@@ -1,0 +1,8 @@
+{
+    "name": "HappyManager",
+    "autoload": {
+        "psr-4": {
+            "HappyManager\\": "src/"
+        }
+    }
+}
