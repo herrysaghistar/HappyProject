@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HseController;
+use App\Http\Controllers\KabengController;
+use App\Http\Controllers\KaproController;
+use App\Http\Controllers\SpvController;
+use App\Http\Controllers\KaryawanController;
 
 
 // Route::get('/', function () {
