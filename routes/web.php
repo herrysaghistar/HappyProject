@@ -17,8 +17,6 @@ use App\Http\Controllers\KaryawanController;
 Route::get('/', [HomeController::class, 'index']);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 // Define routes with middleware for each permission
 Route::middleware('can:admin')->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);
