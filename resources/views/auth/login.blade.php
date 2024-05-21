@@ -77,5 +77,24 @@
 <script src="{{ asset('AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('AdminLTE-3.2.0/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('AdminLTE-3.2.0/plugins/toastr/toastr.min.js') }}"></script>
+<!-- @if ($errors)
+<script type="text/javascript">
+    $(document).ready(function() {
+        Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        Toast.fire({
+            icon: 'error',
+            title: "Email Atau Password Anda Salah"
+        });
+    });
+</script>
+@endif -->
 </body>
 </html>

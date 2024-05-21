@@ -8,6 +8,8 @@ class HseController extends Controller
 {
     public function index()
     {
-    	return view('permission.permission');
+    	$data = ptw::where('level', 'admin')->get();
+    	
+    	return view('permission.permission', compact('data'));
     }
 }

@@ -29,21 +29,31 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>Rendering engine</th>
-                      <th>Browser</th>
-                      <th>Platform(s)</th>
-                      <th>Engine version</th>
-                      <th>CSS grade</th>
+                      <th>No. Register</th>
+                      <th>Nama Proyek</th>
+                      <th>Tanggal Dikeluarkan</th>
+                      <th>Periode Berlaku</th>
+                      <th>Lokasi Kerja</th>
+                      <th>Uraian Kerja</th>
+                      <th>Jenis Izin</th>
+                      <th>Alat Pelindung</th>
+                      <th>Jumlah Tenaga Kerja</th>
+                      <th>Instruksi Tambahan</th>
+                      <th>Approval</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($data as $datas)
                     <tr>
                       <td>Other browsers</td>
                       <td>All others</td>
                       <td>-</td>
                       <td>-</td>
-                      <td>U</td>
+                      <td>
+                        <a href="{{ url('/acc/'.$datas->id) }}"><button type="submit" class="btn btn-success">Acc Permohonan</button></a>
+                      </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
