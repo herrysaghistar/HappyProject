@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('tools_id');
             $table->string('manpower_qty');
             $table->string('remark');
-            $table->string('status');
             $table->string('approved_by');
             $table->timestamps();
         });
