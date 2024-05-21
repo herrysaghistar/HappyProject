@@ -13,11 +13,12 @@ use App\Http\Controllers\KaryawanController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/database-info', function () {
+    return config('database');
+});
 Auth::routes();
+Route::get('/', [HomeController::class, 'index']);
 
-// Define routes with middleware for each permission
 Route::middleware('can:admin')->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);
 });

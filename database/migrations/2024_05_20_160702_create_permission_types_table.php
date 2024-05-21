@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('permission_types', function (Blueprint $table) {
             $table->id();
+            $table->string('permission_name');
             $table->timestamps();
         });
     }

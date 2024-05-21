@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class work_location extends Model
 {
-    use HasFactory;
+
+    protected $fillable = [
+        'location_name',
+    ];
 }

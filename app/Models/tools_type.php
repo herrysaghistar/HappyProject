@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class tools_type extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'tools_name',
+    ];
 }
