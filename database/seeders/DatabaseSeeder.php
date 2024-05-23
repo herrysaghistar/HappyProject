@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             foreach ($roles as $roleName) {
                 // Create a user
                 $user = User::factory()->create([
-                    'name' => ucfirst($roleName) . ' User',
+                    'name' => $roleName . ' User',
                     'email' => $roleName . '@example.com',
                     'password' => Hash::make('12345678'),
                 ]);
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             foreach ($tools as $tools_name) {
                 // Create a user
                 \App\Models\tools_type::create([
-                    'tools_name' => ucfirst(strtolower($tools_name)),
+                    'tools_name' => $tools_name,
                 ]);
             }
 
@@ -54,9 +54,24 @@ class DatabaseSeeder extends Seeder
             foreach ($permissions as $permissions_name) {
                 // Create a user
                 \App\Models\permission_type::create([
-                    'permission_name' => ucfirst(strtolower($permissions_name)),
+                    'permission_name' => $permissions_name,
                 ]);
             }
+            foreach ($roles as $roleName) {
+                \App\Models\ptw::create([
+                    'project_id' => '1',
+                    'level' => $roleName,
+                    'status' => '',
+                    'berlaku_dari' => '',
+                    'berlaku_sampai' => '',
+                    'manpower_qty' => '5',
+                    'remark' => 'kerja bagai kuda',
+                    'approved_by' => '',
+                ]);
+            }
+            \App\Models\project::create([
+                'project_name' => 'nguli',
+            ]);
         } catch (Exception $e) {
             
         }

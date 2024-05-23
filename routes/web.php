@@ -42,3 +42,6 @@ Route::middleware('can:spv')->group(function () {
 Route::middleware('can:karyawan')->group(function () {
     Route::get('/karyawan', [KaryawanController::class, 'index']);
 });
+
+Route::post('/acc', [HomeController::class, 'acc']);
+Route::post('/reject', [HomeController::class, 'reject']);

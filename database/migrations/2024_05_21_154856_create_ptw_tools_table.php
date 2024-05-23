@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ptw_tools', function (Blueprint $table) {
-            $table->id();
+            $table->string('ptw_id');
+            $table->string('tools_id');
             $table->timestamps();
         });
     }

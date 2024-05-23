@@ -37,20 +37,31 @@
                       <th>Uraian Kerja</th>
                       <th>Jenis Izin</th>
                       <th>Alat Pelindung</th>
-                      <th>Jumlah Tenaga Kerja</th>
-                      <th>Instruksi Tambahan</th>
                       <th>Approval</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach($data as $datas)
                     <tr>
-                      <td>Other browsers</td>
-                      <td>All others</td>
-                      <td>-</td>
-                      <td>-</td>
+                      <td>{{ $datas->karyawan_name }}</td>
+                      <td>{{ $datas->project_name }}</td>
+                      <td>{{ $datas->created_at }}</td>
+                      <td>{{ $datas->berlaku_dari }} - {{ $datas->berlaku_sampai }}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>{{ $datas->manpower_qty }}</td>
+                      <td>{{ $datas->remark }}</td>
                       <td>
-                        <a href="{{ url('/acc/'.$datas->id) }}"><button type="submit" class="btn btn-success">Acc Permohonan</button></a>
+                          @if($datas->status == 'N')
+                          Ditolak
+                          @elseif($datas->status == 'Y')
+                          <button class="btn btn-outline-primary">Download PDF</button>
+                          @else
+                          <button type="submit" class="btn btn-success" onclick="setPtwId({{ $datas->id }})" data-toggle="modal" data-target="#modal-sm-success">Acc Permohonan</button>
+                          <button type="submit" class="btn btn-danger" onclick="setPtwId({{ $datas->id }})"data-toggle="modal" data-target="#modal-sm-danger">Reject Permohonan</button>
+                          @endif
                       </td>
                     </tr>
                     @endforeach
@@ -87,6 +98,49 @@
         </div>
         <!-- /.modal-dialog -->
       </div>
+      <div class="modal fade" id="modal-sm-success">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Setujui Perizinan</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <form action="{{ url('/acc') }}" method="post">
+                @csrf
+                <input type="" name="id_ptw" id="id_ptw">
+                <button type="submit" class="btn btn-success">Setujui</button>
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <div class="modal fade" id="modal-sm-danger">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Tolak Perizinan</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <form action="{{ url('/reject') }}" method="post">
+                @csrf
+                <input type="" name="id_ptw" id="id_ptw">
+                <button type="submit" class="btn btn-danger">Tolak</button>
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- Modal -->
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->

@@ -156,5 +156,10 @@
     });
   });
 </script>
+<script>
+function setPtwId(id) {
+    document.getElementById('id_ptw').value = id;
+}
+</script>
 </body>
 </html>

@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('ptws', function (Blueprint $table) {
             $table->id();
-            $table->string('karyawan_id');
+            $table->string('project_id');
             $table->string('level');
             $table->string('status');
             $table->string('berlaku_dari');
             $table->string('berlaku_sampai');
-            $table->string('permission_type_id');
-            $table->string('tools_id');
             $table->string('manpower_qty');
             $table->string('remark');
             $table->string('approved_by');
