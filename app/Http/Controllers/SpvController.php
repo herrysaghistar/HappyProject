@@ -9,9 +9,8 @@ class SpvController extends Controller
 {
     public function index()
     {
-    	$data = ptw::join('karyawans', 'ptws.karyawan_id', '=', 'karyawans.id')
-    				->join('projects', 'ptws.project_id', '=', 'projects.id')
-    				->select('ptws.*', 'karyawans.*', 'projects.*')
+    	$data = ptw::join('projects', 'ptws.project_id', '=', 'projects.id')
+    				->select('ptws.id as ptw_id' ,'ptws.*',  'projects.*')
     				->where('level', 'spv')
     				->get();
     	

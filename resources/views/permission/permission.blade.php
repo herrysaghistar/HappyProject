@@ -49,8 +49,6 @@
                       <td>{{ $datas->berlaku_dari }} - {{ $datas->berlaku_sampai }}</td>
                       <td></td>
                       <td></td>
-                      <td></td>
-                      <td></td>
                       <td>{{ $datas->manpower_qty }}</td>
                       <td>{{ $datas->remark }}</td>
                       <td>
@@ -59,8 +57,8 @@
                           @elseif($datas->status == 'Y')
                           <button class="btn btn-outline-primary">Download PDF</button>
                           @else
-                          <button type="submit" class="btn btn-success" onclick="setPtwId({{ $datas->id }})" data-toggle="modal" data-target="#modal-sm-success">Acc Permohonan</button>
-                          <button type="submit" class="btn btn-danger" onclick="setPtwId({{ $datas->id }})"data-toggle="modal" data-target="#modal-sm-danger">Reject Permohonan</button>
+                          <button type="submit" class="btnid btn btn-success" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-success">Acc Permohonan</button>
+                          <button type="submit" class="btnid btn btn-danger" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-danger">Reject Permohonan</button>
                           @endif
                       </td>
                     </tr>
@@ -110,7 +108,7 @@
             <div class="modal-footer justify-content-between">
               <form action="{{ url('/acc') }}" method="post">
                 @csrf
-                <input type="" name="id_ptw" id="id_ptw">
+                <input type="" name="id_ptw" id="id_ptw" hidden>
                 <button type="submit" class="btn btn-success">Setujui</button>
               </form>
             </div>
@@ -131,7 +129,7 @@
             <div class="modal-footer justify-content-between">
               <form action="{{ url('/reject') }}" method="post">
                 @csrf
-                <input type="" name="id_ptw" id="id_ptw">
+                <input type="" name="id_ptw" id="id_ptw" hidden>
                 <button type="submit" class="btn btn-danger">Tolak</button>
               </form>
             </div>

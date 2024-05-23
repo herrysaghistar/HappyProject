@@ -156,10 +156,19 @@
     });
   });
 </script>
-<script>
-function setPtwId(id) {
-    document.getElementById('id_ptw').value = id;
-}
+<script type="text/javascript">
+$('.btnid').click(function(){
+   var Id = $(this).data('id');
+   console.log('Button clicked. ID:', Id);
+   $("#modal-sm-success #id_ptw").val(Id);
+});
+</script>
+<script type="text/javascript">
+$('.btnid').click(function(){
+   var Id = $(this).data('id');
+   console.log('Button clicked. ID:', Id);
+   $("#modal-sm-danger #id_ptw").val(Id);
+});
 </script>
 </body>
 </html>

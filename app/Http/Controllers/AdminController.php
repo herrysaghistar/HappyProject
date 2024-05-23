@@ -12,9 +12,8 @@ class AdminController extends Controller
 {
     public function index()
     {
-    	$data = ptw::join('karyawans', 'ptws.karyawan_id', '=', 'karyawans.id')
-    				->join('projects', 'ptws.project_id', '=', 'projects.id')
-    				->select('ptws.*', 'karyawans.*', 'projects.*')
+    	$data = ptw::join('projects', 'ptws.project_id', '=', 'projects.id')
+    				->select('ptws.id as ptw_id' ,'ptws.*',  'projects.*')
     				->get();
     	
     	return view('permission.permission', compact('data'));
