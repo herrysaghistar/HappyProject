@@ -55,7 +55,9 @@
                           @if($datas->status == 'N')
                           Ditolak
                           @elseif($datas->status == 'Y')
-                          <button class="btn btn-outline-primary">Download PDF</button>
+                          <a href="{{ url('/download-pdf').'/'.$datas->ptw_id }}">
+                            <button class="btn btn-outline-primary">Download PDF</button>
+                          </a>
                           @else
                           <button type="submit" class="btnid btn btn-success" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-success">Acc Permohonan</button>
                           <button type="submit" class="btnid btn btn-danger" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-danger">Reject Permohonan</button>

@@ -7,7 +7,6 @@ use App\Http\Controllers\HseController;
 use App\Http\Controllers\KabengController;
 use App\Http\Controllers\KaproController;
 use App\Http\Controllers\SpvController;
-use App\Http\Controllers\KaryawanController;
 
 
 // Route::get('/', function () {
@@ -39,9 +38,7 @@ Route::middleware('can:spv')->group(function () {
     Route::get('/spv', [SpvController::class, 'index']);
 });
 
-Route::middleware('can:karyawan')->group(function () {
-    Route::get('/karyawan', [KaryawanController::class, 'index']);
-});
-
 Route::post('/acc', [HomeController::class, 'acc']);
 Route::post('/reject', [HomeController::class, 'reject']);
+
+Route::get('/download-pdf/{id}', [HomeController::class, 'download']);

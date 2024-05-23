@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ptw;
+use \PDF;
 
 class HomeController extends Controller
 {
@@ -64,5 +65,13 @@ class HomeController extends Controller
         $ptw->save();
 
         return redirect()->back();
+    }
+
+    public function download($id)
+    {
+        $data = ptw::find($id);
+        $pdf = PDF::loadView('pdf', compact('data'))
+        // return $pdf->download('your-document.pdf');
+        return view('pdf');
     }
 }
