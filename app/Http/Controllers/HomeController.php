@@ -29,6 +29,30 @@ class HomeController extends Controller
         return view('dashboard.index');
     }
 
+    public function create(Request $request)
+    {
+        $ptw = New ptw;
+        $ptw->level = 'spv';
+        $ptw->status = '';
+        $ptw->project_id = '1';
+        $ptw->berlaku_dari = $request->berlaku_dari;
+        $ptw->berlaku_sampai = $request->berlaku_sampai;
+        $ptw->manpower_qty = $request->manpower_qty;
+        $ptw->remark = $request->remark;
+        $ptw->approved_by = '';
+        $ptw->save();
+
+        foreach ($request->input('tools', []) as $tools_name) {
+            // Create a user
+            ptw_tools::create([
+                'ptw_id' => $ptw->id,
+                'tools_id' => $tools_name,
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
     public function acc(Request $request)
     {
         $ptw = ptw::find($request->id_ptw);
@@ -69,9 +93,12 @@ class HomeController extends Controller
 
     public function download($id)
     {
-        $data = ptw::find($id);
-        $pdf = PDF::loadView('pdf', compact('data'))
+        $data = ptw::join('projects', 'ptws.project_id', '=', 'projects.id')
+                    ->select('ptws.id as ptw_id' ,'ptws.*',  'projects.*')
+                    ->where('ptws.id', $id)
+                    ->first();
+        $pdf = PDF::loadView('pdf', compact('data'));
         // return $pdf->download('your-document.pdf');
-        return view('pdf');
+        return view('pdf', compact('data'));
     }
 }

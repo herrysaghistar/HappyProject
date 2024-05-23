@@ -87,12 +87,33 @@
               </button>
             </div>
             <div class="modal-body">
-              <p>One fine body&hellip;</p>
+              <form method="POST" action="{{ url('/create-ptw') }}">
+                @csrf
+                <div class="form-group">
+                    <label for="berlaku_dari">Berlaku Dari</label>
+                    <input type="date" name="berlaku_dari" class="form-control" id="berlaku_dari" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="berlaku_sampai">Berlaku Sampai</label>
+                    <input type="date" name="berlaku_sampai" class="form-control" id="berlaku_sampai" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="manpower_qty">Jumlah Man Power</label>
+                    <input type="number" name="manpower_qty" class="form-control" id="manpower_qty" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="remark">Remark</label>
+                    <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
+                </div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Submit</button>
+              <button class="btn btn-success" type="submit">Buat Permohonan</button>
             </div>
+              </form>
           </div>
           <!-- /.modal-content -->
         </div>
