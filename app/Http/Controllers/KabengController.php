@@ -17,7 +17,7 @@ class KabengController extends Controller
                     ->select('ptws.id as ptw_id' ,'ptws.*',  'projects.*', 'work_locations.*')
     				->whereIn('level', ['kabeng', 'approved', 'rejected'])
     				->get();
-                    
+        $project = project::all();  
     	$work_location = work_location::all();
         $permission_type = permission_type::all();
 
