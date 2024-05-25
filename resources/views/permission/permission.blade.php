@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Advanced Form</h1>
+            <h1>Formulir Perizinan</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -115,18 +115,20 @@
               <form method="POST" action="{{ url('/create-ptw') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="">Nama Proyek</label>
-                    <input type="text" name="" class="form-control" id="" required>
+                  <label for="exampleFormControlSelect1">Nama Proyek</label>
+                  <select class="form-control" name="project_id" id="exampleFormControlSelect1">
+                    @foreach($project as $projects)
+                    <option value="{{ $projects->id }}">{{ $projects->project_name }}</option>
+                    @endforeach
+                  </select>
                 </div>
 
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Lokasi</label>
-                  <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                  <select class="form-control" name="location_id" id="exampleFormControlSelect1">
+                    @foreach($work_location as $work_locations)
+                    <option value="{{ $work_locations->id }}">{{ $work_locations->location_name }}</option>
+                    @endforeach
                   </select>
                 </div>
 
@@ -138,108 +140,6 @@
                 <div class="form-group">
                     <label for="berlaku_sampai">Berlaku Sampai</label>
                     <input type="date" name="berlaku_sampai" class="form-control" id="berlaku_sampai" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="tools">Permission</label>
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
                 <div class="form-group">

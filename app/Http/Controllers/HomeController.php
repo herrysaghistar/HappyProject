@@ -33,7 +33,9 @@ class HomeController extends Controller
     {
         $ptw = New ptw;
         $ptw->level = 'spv';
-        $ptw->project_id = '1';
+        $ptw->project_id = $request->project_id;
+        $ptw->work_location_id = $request->location_id;
+        $ptw->permission_id = $request->permission_id;
         $ptw->berlaku_dari = $request->berlaku_dari;
         $ptw->berlaku_sampai = $request->berlaku_sampai;
         $ptw->manpower_qty = $request->manpower_qty;
@@ -48,13 +50,6 @@ class HomeController extends Controller
             ptw_tools::create([
                 'ptw_id' => $ptw->id,
                 'tools_id' => $tools_name,
-            ]);
-        }
-
-        foreach ($request->input('permission', []) as $permission_name) {
-            ptw_tools::create([
-                'ptw_id' => $ptw->id,
-                'permission_id' => $permission_name,
             ]);
         }
 
