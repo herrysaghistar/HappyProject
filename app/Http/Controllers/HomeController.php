@@ -100,6 +100,24 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    public function mulai(Request $request)
+    {
+        $ptw = ptw::find($request->id_ptw);
+        $ptw->status = 'onprogress';
+        $ptw->save();
+
+        return redirect()->back();
+    }
+
+    public function done(Request $request)
+    {
+        $ptw = ptw::find($request->id_ptw);
+        $ptw->status = 'done';
+        $ptw->save();
+
+        return redirect()->back();
+    }
+
     public function startJob()
     {
         

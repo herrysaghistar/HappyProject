@@ -43,4 +43,7 @@ Route::post('/create-ptw', [HomeController::class, 'create']);
 Route::post('/acc', [HomeController::class, 'acc']);
 Route::post('/reject', [HomeController::class, 'reject']);
 
+Route::post('/mulai', [HomeController::class, 'mulai']);
+Route::post('/done', [HomeController::class, 'done']);
+
 Route::get('/download-pdf/{id}', [HomeController::class, 'download']);
