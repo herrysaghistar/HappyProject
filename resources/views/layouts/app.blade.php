@@ -162,6 +162,8 @@ $('.btnid').click(function(){
    console.log('Button clicked. ID:', Id);
    $("#modal-sm-success #id_ptw").val(Id);
    $("#modal-sm-danger #id_ptw").val(Id);
+   $("#modal-sm-progress #id_ptw").val(Id);
+   $("#modal-sm-done #id_ptw").val(Id);
 });
 </script>
 <script type="text/javascript">
