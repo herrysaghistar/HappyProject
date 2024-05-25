@@ -11,7 +11,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -23,44 +22,70 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                @can('spv')
                 <div class="col-2">
                   <button type="submit" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-lg">Permohonan Baru</button>
                 </div>
+                @endcan
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
+                      <th>Detail</th>
                       <th>No. Register</th>
-                      <th>Nama Proyek</th>
+                      <th>Dibuat oleh</th>
                       <th>Tanggal Dikeluarkan</th>
-                      <th>Periode Berlaku</th>
+                      <th>Periode</th>
                       <th>Lokasi Kerja</th>
-                      <th>Uraian Kerja</th>
-                      <th>Jenis Izin</th>
-                      <th>Alat Pelindung</th>
+                      <th>Status Pekerjaan</th>
                       <th>Approval</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach($data as $datas)
                     <tr>
-                      <td>{{ $datas->karyawan_name }}</td>
-                      <td>{{ $datas->project_name }}</td>
+                      <td><button class="btniddetail btn btn-secondary" id="btniddetail" data-id="{{ $datas }}" data-toggle="modal" data-target="#modal-lg-detail"><i class="fas fa-eye"></i></button></td>
+                      <td>{{ $datas->ptw_id }}/PTW/{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}/{{ $datas->created_at->format('Y') }}</td>
                       <td>{{ $datas->created_at }}</td>
+                      <td>{{ $datas->created_by }}</td>
                       <td>{{ $datas->berlaku_dari }} - {{ $datas->berlaku_sampai }}</td>
-                      <td></td>
-                      <td></td>
-                      <td>{{ $datas->manpower_qty }}</td>
-                      <td>{{ $datas->remark }}</td>
+                      <td>{{ $datas->location_name }}</td>
                       <td>
-                          @if($datas->status == 'N')
-                          Ditolak
-                          @elseif($datas->status == 'Y')
+                        @if($datas->status == 'progress')
+                        <div class="row">
+                          <div>
+                            Pekerjaan Sedang Dalam Progress
+                          </div>
+                          <div>
+                            <button class="btn btn-outline-success">Pekerjaan Selesai</button>
+                          </div>
+                        </div>
+                        @elseif($datas->status == 'done')
+                          Pekerjaan Telah Selesai
+                        @elseif($datas->level == 'rejected')
+                          Dokumen Ditolak
+                        @elseif($datas->level != 'approved' && $datas->level != 'rejected')
+                          Dokumen Belum Disetujui
+                        @elseif($datas->status == 'onprogress')
+                        <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-done">Selesaikan Pekerjaan</button>
+                        @elseif(!$datas->status)
+                        <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-progress">Mulai Pekerjaan</button>
+                        @endif
+                      </td>
+                      <td>
+                          @if($datas->level == 'approved')
                           <a href="{{ url('/download-pdf').'/'.$datas->ptw_id }}">
                             <button class="btn btn-outline-primary">Download PDF</button>
                           </a>
+                          @elseif($datas->level == 'rejected')
+                          <button class="btn btn-outline-danger" disabled>Perijinan ditolak oleh {{ $datas->rejected_by }}</button>
                           @else
-                          <button type="submit" class="btnid btn btn-success" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-success">Acc Permohonan</button>
-                          <button type="submit" class="btnid btn btn-danger" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-danger">Reject Permohonan</button>
+                            @can('spv')
+                            Menunggu keputusan {{ $datas->level }}
+                            @endcan
+                            @cannot('spv')
+                            <button type="submit" class="btnid btn btn-success" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-success">Acc Permohonan</button>
+                            <button type="submit" class="btnid btn btn-danger" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-danger">Reject Permohonan</button>
+                            @endcannot
                           @endif
                       </td>
                     </tr>
@@ -90,6 +115,22 @@
               <form method="POST" action="{{ url('/create-ptw') }}">
                 @csrf
                 <div class="form-group">
+                    <label for="">Nama Proyek</label>
+                    <input type="text" name="" class="form-control" id="" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Lokasi</label>
+                  <select class="form-control" id="exampleFormControlSelect1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
                     <label for="berlaku_dari">Berlaku Dari</label>
                     <input type="date" name="berlaku_dari" class="form-control" id="berlaku_dari" required>
                 </div>
@@ -97,6 +138,184 @@
                 <div class="form-group">
                     <label for="berlaku_sampai">Berlaku Sampai</label>
                     <input type="date" name="berlaku_sampai" class="form-control" id="berlaku_sampai" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="tools">Permission</label>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="tools">Equipment</label>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Default checkbox
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-group">
@@ -108,12 +327,65 @@
                     <label for="remark">Remark</label>
                     <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
                 </div>
+
+                <div class="form-group">
+                    <label for="remark">Instruksi Tambahan</label>
+                    <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
+                </div>
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button class="btn btn-success" type="submit">Buat Permohonan</button>
             </div>
               </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <div class="modal fade" id="modal-lg-detail">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Detail Perizinan</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="">Nama Proyek</label>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="berlaku_dari">Berlaku Dari</label>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="berlaku_sampai">Berlaku Sampai</label>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="manpower_qty">Jumlah Man Power</label>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="remark">Remark</label>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="remark">Instruksi Tambahan</label>
+                    
+                </div>
+            </div>
+            <div class="modal-footer justify-content-end">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
           </div>
           <!-- /.modal-content -->
         </div>
@@ -157,9 +429,45 @@
               </form>
             </div>
           </div>
-          <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
+      </div>
+      <div class="modal fade" id="modal-sm-progress">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Ubah Status Pekerjaan Menjadi On Progress?</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <form action="{{ url('/mulai') }}" method="post">
+                @csrf
+                <input type="" name="id_ptw" id="id_ptw" hidden>
+                <button type="submit" class="btn btn-primary">Mulai</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-sm-done">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Ubah Status Pekerjaan Menjadi Selesai?</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <form action="{{ url('/done') }}" method="post">
+                @csrf
+                <input type="" name="id_ptw" id="id_ptw" hidden>
+                <button type="submit" class="btn btn-success">Selesai</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- Modal -->
       <!-- /.container-fluid -->

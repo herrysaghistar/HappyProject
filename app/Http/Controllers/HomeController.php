@@ -33,20 +33,28 @@ class HomeController extends Controller
     {
         $ptw = New ptw;
         $ptw->level = 'spv';
-        $ptw->status = '';
         $ptw->project_id = '1';
         $ptw->berlaku_dari = $request->berlaku_dari;
         $ptw->berlaku_sampai = $request->berlaku_sampai;
         $ptw->manpower_qty = $request->manpower_qty;
         $ptw->remark = $request->remark;
+        $ptw->created_by = auth()->user()->name;
         $ptw->approved_by = '';
+        $ptw->rejected_by = '';
+        $ptw->status = '';
         $ptw->save();
 
         foreach ($request->input('tools', []) as $tools_name) {
-            // Create a user
             ptw_tools::create([
                 'ptw_id' => $ptw->id,
                 'tools_id' => $tools_name,
+            ]);
+        }
+
+        foreach ($request->input('permission', []) as $permission_name) {
+            ptw_tools::create([
+                'ptw_id' => $ptw->id,
+                'permission_id' => $permission_name,
             ]);
         }
 
@@ -63,7 +71,6 @@ class HomeController extends Controller
             $ptw->level = 'kapro';
         }
         elseif (Auth::user()->can('kapro')) {
-            $ptw->status = 'Y';
             $ptw->level = 'approved';
         }
         $ptw->approved_by = auth()->user()->name;
@@ -75,20 +82,32 @@ class HomeController extends Controller
     public function reject(Request $request)
     {
         $ptw = ptw::find($request->id_ptw);
-        $ptw->status = 'N';
         if (Auth::user()->can('hse') || Auth::user()->can('admin')) {
-            $ptw->level = 'hse';
+            $ptw->level = 'rejected';
+            $ptw->rejected_by = Auth::user()->name;
         }
         elseif (Auth::user()->can('kabeng')) {
-            $ptw->level = 'hse';
+            $ptw->level = 'rejected';
+            $ptw->rejected_by = Auth::user()->name;
         }
         elseif (Auth::user()->can('kapro')) {
-            $ptw->level = 'kapro';
+            $ptw->level = 'rejected';
+            $ptw->rejected_by = Auth::user()->name;
         }
         $ptw->approved_by = auth()->user()->name;
         $ptw->save();
 
         return redirect()->back();
+    }
+
+    public function startJob()
+    {
+        
+    }
+
+    public function endJob()
+    {
+        
     }
 
     public function download($id)

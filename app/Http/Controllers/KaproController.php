@@ -10,8 +10,9 @@ class KaproController extends Controller
     public function index()
     {
     	$data = ptw::join('projects', 'ptws.project_id', '=', 'projects.id')
-    				->select('ptws.id as ptw_id' ,'ptws.*',  'projects.*')
-                    ->whereIn('level', ['kapro', 'approved'])
+                    ->join('work_locations', 'ptws.work_location_id', '=', 'work_locations.id')
+                    ->select('ptws.id as ptw_id' ,'ptws.*',  'projects.*', 'work_locations.*')
+                    ->whereIn('level', ['kapro', 'approved', 'rejected'])
     				->get();
     	
     	return view('permission.permission', compact('data'));

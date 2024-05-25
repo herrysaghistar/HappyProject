@@ -161,13 +161,15 @@ $('.btnid').click(function(){
    var Id = $(this).data('id');
    console.log('Button clicked. ID:', Id);
    $("#modal-sm-success #id_ptw").val(Id);
+   $("#modal-sm-danger #id_ptw").val(Id);
 });
 </script>
 <script type="text/javascript">
-$('.btnid').click(function(){
-   var Id = $(this).data('id');
-   console.log('Button clicked. ID:', Id);
-   $("#modal-sm-danger #id_ptw").val(Id);
+$('.btniddetail').click(function(){
+   var dataDetail = $(this).data('id');
+   console.log('Button clicked. ID:', dataDetail.ptw_id);
+   $("#modal-lg-detail #ptw_id").val(dataDetail.ptw_id);
+   $("#modal-lg-detail #project_name").val(dataDetail.project_name);
 });
 </script>
 </body>

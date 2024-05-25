@@ -16,11 +16,14 @@ return new class extends Migration
             $table->string('project_id');
             $table->string('level');
             $table->string('status');
+            $table->string('work_location_id');
             $table->string('berlaku_dari');
             $table->string('berlaku_sampai');
             $table->string('manpower_qty');
             $table->string('remark');
+            $table->string('created_by');
             $table->string('approved_by');
+            $table->string('rejected_by');
             $table->timestamps();
         });
     }
