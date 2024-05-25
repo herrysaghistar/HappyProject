@@ -15,6 +15,12 @@ use App\Http\Controllers\SpvController;
 Route::get('/database-info', function () {
     return config('database');
 });
+
+Route::get('/logouts', function () {
+    Auth::logout();
+  	return redirect('/');
+});
+
 Auth::routes();
 Route::get('/', [HomeController::class, 'index']);
 
