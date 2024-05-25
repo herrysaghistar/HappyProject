@@ -143,6 +143,20 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="exampleFormControlSelect1">Jenis Perizinan</label>
+                  <select class="form-control" name="location_id" id="exampleFormControlSelect1">
+                    @foreach($permission_type as $permission_types)
+                    <option value="{{ $permission_types->id }}">{{ $permission_types->permission_name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="remark">Instruksi Tambahan</label>
+                    <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
                   <label for="tools">Equipment</label>
                   <div class="row">
                     <div class="col-6">
@@ -224,14 +238,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="remark">Remark</label>
+                    <label for="remark">Catatan/Keterangan Tambahan</label>
                     <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="remark">Instruksi Tambahan</label>
-                    <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
-                </div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

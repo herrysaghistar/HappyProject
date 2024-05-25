@@ -31,27 +31,27 @@ class HomeController extends Controller
 
     public function create(Request $request)
     {
-        $ptw = New ptw;
-        $ptw->level = 'spv';
-        $ptw->project_id = $request->project_id;
-        $ptw->work_location_id = $request->location_id;
-        $ptw->permission_id = $request->permission_id;
-        $ptw->berlaku_dari = $request->berlaku_dari;
-        $ptw->berlaku_sampai = $request->berlaku_sampai;
-        $ptw->manpower_qty = $request->manpower_qty;
-        $ptw->remark = $request->remark;
-        $ptw->created_by = auth()->user()->name;
-        $ptw->approved_by = '';
-        $ptw->rejected_by = '';
-        $ptw->status = '';
-        $ptw->save();
+        // $ptw = New ptw;
+        // $ptw->level = 'spv';
+        // $ptw->project_id = $request->project_id;
+        // $ptw->work_location_id = $request->location_id;
+        // $ptw->permission_id = $request->permission_id;
+        // $ptw->berlaku_dari = $request->berlaku_dari;
+        // $ptw->berlaku_sampai = $request->berlaku_sampai;
+        // $ptw->manpower_qty = $request->manpower_qty;
+        // $ptw->remark = $request->remark;
+        // $ptw->created_by = auth()->user()->name;
+        // $ptw->approved_by = '';
+        // $ptw->rejected_by = '';
+        // $ptw->status = '';
+        // $ptw->save();
 
-        foreach ($request->input('tools', []) as $tools_name) {
-            ptw_tools::create([
-                'ptw_id' => $ptw->id,
-                'tools_id' => $tools_name,
-            ]);
-        }
+        // foreach ($request->input('tools', []) as $tools_name) {
+        //     ptw_tools::create([
+        //         'ptw_id' => $ptw->id,
+        //         'tools_id' => $tools_name,
+        //     ]);
+        // }
 
         return redirect()->back();
     }
