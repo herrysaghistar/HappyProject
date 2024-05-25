@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
 
-            $project = ['nguli', 'nge cor', 'malu', 'nempa', 'ngelebur', 'mecah batu'];
+            $project = ['nguli', 'nge cor', 'malu', 'nempa', 'ngelebur', 'mecah batu', 'pembersihan' ,'pengelasan' ,'isolasi'];
             foreach ($project as $projects) {
                 \App\Models\project::create([
                     'project_name' => $projects,
@@ -81,7 +81,8 @@ class DatabaseSeeder extends Seeder
                     'berlaku_dari' => '2024-05-25',
                     'berlaku_sampai' => '2024-05-30',
                     'manpower_qty' => '5',
-                    'remark' => 'kerja bagai kuda',
+                    'remark' => 'kerja bolo',
+                    'instruksi_tambahan' => 'kerja bagai kuda',
                     'approved_by' => '',
                     'rejected_by' => '',
                     'created_by' => $roleName . ' User',

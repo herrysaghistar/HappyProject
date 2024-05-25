@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('berlaku_sampai');
             $table->string('manpower_qty');
             $table->string('remark');
+            $table->string('instruksi_tambahan');
             $table->string('created_by');
             $table->string('approved_by');
             $table->string('rejected_by');

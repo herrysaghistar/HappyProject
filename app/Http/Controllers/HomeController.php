@@ -131,7 +131,8 @@ class HomeController extends Controller
     public function download($id)
     {
         $data = ptw::join('projects', 'ptws.project_id', '=', 'projects.id')
-                    ->select('ptws.id as ptw_id' ,'ptws.*',  'projects.*')
+                    ->join('work_locations', 'ptws.work_location_id', '=', 'work_locations.id')
+                    ->select('ptws.id as ptw_id' ,'ptws.*',  'projects.*', 'work_locations.*')
                     ->where('ptws.id', $id)
                     ->first();
         $pdf = PDF::loadView('pdf', compact('data'));
