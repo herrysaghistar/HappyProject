@@ -15,8 +15,9 @@ class HseController extends Controller
                     ->whereIn('level', ['hse', 'approved', 'rejected'])
     				->get();
     	
-    	return view('permission.permission', compact('data'));
-    	
-    	return view('permission.permission', compact('data'));
+        $work_location = work_location::all();
+        $permission_type = permission_type::all();
+
+        return view('permission.permission', compact('data', 'project', 'work_location', 'permission_type'));
     }
 }

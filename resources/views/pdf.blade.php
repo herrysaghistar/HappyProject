@@ -11,7 +11,7 @@
         </colgroup>
         <tbody>
             <tr style="height:21px;">
-                <td style="border:1px solid #000000;font-size:11pt;overflow:hidden;padding:2px 3px;text-align:center;vertical-align:middle;" colspan="7" rowspan="1" data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;\nPT.PAL INDONESIA\nSURAT IZIN KERJA\n&quot;}" data-sheets-textstyleruns="{&quot;1&quot;:1,&quot;2&quot;:{&quot;4&quot;:13}}{&quot;1&quot;:17}"><br><span style="font-family:Arial;font-size:13pt;"><span style="font-style:normal;">PT.PAL INDONESIA</span></span><br><span style="font-family:Arial;font-size:11pt;"><span style="font-style:normal;">SURAT IZIN KERJA</span></span><br>&nbsp;</td>
+                <td style="border:1px solid #000000;font-size:11pt;overflow:hidden;padding:2px 3px;text-align:center;vertical-align:middle;" colspan="7" rowspan="1" data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;\nnSURAT IZIN KERJA\n&quot;}" data-sheets-textstyleruns="{&quot;1&quot;:1,&quot;2&quot;:{&quot;4&quot;:13}}{&quot;1&quot;:17}"><span style="font-family:Arial;font-size:11pt;"><span style="font-style:normal;"><br>SURAT IZIN KERJA</span></span><br>&nbsp;</td>
             </tr>
             <tr style="height:21px;">
                 <td style="border-bottom:1px solid #000000;border-left:1px solid #000000;border-right:1px solid #000000;font-size:11pt;overflow:hidden;padding:2px 3px;vertical-align:middle;" colspan="4" rowspan="1" data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;FORMULIR IJIN KERJA\nNO. REGISTER : {{ $datas->created_at }}&quot;}">FORMULIR IJIN KERJA<br>NO. REGISTER : {{ $datas->created_at }}</td>

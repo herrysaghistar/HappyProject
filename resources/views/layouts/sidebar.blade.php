@@ -49,6 +49,38 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('spv') }}" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                Data Master Perizinan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('spv') }}" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                Data Master Lokasi
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('spv') }}" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                Data Master Project
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('spv') }}" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                User Setting
+              </p>
+            </a>
+          </li>
           @endcan
           @can('hse')
           <li class="nav-item">
