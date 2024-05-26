@@ -37,7 +37,7 @@ class HomeController extends Controller
         $ptw->project_id = $request->project_id;
         $ptw->permission_id = $request->permission_id;
         $ptw->work_location_id = $request->location_id;
-        $ptw->level = 'spv';
+        $ptw->level = 'hse';
         $ptw->berlaku_dari = $request->berlaku_dari;
         $ptw->berlaku_sampai = $request->berlaku_sampai;
         $ptw->manpower_qty = $request->manpower_qty;

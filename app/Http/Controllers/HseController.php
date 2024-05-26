@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ptw;
+use App\Models\tools_type;
+use App\Models\permission_tambahan;
+use App\Models\project;
+use App\Models\work_location;
+use App\Models\permission_type;
+use DB;
 
 class HseController extends Controller
 {
