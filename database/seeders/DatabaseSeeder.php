@@ -81,9 +81,9 @@ class DatabaseSeeder extends Seeder
             for ($i=0; $i < 3; $i++) { 
                 foreach ($roles_ptw as $roleName) {
                 \App\Models\ptw::create([
-                    'project_id' => $i,
-                    'permission_id' => $i,
-                    'work_location_id' => $i,
+                    'project_id' => $i+1,
+                    'permission_id' => $i+1,
+                    'work_location_id' => $i+1,
                     'level' => $roleName,
                     'berlaku_dari' => '2024-05-25',
                     'berlaku_sampai' => '2024-05-30',
