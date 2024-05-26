@@ -77,14 +77,13 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
 
-            $j = 1;
             $roles_ptw = ['hse', 'kabeng', 'kapro'];
             for ($i=0; $i < 3; $i++) { 
                 foreach ($roles_ptw as $roleName) {
                 \App\Models\ptw::create([
-                    'project_id' => $j,
-                    'permission_id' => $j,
-                    'work_location_id' => $j,
+                    'project_id' => $i,
+                    'permission_id' => $i,
+                    'work_location_id' => $i,
                     'level' => $roleName,
                     'berlaku_dari' => '2024-05-25',
                     'berlaku_sampai' => '2024-05-30',
@@ -95,7 +94,6 @@ class DatabaseSeeder extends Seeder
                     'rejected_by' => '',
                     'created_by' => $roleName . ' User',
                 ]);
-                $j++;
                 }
             }
         } catch (Exception $e) {
