@@ -137,12 +137,75 @@ $('.btnid').click(function(){
 });
 </script>
 <script type="text/javascript">
-$('.btniddetail').click(function(){
-   var dataDetail = $(this).data('id');
-   console.log('Button clicked. ID:', dataDetail.ptw_id);
-   $("#modal-lg-detail #ptw_id").val(dataDetail.ptw_id);
-   $("#modal-lg-detail #project_name").val(dataDetail.project_name);
+$(document).ready(function() {
+  $('.btniddetail').click(function() {
+    var dataDetail = $(this).data();
+    var permissionString = dataDetail.permissionTambahan;
+    var permissionsArray = permissionString.split(',');
+    var toolsString = dataDetail.tools;
+    var toolsArray = toolsString.split(',');
+
+    $("#modal-lg-detail #ptw_id").val(dataDetail.ptwId);
+    $("#modal-lg-detail #no_register").val(dataDetail.ptwId+'/'+'PTW'+'/'+dataDetail.month+'/'+dataDetail.year);
+    $("#modal-lg-detail #created_at").val(dataDetail.createdAt);
+    $("#modal-lg-detail #created_by").val(dataDetail.createdBy);
+    $("#modal-lg-detail #berlaku_dari").val(dataDetail.berlakuDari);
+    $("#modal-lg-detail #berlaku_sampai").val(dataDetail.berlakuSampai);
+    $("#modal-lg-detail #work_location").val(dataDetail.locationName);
+    $("#modal-lg-detail #manpower_qty").val(dataDetail.manpowerQty);
+    $("#modal-lg-detail #permission_type").val(dataDetail.permissionType);
+    $("#modal-lg-detail #nama_proyek").val(dataDetail.projectName);
+    if (permissionsArray[0]) {
+      document.getElementById("instruksi_tambahan1").innerHTML = '1. '+permissionsArray[0];  
+    }
+    if (permissionsArray[1]) {
+      document.getElementById("instruksi_tambahan2").innerHTML = '2. '+permissionsArray[0];  
+    }
+    if (permissionsArray[2]) {
+      document.getElementById("instruksi_tambahan3").innerHTML = '3. '+permissionsArray[0];  
+    }
+    if (permissionsArray[3]) {
+      document.getElementById("instruksi_tambahan4").innerHTML = '4. '+permissionsArray[0];  
+    }
+    if (toolsArray[0]) {
+      document.getElementById("tools1").innerHTML = '1. '+toolsArray[0];  
+    }
+    if (toolsArray[1]) {
+      document.getElementById("tools2").innerHTML = '2. '+toolsArray[1];  
+    }
+    if (toolsArray[2]) {
+      document.getElementById("tools3").innerHTML = '3. '+toolsArray[2];  
+    }
+    if (toolsArray[3]) {
+      document.getElementById("tools4").innerHTML = '4. '+toolsArray[3];  
+    }
+    if (toolsArray[4]) {
+      document.getElementById("tools5").innerHTML = '5. '+toolsArray[4];  
+    }
+    if (toolsArray[5]) {
+      document.getElementById("tools6").innerHTML = '6. '+toolsArray[5];  
+    }
+    if (toolsArray[6]) {
+      document.getElementById("tools7").innerHTML = '7. '+toolsArray[6];  
+    }
+    if (toolsArray[7]) {
+      document.getElementById("tools8").innerHTML = '8. '+toolsArray[7];  
+    }
+    if (toolsArray[8]) {
+      document.getElementById("tools9").innerHTML = '9. '+toolsArray[8];  
+    }
+    if (toolsArray[9]) {
+      document.getElementById("tools10").innerHTML = '10. '+toolsArray[9];  
+    }
+    if (toolsArray[10]) {
+      document.getElementById("tools11").innerHTML = '11. '+toolsArray[10];  
+    }
+    if (toolsArray[11]) {
+      document.getElementById("tools12").innerHTML = '12. '+toolsArray[11];  
+    }
+  });
 });
 </script>
+
 </body>
 </html>

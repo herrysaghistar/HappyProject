@@ -43,7 +43,27 @@
                   <tbody>
                     @foreach($data as $datas)
                     <tr>
-                      <td><button class="btniddetail btn btn-secondary" id="btniddetail" data-id="{{ $datas }}" data-toggle="modal" data-target="#modal-lg-detail"><i class="fas fa-eye"></i></button></td>
+                      <td>
+                        <button class="btniddetail btn btn-secondary" id="btniddetail" 
+                                data-ptw-id="{{ $datas->ptw_id }}" 
+                                data-manpower-qty="{{ $datas->manpower_qty }}" 
+                                data-project="{{ $datas->project_name }}" 
+                                data-month="{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}"
+                                data-year="{{ $datas->created_at->format('Y') }}" 
+                                data-created-at="{{ $datas->created_at }}" 
+                                data-created-by="{{ $datas->created_by }}" 
+                                data-berlaku-dari="{{ $datas->berlaku_dari }}" 
+                                data-berlaku-sampai="{{ $datas->berlaku_sampai }}" 
+                                data-location-name="{{ $datas->location_name }}" 
+                                data-project-name="{{ $datas->project_name }}" 
+                                data-permission-type="{{ $datas->permission_name }}" 
+                                data-permission-tambahan="{{ $datas->permission_names }}"
+                                data-tools="{{ $datas->tools_names }}"
+                                data-toggle="modal" 
+                                data-target="#modal-lg-detail">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                      </td>
                       <td>{{ $datas->ptw_id }}/PTW/{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}/{{ $datas->created_at->format('Y') }}</td>
                       <td>{{ $datas->created_at }}</td>
                       <td>{{ $datas->created_by }}</td>
@@ -144,7 +164,7 @@
 
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Jenis Perizinan</label>
-                  <select class="form-control" name="location_id" id="exampleFormControlSelect1">
+                  <select class="form-control" name="permission_id" id="exampleFormControlSelect1">
                     @foreach($permission_type as $permission_types)
                     <option value="{{ $permission_types->id }}">{{ $permission_types->permission_name }}</option>
                     @endforeach
@@ -152,82 +172,33 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="remark">Instruksi Tambahan</label>
-                    <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
+                  <label for="tools">Instruksi Tambahan</label>
+                  <div class="row">
+                    <div class="col-12">
+                      @foreach($permission_tambahan as $permission)
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $permission->id }}" name="permission_tambahan[]" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          {{ $permission->permission_name }}
+                        </label>
+                      </div>
+                      @endforeach
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-group">
                   <label for="tools">Equipment</label>
                   <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
+                      @foreach($tools as $tool)
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="{{ $tool->id }}" name="tools[]" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
+                          {{ $tool->tools_name }}
                         </label>
                       </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
-                        </label>
-                      </div>
+                      @endforeach
                     </div>
                   </div>
                 </div>
@@ -263,35 +234,74 @@
               </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="">Nama Proyek</label>
-                    
-                </div>
+              <div class="form-group">
+                <label for="nama_proyek">No. Register</label>
+                <input type="text" id="no_register" class="form-control" disabled>
+              </div>
 
-                <div class="form-group">
-                    <label for="berlaku_dari">Berlaku Dari</label>
-                    
-                </div>
+              <div class="form-group">
+                <label for="nama_proyek">Nama Proyek</label>
+                <input type="text" id="nama_proyek" class="form-control" disabled>
+              </div>
 
-                <div class="form-group">
-                    <label for="berlaku_sampai">Berlaku Sampai</label>
-                    
-                </div>
+              <div class="form-group">
+                <label for="nama_proyek">Tanggal Dikeluarkan</label>
+                <input type="text" id="created_at" class="form-control" disabled>
+              </div>
 
-                <div class="form-group">
-                    <label for="manpower_qty">Jumlah Man Power</label>
-                    
-                </div>
+              <div class="form-group">
+                <label for="berlaku_dari">Berlaku Dari</label>
+                <input type="text" id="berlaku_dari" class="form-control" disabled>
+              </div>
 
-                <div class="form-group">
-                    <label for="remark">Remark</label>
-                    
-                </div>
+              <div class="form-group">
+                <label for="berlaku_sampai">Berlaku Sampai</label>
+                <input type="text" id="berlaku_sampai" class="form-control" disabled>
+              </div>
 
-                <div class="form-group">
-                    <label for="remark">Instruksi Tambahan</label>
-                    
-                </div>
+              <div class="form-group">
+                <label for="nama_proyek">Lokasi Kerja</label>
+                <input type="text" id="work_location" class="form-control" disabled>
+              </div>
+
+              <div class="form-group">
+                <label for="nama_proyek">Uraian Kegiatan</label>
+                <input type="text" id="remark" class="form-control" disabled>
+              </div>
+
+              <div class="form-group">
+                <label for="nama_proyek">Jenis Ijin Kerja Yang Dilakukan</label>
+                <input type="text" id="permission_type" class="form-control" disabled>
+              </div>
+
+              <div class="form-group">
+                <label for="manpower_qty">Jumlah Man Power</label>
+                <input type="text" id="manpower_qty" class="form-control" disabled>
+              </div>
+
+              <div class="form-group">
+                <label for="Tools">Tools</label>
+                <p id="tools1"></p>
+                <p id="tools2"></p>
+                <p id="tools3"></p>
+                <p id="tools4"></p>
+                <p id="tools5"></p>
+                <p id="tools6"></p>
+                <p id="tools7"></p>
+                <p id="tools8"></p>
+                <p id="tools9"></p>
+                <p id="tools10"></p>
+                <p id="tools11"></p>
+                <p id="tools12"></p>
+              </div>
+
+              <div class="form-group">
+                <label for="instruksi_tambahan">Instruksi Tambahan</label>
+                <p id="instruksi_tambahan1"></p>
+                <p id="instruksi_tambahan2"></p>
+                <p id="instruksi_tambahan3"></p>
+                <p id="instruksi_tambahan4"></p>
+              </div>
             </div>
             <div class="modal-footer justify-content-end">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

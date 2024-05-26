@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\project;
 use App\Models\permission_type;
+use App\Models\permission_tambahan;
 use App\Models\tools_type;
 use App\Models\work_location;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -41,16 +42,23 @@ class DatabaseSeeder extends Seeder
                 $user->assignRole($roleName);
             }
 
-            $tools = ['PELINDUNG KEPALA','PELINDUNG MUKA','PELINDUNG TELINGA','PELINDUNG TANGAN','PELINDUNG KAKI','PELINDUNG DI KETINGGIAN','BAJU KERJA','PENJAGA KEBAKARAN','DETEKSI GAS BERBAHAYA','ALAT PEMADAM API','ALAT BANTU PERNAFASAN'];
+            $tools = ['PELINDUNG KEPALA / HELM PROTECTION','PELINDUNG MUKA / FACESHIELD, EYE PROTECTION','PELINDUNG TELINGA / EAR PROTECTION','PELINDUNG TANGAN / SAFETY GLOVES','PELINDUNG KAKI / SAFETY SHOES','PELINDUNG DI KETINGGIAN / FULL BODY HARNESS','BAJU KERJA / WEARPCAK CATTLEPAK','PENJAGA KEBAKARAN / FIRE WATCHER','DETEKSI GAS BERBAHAYA / GAS DETECTION TEST','ALAT PEMADAM API / FIRE EXTINGUISHER','ALAT BANTU PERNAPASAN / BREATHING APPARATUS','LAINNYA / OTHERS'];
             foreach ($tools as $tools_name) {
                 \App\Models\tools_type::create([
                     'tools_name' => $tools_name,
                 ]);
             }
 
-            $permissions = ['KERJA PANAS','RUANG TERBATAS','PENGECATAN','TES RADIOGRAFI','PENGANGKATAN','KETINGGIAN','PENYELAMAN','ISOLASI','PENGGALIAN','PEMBERSIHAN DG BAHAN KIMIA','PEMBERSIHAN TANKI & PIPA','PEKERJAAN LISTRIK','KERJA DINGIN','PEKERJAAN MEKANIK','PEKERJAAN PERANCAH'];
+            $permissions = ['KERJA PANAS / HOT WORK','RUANG TERBATAS / CONFINED SPACE','PENGGALIAN / EXCAVATION','PEKERJAAN DINGIN / COLD WORK','ISOLASI/LOTO / ISOLATION','KERJA DI KETINGGIAN / WORKING AT HEIGHT','TES RADIOGRAFI / X-RAY'];
             foreach ($permissions as $permissions_name) {
                 \App\Models\permission_type::create([
+                    'permission_name' => $permissions_name,
+                ]);
+            }
+
+            $permissions_tambahan = ['PERSONIL YANG BEKERJA DI DAERAH SEKITARNYA DIBERITAHU PEKERJAAN RADIOAKTIF AKAN DILAKUKAN', 'PAGAR/LAMPU KEDIP-KEDIP TERPASANG HINGGA BATAS DAERAH LARANGAN', 'SUMBER RADIOAKTIF TIDAK BOLEH DITINGGAL TANPA PENGAWASAN RADIOGRAFER', 'SUMBER RADIOAKTIF DISIMPAN DI TEMPAT PENYIMPANAN YANG DITENTUKAN BILA TIAK DIGUNAKAN'];
+            foreach ($permissions_tambahan as $permissions_name) {
+                \App\Models\permission_tambahan::create([
                     'permission_name' => $permissions_name,
                 ]);
             }
@@ -75,14 +83,14 @@ class DatabaseSeeder extends Seeder
                 foreach ($roles_ptw as $roleName) {
                 \App\Models\ptw::create([
                     'project_id' => $j,
+                    'permission_id' => $j,
                     'work_location_id' => $j,
                     'level' => $roleName,
-                    'status' => '',
                     'berlaku_dari' => '2024-05-25',
                     'berlaku_sampai' => '2024-05-30',
                     'manpower_qty' => '5',
                     'remark' => 'kerja bolo',
-                    'instruksi_tambahan' => 'kerja bagai kuda',
+                    'status' => '',
                     'approved_by' => '',
                     'rejected_by' => '',
                     'created_by' => $roleName . ' User',

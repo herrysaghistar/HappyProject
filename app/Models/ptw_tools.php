@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ptw_tools extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'ptw_id',
+        'tools_id'
+    ];
 }

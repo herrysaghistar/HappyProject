@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ptw;
+use App\Models\ptw_tools;
+use App\Models\ptw_permission;
 use \PDF;
 
 class HomeController extends Controller
@@ -31,27 +33,34 @@ class HomeController extends Controller
 
     public function create(Request $request)
     {
-        // $ptw = New ptw;
-        // $ptw->level = 'spv';
-        // $ptw->project_id = $request->project_id;
-        // $ptw->work_location_id = $request->location_id;
-        // $ptw->permission_id = $request->permission_id;
-        // $ptw->berlaku_dari = $request->berlaku_dari;
-        // $ptw->berlaku_sampai = $request->berlaku_sampai;
-        // $ptw->manpower_qty = $request->manpower_qty;
-        // $ptw->remark = $request->remark;
-        // $ptw->created_by = auth()->user()->name;
-        // $ptw->approved_by = '';
-        // $ptw->rejected_by = '';
-        // $ptw->status = '';
-        // $ptw->save();
+        $ptw = New ptw;
+        $ptw->project_id = $request->project_id;
+        $ptw->permission_id = $request->permission_id;
+        $ptw->work_location_id = $request->location_id;
+        $ptw->level = 'spv';
+        $ptw->berlaku_dari = $request->berlaku_dari;
+        $ptw->berlaku_sampai = $request->berlaku_sampai;
+        $ptw->manpower_qty = $request->manpower_qty;
+        $ptw->remark = $request->remark ?? '';
+        $ptw->created_by = auth()->user()->name;
+        $ptw->approved_by = '';
+        $ptw->rejected_by = '';
+        $ptw->status = '';
+        $ptw->save();
 
-        // foreach ($request->input('tools', []) as $tools_name) {
-        //     ptw_tools::create([
-        //         'ptw_id' => $ptw->id,
-        //         'tools_id' => $tools_name,
-        //     ]);
-        // }
+        foreach ($request->input('tools', []) as $tools) {
+            ptw_tools::create([
+                'ptw_id' => $ptw->id,
+                'tools_id' => $tools,
+            ]);
+        }
+
+        foreach ($request->input('permission_tambahan', []) as $permission) {
+            ptw_permission::create([
+                'ptw_id' => $ptw->id,
+                'permission_id' => $permission,
+            ]);
+        }
 
         return redirect()->back();
     }
