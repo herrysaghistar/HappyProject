@@ -139,6 +139,22 @@ $('.btnid').click(function(){
 <script type="text/javascript">
 $(document).ready(function() {
   $('.btniddetail').click(function() {
+    document.getElementById("instruksi_tambahan1").innerHTML = '';
+    document.getElementById("instruksi_tambahan2").innerHTML = '';
+    document.getElementById("instruksi_tambahan3").innerHTML = '';
+    document.getElementById("instruksi_tambahan4").innerHTML = '';
+    document.getElementById("tools1").innerHTML = '';
+    document.getElementById("tools2").innerHTML = '';
+    document.getElementById("tools3").innerHTML = '';
+    document.getElementById("tools4").innerHTML = '';
+    document.getElementById("tools5").innerHTML = '';
+    document.getElementById("tools6").innerHTML = '';
+    document.getElementById("tools7").innerHTML = '';
+    document.getElementById("tools8").innerHTML = '';
+    document.getElementById("tools9").innerHTML = '';
+    document.getElementById("tools10").innerHTML = '';
+    document.getElementById("tools11").innerHTML = '';
+    document.getElementById("tools12").innerHTML = '';
     var dataDetail = $(this).data();
     var permissionString = dataDetail.permissionTambahan;
     var permissionsArray = permissionString.split(',');
