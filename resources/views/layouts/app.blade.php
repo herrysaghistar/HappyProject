@@ -242,6 +242,15 @@ $(document).ready(function() {
                     checkbox.value = item.id;
                     checkbox.name = 'tools[]';
 
+                    const ketinggian = [0, 1, 3, 4, 5, 6]; // 0-based index adjustment
+                    const radiografi = [0, 1, 3, 4, 6]; // 0-based index adjustment
+                    if (selectedValue == 6 && ketinggian.includes(index)) {
+                        checkbox.checked = true;
+                    }
+                    if (selectedValue == 7 && radiografi.includes(index)) {
+                        checkbox.checked = true;
+                    }
+
                     const label = document.createElement('label');
                     label.className = 'form-check-label';
                     label.textContent = `${index + 1}. ${item.tools_name}`;
