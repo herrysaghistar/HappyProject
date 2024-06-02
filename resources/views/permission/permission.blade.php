@@ -66,8 +66,8 @@
                         </button>
                       </td>
                       <td>{{ $datas->ptw_id }}/PTW/{{ $datas->project_id }}/{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}/{{ $datas->created_at->format('Y') }}</td>
-                      <td>{{ $datas->created_at }}</td>
                       <td>{{ $datas->created_by }}</td>
+                      <td>{{ $datas->created_at }}</td>
                       <td>{{ $datas->berlaku_dari }} - {{ $datas->berlaku_sampai }}</td>
                       <td>{{ $datas->location_name }}</td>
                       <td>
@@ -274,12 +274,10 @@
               </div>
 
               <div class="form-group">
-                <label for="Tools">Tools</label>
                 <div id="tools_div"></div>
               </div>
 
               <div class="form-group">
-                <label for="instruksi_tambahan">Instruksi Tambahan</label>
                 <div id="instruksi_tambahan_div"></div>
               </div>
             </div>

@@ -158,7 +158,11 @@ $(document).ready(function() {
     .then(data => {
         const instruksiDiv = document.getElementById('instruksi_tambahan_div');
         instruksiDiv.innerHTML = '';
-
+        if (data.length > 0) {
+            const labelPermissions = document.createElement('label');
+            labelPermissions.textContent = "Instruksi Tambahan";
+            instruksiDiv.appendChild(labelPermissions);
+        }
         data.forEach((datas, index) => {
             const instruksi_tambahan_data = document.createElement('p');
             instruksi_tambahan_data.textContent = `${index + 1}. ${datas.permission_name}`; 
@@ -172,7 +176,11 @@ $(document).ready(function() {
     .then(data => {
         const apdDiv = document.getElementById('tools_div');
         apdDiv.innerHTML = '';
-
+        if (data.length > 0) {
+            const labelTools = document.createElement('label');
+            labelTools.textContent = "Tools";
+            apdDiv.appendChild(labelTools);
+        }
         data.forEach((datas, index) => {
             const apd_data = document.createElement('p');
             apd_data.textContent = `${index + 1}. ${datas.tools_name}`; 
