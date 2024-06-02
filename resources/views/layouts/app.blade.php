@@ -244,7 +244,7 @@ $(document).ready(function() {
 
                     const label = document.createElement('label');
                     label.className = 'form-check-label';
-                    label.textContent = `${index + 1}. ${item.permission_name}`;
+                    label.textContent = `${index + 1}. ${item.tools_name}`;
 
                     formCheckDiv.appendChild(checkbox);
                     formCheckDiv.appendChild(label);

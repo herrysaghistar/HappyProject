@@ -59,15 +59,22 @@ class DatabaseSeeder extends Seeder
                 }
             }
 
-            $permissions_tambahan = ['PERSONIL YANG BEKERJA DI DAERAH SEKITARNYA DIBERITAHU PEKERJAAN RADIOAKTIF AKAN DILAKUKAN', 'PAGAR/LAMPU KEDIP-KEDIP TERPASANG HINGGA BATAS DAERAH LARANGAN', 'SUMBER RADIOAKTIF TIDAK BOLEH DITINGGAL TANPA PENGAWASAN RADIOGRAFER', 'SUMBER RADIOAKTIF DISIMPAN DI TEMPAT PENYIMPANAN YANG DITENTUKAN BILA TIAK DIGUNAKAN'];
+            $permissions_tambahan_ketinggian = ['APAKAH KONDISI PELAKSANA DALAM KEADAAN SEHAT?','APAKAH HANDRAIL TELAH DIPASANG UNTUK MENCEGAH TERJATUH?','APAKAH BAGIAN TERBUKA DARI PERANCAH DAN LANTAI KERJA TELAH DILINDUNGI/DITUTUP?','APAKAH FULL BODY HARNESS DALAM KONDISI YANG BAIK?','APAKAH PEKERJA TELAH MENGGUNAKAAN SEPATU KESELAMATAN DENGAN LAPISAN ANTI SLIP?','APAKAH ORANG YANG BEKERJA DI KETINGGIAN TELAH MENGGUNAKAN SABUK PENGAMAN (FULL BODY HARNESS)?','APAKAH PEKERJA TELAH DIBERIKAN INSTRUKSI CARA PENGIKATAN DAN PEMAKAIAN FULL BODY HARNESS YANG BENAR?','APAKAH HOOK DAN KARABINER PADA FULL BODY HARNESS BERFUNGSI DENGAN BAIK (DAPAT MEMBUKA DAN MENGUNCI)?'];
             
-            for ($x=1; $x <= count($permissions); $x++) { 
-                foreach ($permissions_tambahan as $permissions_name) {
-                    \App\Models\permission_tambahan::create([
-                        'permission_type_id' => $x,
-                        'permission_name' => $permissions_name,
-                    ]);
-                }
+            foreach ($permissions_tambahan_ketinggian as $permissions_name) {
+                \App\Models\permission_tambahan::create([
+                    'permission_type_id' => 6,
+                    'permission_name' => $permissions_name,
+                ]);
+            }
+
+            $permissions_tambahan_radiografi = ['PERSONIL YANG BEKERJA DI DAERAH SEKITARNYA DIBERITAHU PEKERJAAN RADIOAKTIF AKAN DILAKUKAN','PAGAR/LAMPU KEDIP-KEDIP TERPASANG HINGGA BATAS DAERAH LARANGAN','SUMBER RADIOAKTIF TIDAK BOLEH DITINGGAL TANPA PENGAWASAN RADIOGRAFER','SUMBER RADIOAKTIF DISIMPAN DI TEMPAT PENYIMPANAN YANG DITENTUKAN BILA TIAK DIGUNAKAN'];
+            
+            foreach ($permissions_tambahan_radiografi as $permissions_name) {
+                \App\Models\permission_tambahan::create([
+                    'permission_type_id' => 7,
+                    'permission_name' => $permissions_name,
+                ]);
             }
 
             $work_location = ['Bengkel Fabrikasi & SSH' ,'Bengkel Sub Assembly' ,'Bengkel Assembly MPL' ,'Bengkel Assembly CBL' ,'Bengkel Las 1' ,'Bengkel Las 2' ,'Bengkel Erection 1' ,'Bengkel Erection 2' ,'Bengkel Block Blasting Shop ' ,'Bengkel Konstruksi Plat 1' ,'Bengkel Konstriksi Plat 2' ,'Bengkel Pipa' ,'Bengkel CNC' ,'Bengkel Machinery Assembly' ,'Bengkel Machinery Outfitting' ,'Bengkel Listrik' ,'Bengkel Kayu' ,'Dock Semarang' ,'Dock Irian' ,'Dock Surabaya' ,'Dock Pare-Pare'];
