@@ -59,6 +59,7 @@
                                 data-location-name="{{ $datas->location_name }}" 
                                 data-project-name="{{ $datas->project_name }}" 
                                 data-permission-type="{{ $datas->permission_name }}" 
+                                data-remark="{{ $datas->remark }}" 
                                 data-toggle="modal" 
                                 data-target="#modal-lg-detail">
                           <i class="fas fa-eye"></i>
@@ -202,7 +203,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="remark">Catatan/Keterangan Tambahan</label>
+                    <label for="remark">Uraian Kegiatan</label>
                     <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
                 </div>
 

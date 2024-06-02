@@ -17,7 +17,9 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="../../index2.html"><b>SYSTEM</b></a>
+    <br>
+    <a href="../../index2.html"> Permit To Work</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

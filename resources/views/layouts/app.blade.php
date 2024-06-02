@@ -151,6 +151,7 @@ $(document).ready(function() {
     $("#modal-lg-detail #manpower_qty").val(dataDetail.manpowerQty);
     $("#modal-lg-detail #permission_type").val(dataDetail.permissionType);
     $("#modal-lg-detail #nama_proyek").val(dataDetail.projectName);
+    $("#modal-lg-detail #remark").val(dataDetail.remark);
 
   fetch(`http://127.0.0.1:8000/detail-tambahan/${dataDetail.ptwId}`)
     .then(response => response.json())
