@@ -37,6 +37,7 @@
                       <th>Periode</th>
                       <th>Lokasi Kerja</th>
                       <th>Status Pekerjaan</th>
+                      <th>Status Dokumen</th>
                       <th>Approval</th>
                     </tr>
                   </thead>
@@ -48,6 +49,7 @@
                                 data-ptw-id="{{ $datas->ptw_id }}" 
                                 data-manpower-qty="{{ $datas->manpower_qty }}" 
                                 data-project="{{ $datas->project_name }}" 
+                                data-project-id="{{ $datas->project_id }}" 
                                 data-month="{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}"
                                 data-year="{{ $datas->created_at->format('Y') }}" 
                                 data-created-at="{{ $datas->created_at }}" 
@@ -57,38 +59,32 @@
                                 data-location-name="{{ $datas->location_name }}" 
                                 data-project-name="{{ $datas->project_name }}" 
                                 data-permission-type="{{ $datas->permission_name }}" 
-                                data-permission-tambahan="{{ $datas->permission_names }}"
-                                data-tools="{{ $datas->tools_names }}"
                                 data-toggle="modal" 
                                 data-target="#modal-lg-detail">
                           <i class="fas fa-eye"></i>
                         </button>
                       </td>
-                      <td>{{ $datas->ptw_id }}/PTW/{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}/{{ $datas->created_at->format('Y') }}</td>
+                      <td>{{ $datas->ptw_id }}/PTW/{{ $datas->project_id }}/{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}/{{ $datas->created_at->format('Y') }}</td>
                       <td>{{ $datas->created_at }}</td>
                       <td>{{ $datas->created_by }}</td>
                       <td>{{ $datas->berlaku_dari }} - {{ $datas->berlaku_sampai }}</td>
                       <td>{{ $datas->location_name }}</td>
                       <td>
-                        @if($datas->status == 'progress')
-                        <div class="row">
-                          <div>
-                            Pekerjaan Sedang Dalam Progress
-                          </div>
-                          <div>
-                            <button class="btn btn-outline-success">Pekerjaan Selesai</button>
-                          </div>
-                        </div>
-                        @elseif($datas->status == 'done')
-                          Pekerjaan Telah Selesai
-                        @elseif($datas->level == 'rejected')
-                          Dokumen Ditolak
-                        @elseif($datas->level != 'approved' && $datas->level != 'rejected')
-                          Dokumen Belum Disetujui
-                        @elseif($datas->status == 'onprogress')
+                        @if($datas->status == 'onprogress')
                         <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-done">Selesaikan Pekerjaan</button>
+                        @elseif($datas->status == 'done')
+                        <button class="btn btn-success" disabled>Pekerjaan Telah Selesai</button>
                         @elseif(!$datas->status)
-                        <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-progress">Mulai Pekerjaan</button>
+                        <button class="btn btn-warning" disabled>Dokumen Belum Disetujui</button>
+                        @endif
+                      </td>
+                      <td>
+                        @if($datas->level == 'approved')
+                          <button class="btn btn-success" disabled>Dokumen Telah Di Approve!</button>
+                        @elseif($datas->level == 'rejected')
+                          <button class="btn btn-danger" disabled>Dokumen Ditolak</button>
+                        @elseif($datas->level != 'approved' && $datas->level != 'rejected')
+                          <button class="btn btn-warning" disabled>Dokumen Belum Disetujui</button>
                         @endif
                       </td>
                       <td>
@@ -97,7 +93,7 @@
                             <button class="btn btn-outline-primary">Download PDF</button>
                           </a>
                           @elseif($datas->level == 'rejected')
-                          <button class="btn btn-outline-danger" disabled>Perijinan ditolak oleh {{ $datas->rejected_by }}</button>
+                          <button class="btn btn-danger" disabled>Perijinan ditolak oleh {{ $datas->rejected_by }}</button>
                           @else
                             @can('spv')
                             Menunggu keputusan {{ $datas->level }}
@@ -135,8 +131,8 @@
               <form method="POST" action="{{ url('/create-ptw') }}">
                 @csrf
                 <div class="form-group">
-                  <label for="exampleFormControlSelect1">Nama Proyek</label>
-                  <select class="form-control" name="project_id" id="exampleFormControlSelect1">
+                  <label for="">Nama Proyek</label>
+                  <select class="form-control" name="project_id" id="">
                     @foreach($project as $projects)
                     <option value="{{ $projects->id }}">{{ $projects->project_name }}</option>
                     @endforeach
@@ -144,8 +140,8 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="exampleFormControlSelect1">Lokasi</label>
-                  <select class="form-control" name="location_id" id="exampleFormControlSelect1">
+                  <label for="">Lokasi</label>
+                  <select class="form-control" name="location_id" id="">
                     @foreach($work_location as $work_locations)
                     <option value="{{ $work_locations->id }}">{{ $work_locations->location_name }}</option>
                     @endforeach
@@ -164,7 +160,8 @@
 
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Jenis Perizinan</label>
-                  <select class="form-control" name="permission_id" id="exampleFormControlSelect1">
+                  <select class="form-control" name="permission_id" id="permission_select">
+                    <option value="">Pilih Izin</option>
                     @foreach($permission_type as $permission_types)
                     <option value="{{ $permission_types->id }}">{{ $permission_types->permission_name }}</option>
                     @endforeach
@@ -174,15 +171,13 @@
                 <div class="form-group">
                   <label for="tools">Instruksi Tambahan</label>
                   <div class="row">
-                    <div class="col-12">
-                      @foreach($permission_tambahan as $permission)
+                    <div class="col-12" id="instruksi_tambahan">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{ $permission->id }}" name="permission_tambahan[]" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" name="permission_tambahan[]" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
-                          {{ $permission->permission_name }}
+                          Isi Perizinan Dulu!
                         </label>
                       </div>
-                      @endforeach
                     </div>
                   </div>
                 </div>
@@ -190,15 +185,13 @@
                 <div class="form-group">
                   <label for="tools">Equipment</label>
                   <div class="row">
-                    <div class="col-12">
-                      @foreach($tools as $tool)
+                    <div class="col-12" id="inpuApd">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{ $tool->id }}" name="tools[]" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" name="tools[]" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
-                          {{ $tool->tools_name }}
+                          Isi Perizinan Dulu!
                         </label>
                       </div>
-                      @endforeach
                     </div>
                   </div>
                 </div>
@@ -281,26 +274,12 @@
 
               <div class="form-group">
                 <label for="Tools">Tools</label>
-                <p id="tools1"></p>
-                <p id="tools2"></p>
-                <p id="tools3"></p>
-                <p id="tools4"></p>
-                <p id="tools5"></p>
-                <p id="tools6"></p>
-                <p id="tools7"></p>
-                <p id="tools8"></p>
-                <p id="tools9"></p>
-                <p id="tools10"></p>
-                <p id="tools11"></p>
-                <p id="tools12"></p>
+                <div id="tools_div"></div>
               </div>
 
               <div class="form-group">
                 <label for="instruksi_tambahan">Instruksi Tambahan</label>
-                <p id="instruksi_tambahan1"></p>
-                <p id="instruksi_tambahan2"></p>
-                <p id="instruksi_tambahan3"></p>
-                <p id="instruksi_tambahan4"></p>
+                <div id="instruksi_tambahan_div"></div>
               </div>
             </div>
             <div class="modal-footer justify-content-end">

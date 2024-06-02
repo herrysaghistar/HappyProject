@@ -53,3 +53,9 @@ Route::post('/mulai', [HomeController::class, 'mulai']);
 Route::post('/done', [HomeController::class, 'done']);
 
 Route::get('/download-pdf/{id}', [HomeController::class, 'download']);
+
+Route::get('/input-detail-tambahan/{id}', [HomeController::class, 'InputDetailTambahan']);
+Route::get('/input-apd/{id}', [HomeController::class, 'InputApd']);
+
+Route::get('/detail-tambahan/{id}', [HomeController::class, 'DetailTambahan']);
+Route::get('/apd/{id}', [HomeController::class, 'Apd']);

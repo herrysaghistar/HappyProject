@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ptw;
 use App\Models\ptw_tools;
 use App\Models\ptw_permission;
+use App\Models\tools_type;
+use App\Models\permission_tambahan;
 use \PDF;
 
 class HomeController extends Controller
@@ -76,6 +78,7 @@ class HomeController extends Controller
         }
         elseif (Auth::user()->can('kapro')) {
             $ptw->level = 'approved';
+            $ptw->status = 'onprogress';
         }
         $ptw->approved_by = auth()->user()->name;
         $ptw->save();
@@ -122,14 +125,35 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    public function startJob()
+    public function InputDetailTambahan($id)
     {
-        
+        $detail_tambahan = permission_tambahan::select('id', 'permission_name')->where('permission_type_id', $id)->get();
+
+        return json_encode($detail_tambahan);
+        // return $id;
     }
 
-    public function endJob()
+    public function InputApd($id)
     {
-        
+        $apd = tools_type::select('id', 'tools_name')->where('permission_type_id', $id)->get();
+
+        return json_encode($apd);
+    }
+
+    public function DetailTambahan($id)
+    {
+        $detail_tambahan = ptw_permission::select('permission_name')->join('permission_tambahans', 'permission_tambahans.id', '=', 'ptw_permissions.permission_id')
+        ->where('ptw_id', $id)->get();
+
+        return json_encode($detail_tambahan);
+    }
+
+    public function Apd($id)
+    {
+        $apd = ptw_tools::select('tools_name')->join('tools_types', 'tools_types.id', '=', 'ptw_tools.tools_id')
+        ->where('ptw_id', $id)->get();
+
+        return json_encode($apd);
     }
 
     public function download($id)

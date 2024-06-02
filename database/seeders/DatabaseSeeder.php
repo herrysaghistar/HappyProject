@@ -42,13 +42,6 @@ class DatabaseSeeder extends Seeder
                 $user->assignRole($roleName);
             }
 
-            $tools = ['PELINDUNG KEPALA / HELM PROTECTION','PELINDUNG MUKA / FACESHIELD, EYE PROTECTION','PELINDUNG TELINGA / EAR PROTECTION','PELINDUNG TANGAN / SAFETY GLOVES','PELINDUNG KAKI / SAFETY SHOES','PELINDUNG DI KETINGGIAN / FULL BODY HARNESS','BAJU KERJA / WEARPCAK CATTLEPAK','PENJAGA KEBAKARAN / FIRE WATCHER','DETEKSI GAS BERBAHAYA / GAS DETECTION TEST','ALAT PEMADAM API / FIRE EXTINGUISHER','ALAT BANTU PERNAPASAN / BREATHING APPARATUS','LAINNYA / OTHERS'];
-            foreach ($tools as $tools_name) {
-                \App\Models\tools_type::create([
-                    'tools_name' => $tools_name,
-                ]);
-            }
-
             $permissions = ['KERJA PANAS / HOT WORK','RUANG TERBATAS / CONFINED SPACE','PENGGALIAN / EXCAVATION','PEKERJAAN DINGIN / COLD WORK','ISOLASI/LOTO / ISOLATION','KERJA DI KETINGGIAN / WORKING AT HEIGHT','TES RADIOGRAFI / X-RAY'];
             foreach ($permissions as $permissions_name) {
                 \App\Models\permission_type::create([
@@ -56,11 +49,25 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
 
+            $tools = ['PELINDUNG KEPALA / HELM PROTECTION','PELINDUNG MUKA / FACESHIELD, EYE PROTECTION','PELINDUNG TELINGA / EAR PROTECTION','PELINDUNG TANGAN / SAFETY GLOVES','PELINDUNG KAKI / SAFETY SHOES','PELINDUNG DI KETINGGIAN / FULL BODY HARNESS','BAJU KERJA / WEARPCAK CATTLEPAK','PENJAGA KEBAKARAN / FIRE WATCHER','DETEKSI GAS BERBAHAYA / GAS DETECTION TEST','ALAT PEMADAM API / FIRE EXTINGUISHER','ALAT BANTU PERNAPASAN / BREATHING APPARATUS','LAINNYA / OTHERS'];
+            for ($y=1; $y <= count($permissions) ; $y++) { 
+                foreach ($tools as $tools_name) {
+                    \App\Models\tools_type::create([
+                        'permission_type_id' => $y,
+                        'tools_name' => $tools_name,
+                    ]);
+                }
+            }
+
             $permissions_tambahan = ['PERSONIL YANG BEKERJA DI DAERAH SEKITARNYA DIBERITAHU PEKERJAAN RADIOAKTIF AKAN DILAKUKAN', 'PAGAR/LAMPU KEDIP-KEDIP TERPASANG HINGGA BATAS DAERAH LARANGAN', 'SUMBER RADIOAKTIF TIDAK BOLEH DITINGGAL TANPA PENGAWASAN RADIOGRAFER', 'SUMBER RADIOAKTIF DISIMPAN DI TEMPAT PENYIMPANAN YANG DITENTUKAN BILA TIAK DIGUNAKAN'];
-            foreach ($permissions_tambahan as $permissions_name) {
-                \App\Models\permission_tambahan::create([
-                    'permission_name' => $permissions_name,
-                ]);
+            
+            for ($x=1; $x <= count($permissions); $x++) { 
+                foreach ($permissions_tambahan as $permissions_name) {
+                    \App\Models\permission_tambahan::create([
+                        'permission_type_id' => $x,
+                        'permission_name' => $permissions_name,
+                    ]);
+                }
             }
 
             $work_location = ['Bengkel Fabrikasi & SSH' ,'Bengkel Sub Assembly' ,'Bengkel Assembly MPL' ,'Bengkel Assembly CBL' ,'Bengkel Las 1' ,'Bengkel Las 2' ,'Bengkel Erection 1' ,'Bengkel Erection 2' ,'Bengkel Block Blasting Shop ' ,'Bengkel Konstruksi Plat 1' ,'Bengkel Konstriksi Plat 2' ,'Bengkel Pipa' ,'Bengkel CNC' ,'Bengkel Machinery Assembly' ,'Bengkel Machinery Outfitting' ,'Bengkel Listrik' ,'Bengkel Kayu' ,'Dock Semarang' ,'Dock Irian' ,'Dock Surabaya' ,'Dock Pare-Pare'];
@@ -70,7 +77,7 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
 
-            $project = ['nguli', 'nge cor', 'malu', 'nempa', 'ngelebur', 'mecah batu', 'pembersihan' ,'pengelasan' ,'isolasi'];
+            $project = ['Barge Mounted Power Plant 2 (BMPP-2)', 'Barge Mounted Power Plant 3 (BMPP-3)', 'Single Point Mooring (SPM)', 'Metso Outotec (METSO)', 'Dharma Lautan Utama (DLU)', 'Kapal Bantu Rumah Sakit (BRS)', 'Kapal Fregat Merah Putih (FMP)', 'Kapal Landing Platform Dock (LPD)'];
             foreach ($project as $projects) {
                 \App\Models\project::create([
                     'project_name' => $projects,
@@ -78,12 +85,12 @@ class DatabaseSeeder extends Seeder
             }
 
             $roles_ptw = ['hse', 'kabeng', 'kapro'];
-            for ($i=0; $i < 3; $i++) { 
+            for ($i=0; $i < 5; $i++) { 
                 foreach ($roles_ptw as $roleName) {
                 \App\Models\ptw::create([
-                    'project_id' => $i+1,
-                    'permission_id' => $i+1,
-                    'work_location_id' => $i+1,
+                    'project_id' => $i+1    ,
+                    'permission_id' => $i+1 ,
+                    'work_location_id' => $i+1  ,
                     'level' => $roleName,
                     'berlaku_dari' => '2024-05-25',
                     'berlaku_sampai' => '2024-05-30',
@@ -94,6 +101,7 @@ class DatabaseSeeder extends Seeder
                     'rejected_by' => '',
                     'created_by' => $roleName . ' User',
                 ]);
+
                 }
             }
         } catch (Exception $e) {

@@ -18,23 +18,14 @@ class SpvController extends Controller
     	$data = Ptw::select(
                         'ptws.id as ptw_id',
                         'ptws.*',
+                        'projects.id as project_id',
                         'projects.*',
                         'work_locations.*',
-                        'permission_types.*',
-                        DB::raw('GROUP_CONCAT(DISTINCT permission_tambahans.permission_name) as permission_names'),
-                        DB::raw('GROUP_CONCAT(DISTINCT tools_types.tools_name) as tools_names')
+                        'permission_types.*'
                     )
                     ->join('projects', 'ptws.project_id', '=', 'projects.id')
                     ->join('work_locations', 'ptws.work_location_id', '=', 'work_locations.id')
                     ->join('permission_types', 'ptws.permission_id', '=', 'permission_types.id')
-                    
-                    ->leftJoin('ptw_permissions', 'ptws.id', '=', 'ptw_permissions.ptw_id')
-                    ->leftJoin('permission_tambahans', 'ptw_permissions.permission_id', '=', 'permission_tambahans.id')
-                    
-                    ->leftJoin('ptw_tools', 'ptws.id', '=', 'ptw_tools.ptw_id')
-                    ->leftJoin('tools_types', 'ptw_tools.tools_id', '=', 'tools_types.id')
-                    
-                    ->groupBy('ptws.id')
                     ->get();
 
         $tools = tools_type::all();
