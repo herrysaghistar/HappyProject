@@ -79,6 +79,23 @@ class HomeController extends Controller
         $ptw->remark = $request->remark ?? '';
         $ptw->save();
 
+        ptw_tools::where('ptw_id', $request->id_ptw)->delete();
+        ptw_permission::where('ptw_id', $request->id_ptw)->delete();
+
+        foreach ($request->input('tools', []) as $tools) {
+            ptw_tools::create([
+                'ptw_id' => $ptw->id,
+                'tools_id' => $tools,
+            ]);
+        }
+
+        foreach ($request->input('permission_tambahan', []) as $permission) {
+            ptw_permission::create([
+                'ptw_id' => $ptw->id,
+                'permission_id' => $permission,
+            ]);
+        }
+
         return redirect()->back();
     }
 
