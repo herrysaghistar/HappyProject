@@ -45,7 +45,9 @@
                     @foreach($data as $datas)
                     <tr>
                       <td>
-                        <button class="btniddetail btn btn-secondary" id="btniddetail" 
+                        <div class="row">
+                          <div class="col-12">
+                            <button class="btniddetail btn btn-secondary" id="btniddetail" 
                                 data-ptw-id="{{ $datas->ptw_id }}" 
                                 data-manpower-qty="{{ $datas->manpower_qty }}" 
                                 data-project="{{ $datas->project_name }}" 
@@ -62,11 +64,18 @@
                                 data-remark="{{ $datas->remark }}" 
                                 data-toggle="modal" 
                                 data-target="#modal-lg-detail">
-                          <i class="fas fa-eye"></i>
-                        </button>
-                        @can('hse')
-                        <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-lg-edit"><i class="fas fa-pen"></i></button>
-                        @endcan
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </div>
+                          @can('hse')
+                          <div class="col-12">
+                            <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-lg-edit"><i class="fas fa-pen"></i></button>
+                          </div>
+                          <div class="col-12">
+                            <button type="submit" class="btnid btn btn-outline-danger" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-delete"><i class="fas fa-trash"></i></button>
+                          </div>
+                          @endcan
+                        </div>
                       </td>
                       <td>{{ $datas->ptw_id }}/PTW/{{ $datas->project_id }}/{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}/{{ $datas->created_at->format('Y') }}</td>
                       <td>{{ $datas->created_by }}</td>
@@ -204,31 +213,29 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="manpower_qty">Jumlah Man Power</label>
-                    <input type="number" name="manpower_qty" class="form-control" id="manpower_qty" required>
+                  <label for="manpower_qty">Jumlah Man Power</label>
+                  <input type="number" name="manpower_qty" class="form-control" id="manpower_qty" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="remark">Uraian Kegiatan</label>
-                    <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
+                  <label for="remark">Uraian Kegiatan</label>
+                  <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
                 </div>
 
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button class="btn btn-success" type="submit">Buat Permohonan</button>
-            </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button class="btn btn-success" type="submit">Buat Permohonan</button>
+                </div>
               </form>
           </div>
-          <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
       </div>
       <div class="modal fade" id="modal-lg-edit">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Form Permohonan Baru</h4>
+              <h4 class="modal-title">Edit Form Perizinan</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -302,27 +309,41 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="form-group">
-                    <label for="manpower_qty">Jumlah Man Power</label>
-                    <input type="number" name="manpower_qty" class="form-control" id="manpower_qty" required>
+                  <label for="manpower_qty">Jumlah Man Power</label>
+                  <input type="number" name="manpower_qty" class="form-control" id="manpower_qty" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="remark">Uraian Kegiatan</label>
-                    <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
+                  <label for="remark">Uraian Kegiatan</label>
+                  <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
                 </div>
-
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button class="btn btn-success" type="submit">Buat Permohonan</button>
-            </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button class="btn btn-success" type="submit">Edit Permohonan</button>
+                </div>
               </form>
           </div>
-          <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
+      </div>
+      <div class="modal fade" id="modal-sm-delete">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Yakin Untuk Menghapus Form Perizinan?</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <form action="{{ url('/delete-ptw') }}" method="post">
+                @csrf
+                <input type="" name="id_ptw" id="id_ptw" hidden>
+                <button type="submit" class="btn btn-danger">Hapus Form</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal fade" id="modal-lg-detail">
         <div class="modal-dialog modal-lg">
@@ -391,9 +412,7 @@
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
-          <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
       </div>
       <div class="modal fade" id="modal-sm-success">
         <div class="modal-dialog modal-sm">
@@ -412,9 +431,7 @@
               </form>
             </div>
           </div>
-          <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
       </div>
       <div class="modal fade" id="modal-sm-danger">
         <div class="modal-dialog modal-sm">

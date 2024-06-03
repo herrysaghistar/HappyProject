@@ -136,6 +136,7 @@ $('.btnid').click(function(){
    $("#modal-sm-open #id_ptw").val(Id);
    $("#modal-sm-hold #id_ptw").val(Id);
    $("#modal-sm-done #id_ptw").val(Id);
+   $("#modal-sm-delete #id_ptw").val(Id);
 });
 </script>
 <script type="text/javascript">

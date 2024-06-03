@@ -101,8 +101,9 @@ class HomeController extends Controller
 
     public function deletePtw(Request $request)
     {
-        $ptw = ptw::find($request->id_ptw);
-        $ptw->delete();
+        ptw::find($request->id_ptw)->delete();
+        ptw_tools::where('ptw_id', $request->id_ptw)->delete();
+        ptw_permission::where('ptw_id', $request->id_ptw)->delete();
 
         return redirect()->back();
     }
