@@ -46,7 +46,7 @@ Route::middleware('can:spv')->group(function () {
 
 Route::post('/create-ptw', [HomeController::class, 'create']);
 Route::post('/edit-ptw', [HomeController::class, 'UpdatePtw']);
-Route::post('/delete-ptw', [HomeController::class, 'delete']);
+Route::post('/delete-ptw', [HomeController::class, 'deletePtw']);
 
 Route::post('/acc', [HomeController::class, 'acc']);
 Route::post('/reject', [HomeController::class, 'reject']);
