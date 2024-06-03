@@ -64,6 +64,9 @@
                                 data-target="#modal-lg-detail">
                           <i class="fas fa-eye"></i>
                         </button>
+                        @can('hse')
+                        <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-lg-edit"><i class="fas fa-pen"></i></button>
+                        @endcan
                       </td>
                       <td>{{ $datas->ptw_id }}/PTW/{{ $datas->project_id }}/{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}/{{ $datas->created_at->format('Y') }}</td>
                       <td>{{ $datas->created_by }}</td>
@@ -72,11 +75,14 @@
                       <td>{{ $datas->location_name }}</td>
                       <td>
                         @if($datas->status == 'onprogress')
-                        <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-done">Selesaikan Pekerjaan</button>
+                        <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-hold">Hold</button>
+                        <button type="submit" class="btnid btn btn-danger" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-done">Close</button>
+                        @elseif($datas->status == 'onhold')
+                        <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-open">Open</button>
                         @elseif($datas->status == 'done')
-                        <button class="btn btn-success" disabled>Pekerjaan Telah Selesai</button>
+                        <button class="btn btn-success" disabled>Closed</button>
                         @elseif(!$datas->status)
-                        <button class="btn btn-warning" disabled>Dokumen Belum Disetujui</button>
+                        <button class="btn btn-warning" disabled>Butuh Approval KAPRO Untuk Open</button>
                         @endif
                       </td>
                       <td>
@@ -186,7 +192,107 @@
                 <div class="form-group">
                   <label for="tools">Equipment</label>
                   <div class="row">
-                    <div class="col-12" id="inpuApd">
+                    <div class="col-12" id="inputApd">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" name="tools[]" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Isi Perizinan Dulu!
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="manpower_qty">Jumlah Man Power</label>
+                    <input type="number" name="manpower_qty" class="form-control" id="manpower_qty" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="remark">Uraian Kegiatan</label>
+                    <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button class="btn btn-success" type="submit">Buat Permohonan</button>
+            </div>
+              </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <div class="modal fade" id="modal-lg-edit">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Form Permohonan Baru</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="{{ url('/edit-ptw') }}">
+                @csrf
+                <input type="" name="id_ptw" id="id_ptw" hidden>
+                <div class="form-group">
+                  <label for="">Nama Proyek</label>
+                  <select class="form-control" name="project_id" id="">
+                    @foreach($project as $projects)
+                    <option value="{{ $projects->id }}">{{ $projects->project_name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="">Lokasi</label>
+                  <select class="form-control" name="location_id" id="">
+                    @foreach($work_location as $work_locations)
+                    <option value="{{ $work_locations->id }}">{{ $work_locations->location_name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="berlaku_dari">Berlaku Dari</label>
+                    <input type="date" name="berlaku_dari" class="form-control" id="berlaku_dari" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="berlaku_sampai">Berlaku Sampai</label>
+                    <input type="date" name="berlaku_sampai" class="form-control" id="berlaku_sampai" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Jenis Perizinan</label>
+                  <select class="form-control" name="permission_id" id="permission_select_edit">
+                    <option value="">Pilih Izin</option>
+                    @foreach($permission_type as $permission_types)
+                    <option value="{{ $permission_types->id }}">{{ $permission_types->permission_name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="tools">Instruksi Tambahan</label>
+                  <div class="row">
+                    <div class="col-12" id="edit_instruksi_tambahan">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" name="permission_tambahan[]" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Isi Perizinan Dulu!
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="tools">Equipment</label>
+                  <div class="row">
+                    <div class="col-12" id="editApd">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" name="tools[]" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
@@ -329,7 +435,7 @@
           </div>
         </div>
       </div>
-      <div class="modal fade" id="modal-sm-progress">
+      <div class="modal fade" id="modal-sm-open">
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <div class="modal-header">
@@ -343,6 +449,25 @@
                 @csrf
                 <input type="" name="id_ptw" id="id_ptw" hidden>
                 <button type="submit" class="btn btn-primary">Mulai</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-sm-hold">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Ubah Status Pekerjaan Menjadi On Hold ?</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <form action="{{ url('/hold') }}" method="post">
+                @csrf
+                <input type="" name="id_ptw" id="id_ptw" hidden>
+                <button type="submit" class="btn btn-success">Hold</button>
               </form>
             </div>
           </div>

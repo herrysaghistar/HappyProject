@@ -130,9 +130,11 @@
 $('.btnid').click(function(){
    var Id = $(this).data('id');
    console.log('Button clicked. ID:', Id);
+   $("#modal-lg-edit #id_ptw").val(Id);
    $("#modal-sm-success #id_ptw").val(Id);
    $("#modal-sm-danger #id_ptw").val(Id);
-   $("#modal-sm-progress #id_ptw").val(Id);
+   $("#modal-sm-open #id_ptw").val(Id);
+   $("#modal-sm-hold #id_ptw").val(Id);
    $("#modal-sm-done #id_ptw").val(Id);
 });
 </script>
@@ -195,6 +197,111 @@ $(document).ready(function() {
 </script>
 <script type="text/javascript">
   $(document).ready(function() {
+    $('#permission_select_edit').on('change', function() {
+        const selectedValue = this.value;
+        console.log(selectedValue);
+
+        fetch(`http://127.0.0.1:8000/input-apd/${selectedValue}`)
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+                const instruksiDiv = document.getElementById('editApd');
+                instruksiDiv.innerHTML = ''; // Clear previous content
+
+                data.forEach((item, index) => {
+                    const formCheckDiv = document.createElement('div');
+                    formCheckDiv.className = 'form-check';
+
+                    const checkbox = document.createElement('input');
+                    checkbox.className = 'form-check-input';
+                    checkbox.type = 'checkbox';
+                    checkbox.value = item.id;
+                    checkbox.name = 'tools[]';
+
+                    const hot  = [0,1,3,4,6,9];
+                    const conf = [0,3,4,6,8,9];
+                    const exca = [0,3,4,6,9];
+                    const cold = [0,3,4,6,9];
+                    const isol = [0,3,4,6,9];
+                    const ketinggian = [0, 1, 3, 4, 5, 6];
+                    const radiografi = [0, 1, 3, 4, 6];
+                    if (selectedValue == 1 && hot.includes(index)) {
+                        checkbox.checked = true;
+                    }
+                    if (selectedValue == 2 && conf.includes(index)) {
+                        checkbox.checked = true;
+                    }
+                    if (selectedValue == 3 && exca.includes(index)) {
+                        checkbox.checked = true;
+                    }
+                    if (selectedValue == 4 && cold.includes(index)) {
+                        checkbox.checked = true;
+                    }
+                    if (selectedValue == 5 && isol.includes(index)) {
+                        checkbox.checked = true;
+                    }
+                    if (selectedValue == 6 && ketinggian.includes(index)) {
+                        checkbox.checked = true;
+                    }
+                    if (selectedValue == 7 && radiografi.includes(index)) {
+                        checkbox.checked = true;
+                    }
+
+                    const label = document.createElement('label');
+                    label.className = 'form-check-label';
+                    label.textContent = `${index + 1}. ${item.tools_name}`;
+
+                    formCheckDiv.appendChild(checkbox);
+                    formCheckDiv.appendChild(label);
+
+                    instruksiDiv.appendChild(formCheckDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    });
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#permission_select_edit').on('change', function() {
+        const selectedValue = this.value;
+        console.log(selectedValue);
+
+        fetch(`http://127.0.0.1:8000/input-detail-tambahan/${selectedValue}`)
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+                const instruksiDiv = document.getElementById('edit_instruksi_tambahan');
+                instruksiDiv.innerHTML = ''; // Clear previous content
+
+                data.forEach((item, index) => {
+                    const formCheckDiv = document.createElement('div');
+                    formCheckDiv.className = 'form-check';
+
+                    const checkbox = document.createElement('input');
+                    checkbox.className = 'form-check-input';
+                    checkbox.type = 'checkbox';
+                    checkbox.value = item.id;
+                    checkbox.name = 'permission_tambahan[]';
+                    checkbox.style.display = 'none';
+                    checkbox.checked = true;
+
+                    const label = document.createElement('label');
+                    label.className = 'form-check-label';
+                    label.textContent = `${index + 1}. ${item.permission_name}`;
+
+                    formCheckDiv.appendChild(checkbox);
+                    formCheckDiv.appendChild(label);
+
+                    instruksiDiv.appendChild(formCheckDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));        
+    });
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
     $('#permission_select').on('change', function() {
         const selectedValue = this.value;
         
@@ -214,6 +321,8 @@ $(document).ready(function() {
                     checkbox.type = 'checkbox';
                     checkbox.value = item.id;
                     checkbox.name = 'permission_tambahan[]';
+                    checkbox.style.display = 'none';
+                    checkbox.checked = true;
 
                     const label = document.createElement('label');
                     label.className = 'form-check-label';
@@ -251,8 +360,28 @@ $(document).ready(function() {
                     checkbox.value = item.id;
                     checkbox.name = 'tools[]';
 
-                    const ketinggian = [0, 1, 3, 4, 5, 6]; // 0-based index adjustment
-                    const radiografi = [0, 1, 3, 4, 6]; // 0-based index adjustment
+                    const hot  = [0,1,3,4,6,9];
+                    const conf = [0,3,4,6,8,9];
+                    const exca = [0,3,4,6,9];
+                    const cold = [0,3,4,6,9];
+                    const isol = [0,3,4,6,9];
+                    const ketinggian = [0, 1, 3, 4, 5, 6];
+                    const radiografi = [0, 1, 3, 4, 6];
+                    if (selectedValue == 1 && hot.includes(index)) {
+                        checkbox.checked = true;
+                    }
+                    if (selectedValue == 2 && conf.includes(index)) {
+                        checkbox.checked = true;
+                    }
+                    if (selectedValue == 3 && exca.includes(index)) {
+                        checkbox.checked = true;
+                    }
+                    if (selectedValue == 4 && cold.includes(index)) {
+                        checkbox.checked = true;
+                    }
+                    if (selectedValue == 5 && isol.includes(index)) {
+                        checkbox.checked = true;
+                    }
                     if (selectedValue == 6 && ketinggian.includes(index)) {
                         checkbox.checked = true;
                     }

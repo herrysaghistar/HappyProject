@@ -59,6 +59,87 @@ class DatabaseSeeder extends Seeder
                 }
             }
 
+            $permissions_tambahan_hot = ['BAHAN YANG MUDAH TERBAKAR SUDAH DISINGKIRKAN/DILINDUNGI/DIJAGA',
+'TIDAK DITEMUI TABUNG GAS DI ATAS KAPAL',
+'LOKASI KERJA DAN DAERAH SEKITARNYA SUDAH DIBASAHI',
+'PIPA-PIPA ATAU PERALATAN LAINNYA TELAH DIISOLASI',
+'PERALATAN TELAH DIISOLASI TERHADAP HUBUNGAN LISTRIK',
+'PERALATAN LAS DAN POTONG DALAM KEADAAN LAIK PAKAI',
+'TELAH DISEDIAKAN SLANG AIR (PENYIRAM) YANG SIAP PAKAI',
+'TERSEDIA ALAT PEMADAM KEBAKARAN YANG SESUAI DENGAN JENIS KEBAKARAN',
+'TERSEDIA VENTILASI YANG MEMADAI',
+'TELAH DISIAGAKAN PERSONIL PEMADAM KEBAKARAN (SAT-PK)'];
+            
+            foreach ($permissions_tambahan_hot as $permissions_name) {
+                \App\Models\permission_tambahan::create([
+                    'permission_type_id' => 1,
+                    'permission_name' => $permissions_name,
+                ]);
+            }
+
+            $permissions_tambahan_confined = ['SUDAH DILAKUKAN PEMERIKSAAN GAS DENGAN GAS DETECTOR DENGAN OKSIGEN >21%;  H2S <5 ppm; CO <9 ppm',
+'RUANGAN TELAH DIBERSIHKAN',
+'TERSEDIA PENERANGAN YANG MEMADAI',
+'TERSEDIA PERALATAN RESCUE DAN RESUSITASI',
+'PIPA-PIPA ATAU PERALATAN LAINNYA TELAH DIISOLASI',
+'TERDAPAT PERSONIL YANG BERSIAGA DISAMPING LUBANG MASUK',
+'SISTEM KOMUNIKASI ANTARA PERSONIL DI DALAM DAN YANG SIAGA DILUAR TELAH DISETUJUI DAN DIPERIKSA',
+'TELAH MEMAHAMI DAN MENYETUJUI PROSEDUR EMERGENCY',
+'TERSEDIA SISTEM PENCATATAN TERHADAP PERSONIL YANG MASUK KE DALAM KOMPARTEMEN',
+'TERSEDIA VENTILASI YANG MEMADAI',
+'TELAH DISIAGAKAN ALAT PEMADAM DAN PERSONIL PEMADAM KEBAKARAN (SAT-PK)',
+'SAYA SADAR BAHWA RUANGAN HARUS SEGERA DIKOSONGKAN SEGERA BILA TERJADI KEGAGALAN VENTILASI ATAU BILA HASIL PENGETESAN BERUBAH DARI KRITERIA YANG DITETAPKAN',
+'DILAKUKAN PENGECEKAN GAS SELAMA DAN SETELAH PEKERJAAN BERLANGSUNG'];
+            
+            foreach ($permissions_tambahan_confined as $permissions_name) {
+                \App\Models\permission_tambahan::create([
+                    'permission_type_id' => 2,
+                    'permission_name' => $permissions_name,
+                ]);
+            }
+
+            $permissions_tambahan_excavation = ['PENGAMANAN DAERAH PENGGALIAN',
+'ALAT PENGGALI TANGAN DISEDIAKAN',
+'MENGIDENTIFIKASI POTENSI BAHAYA',
+'ISOLASI PERALATAN LISTRIK'];
+            
+            foreach ($permissions_tambahan_excavation as $permissions_name) {
+                \App\Models\permission_tambahan::create([
+                    'permission_type_id' => 3,
+                    'permission_name' => $permissions_name,
+                ]);
+            }
+
+            $permissions_tambahan_cold = ['BAHAN YANG MUDAH TERBAKAR SUDAH DISINGKIRKAN/DILINDUNGI/DIJAGA',
+'TIDAK DITEMUI TABUNG GAS DI ATAS KAPAL',
+'LOKASI KERJA DAN DAERAH SEKITARNYA SUDAH DIBASAHI',
+'PIPA-PIPA ATAU PERALATAN LAINNYA TELAH DIISOLASI',
+'PERALATAN TELAH DIISOLASI TERHADAP HUBUNGAN LISTRIK',
+'PERALATAN LAS DAN POTONG DALAM KEADAAN LAIK PAKAI',
+'TELAH DISEDIAKAN SLANG AIR (PENYIRAM) YANG SIAP PAKAI',
+'TERSEDIA ALAT PEMADAM KEBAKARAN YANG SESUAI DENGAN JENIS KEBAKARAN',
+'TERSEDIA VENTILASI YANG MEMADAI',
+'TELAH DISIAGAKAN PERSONIL PEMADAM KEBAKARAN (SAT-PK)'];
+            
+            foreach ($permissions_tambahan_cold as $permissions_name) {
+                \App\Models\permission_tambahan::create([
+                    'permission_type_id' => 4,
+                    'permission_name' => $permissions_name,
+                ]);
+            }
+
+            $permissions_tambahan_isolation = ['PERALATAN KERJA DAN PELINDUNG DIRI YANG DIPERSYARATKAN',
+'PERALATAN LISTRIK TELAH DIISOLASI, DIBERI TANDA DAN KUNCI (LOTO)',
+'DIPASANG RAMBU/PENGHALANG',
+'DAERAH KERJA DILENGKAPI PENERANGAN DAN VENTILASI YANG MEMADAI'];
+            
+            foreach ($permissions_tambahan_isolation as $permissions_name) {
+                \App\Models\permission_tambahan::create([
+                    'permission_type_id' => 5,
+                    'permission_name' => $permissions_name,
+                ]);
+            }
+
             $permissions_tambahan_ketinggian = ['APAKAH KONDISI PELAKSANA DALAM KEADAAN SEHAT?','APAKAH HANDRAIL TELAH DIPASANG UNTUK MENCEGAH TERJATUH?','APAKAH BAGIAN TERBUKA DARI PERANCAH DAN LANTAI KERJA TELAH DILINDUNGI/DITUTUP?','APAKAH FULL BODY HARNESS DALAM KONDISI YANG BAIK?','APAKAH PEKERJA TELAH MENGGUNAKAAN SEPATU KESELAMATAN DENGAN LAPISAN ANTI SLIP?','APAKAH ORANG YANG BEKERJA DI KETINGGIAN TELAH MENGGUNAKAN SABUK PENGAMAN (FULL BODY HARNESS)?','APAKAH PEKERJA TELAH DIBERIKAN INSTRUKSI CARA PENGIKATAN DAN PEMAKAIAN FULL BODY HARNESS YANG BENAR?','APAKAH HOOK DAN KARABINER PADA FULL BODY HARNESS BERFUNGSI DENGAN BAIK (DAPAT MEMBUKA DAN MENGUNCI)?'];
             
             foreach ($permissions_tambahan_ketinggian as $permissions_name) {

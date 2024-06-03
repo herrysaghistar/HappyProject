@@ -45,11 +45,14 @@ Route::middleware('can:spv')->group(function () {
 });
 
 Route::post('/create-ptw', [HomeController::class, 'create']);
+Route::post('/edit-ptw', [HomeController::class, 'UpdatePtw']);
+Route::post('/delete-ptw', [HomeController::class, 'delete']);
 
 Route::post('/acc', [HomeController::class, 'acc']);
 Route::post('/reject', [HomeController::class, 'reject']);
 
 Route::post('/mulai', [HomeController::class, 'mulai']);
+Route::post('/hold', [HomeController::class, 'hold']);
 Route::post('/done', [HomeController::class, 'done']);
 
 Route::get('/download-pdf/{id}', [HomeController::class, 'download']);

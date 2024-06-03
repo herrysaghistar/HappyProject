@@ -67,6 +67,29 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    public function UpdatePtw(Request $request)
+    {
+        $ptw = ptw::find($request->id_ptw);
+        $ptw->project_id = $request->project_id;
+        $ptw->permission_id = $request->permission_id;
+        $ptw->work_location_id = $request->location_id;
+        $ptw->berlaku_dari = $request->berlaku_dari;
+        $ptw->berlaku_sampai = $request->berlaku_sampai;
+        $ptw->manpower_qty = $request->manpower_qty;
+        $ptw->remark = $request->remark ?? '';
+        $ptw->save();
+
+        return redirect()->back();
+    }
+
+    public function deletePtw(Request $request)
+    {
+        $ptw = ptw::find($request->id_ptw);
+        $ptw->delete();
+
+        return redirect()->back();
+    }
+
     public function acc(Request $request)
     {
         $ptw = ptw::find($request->id_ptw);
@@ -111,6 +134,15 @@ class HomeController extends Controller
     {
         $ptw = ptw::find($request->id_ptw);
         $ptw->status = 'onprogress';
+        $ptw->save();
+
+        return redirect()->back();
+    }
+
+    public function hold(Request $request)
+    {
+        $ptw = ptw::find($request->id_ptw);
+        $ptw->status = 'onhold';
         $ptw->save();
 
         return redirect()->back();
