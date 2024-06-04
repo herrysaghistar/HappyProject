@@ -348,7 +348,7 @@ $(document).ready(function() {
             .then(response => response.json())
             .then(data => {
               console.log(data);
-                const instruksiDiv = document.getElementById('inpuApd');
+                const instruksiDiv = document.getElementById('inputApd');
                 instruksiDiv.innerHTML = ''; // Clear previous content
 
                 data.forEach((item, index) => {
