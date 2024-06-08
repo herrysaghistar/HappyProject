@@ -39,6 +39,6 @@ class SpvController extends Controller
 
     public function jsa()
     {
-
+        return view('jsa.jsa');
     }
 }

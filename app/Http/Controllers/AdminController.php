@@ -68,6 +68,6 @@ class AdminController extends Controller
 
     public function jsa()
     {
-
+        return view('jsa.jsa');
     }
 }
