@@ -42,10 +42,18 @@
           </li>
           @can('admin')
           <li class="nav-item">
-            <a href="{{ url('admin') }}" class="nav-link">
+            <a href="{{ url('ptw-admin') }}" class="nav-link">
               <i class="nav-icon far fa-file"></i>
               <p>
-                Perizinan
+                Permission To Work
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('jsa-spv') }}" class="nav-link">
+              <i class="nav-icon far fa-file"></i>
+              <p>
+                Job Hazard Analysis
               </p>
             </a>
           </li>
@@ -84,40 +92,72 @@
           @endcan
           @can('hse')
           <li class="nav-item">
-            <a href="{{ url('hse') }}" class="nav-link">
+            <a href="{{ url('ptw-hse') }}" class="nav-link">
               <i class="nav-icon far fa-file"></i>
               <p>
-                Perizinan
+                Permission To Work
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('jsa-spv') }}" class="nav-link">
+              <i class="nav-icon far fa-file"></i>
+              <p>
+                Job Hazard Analysis
               </p>
             </a>
           </li>
           @endcan
           @can('kabeng')
           <li class="nav-item">
-            <a href="{{ url('kabeng') }}" class="nav-link">
+            <a href="{{ url('ptw-kabeng') }}" class="nav-link">
               <i class="nav-icon far fa-file"></i>
               <p>
-                Perizinan
+                Permission To Work
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('jsa-spv') }}" class="nav-link">
+              <i class="nav-icon far fa-file"></i>
+              <p>
+                Job Hazard Analysis
               </p>
             </a>
           </li>
           @endcan
           @can('kapro')
           <li class="nav-item">
-            <a href="{{ url('kapro') }}" class="nav-link">
+            <a href="{{ url('ptw-kapro') }}" class="nav-link">
               <i class="nav-icon far fa-file"></i>
               <p>
-                Perizinan
+                Permission To Work
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('jsa-spv') }}" class="nav-link">
+              <i class="nav-icon far fa-file"></i>
+              <p>
+                Job Hazard Analysis
               </p>
             </a>
           </li>
           @endcan
           @can('spv')
           <li class="nav-item">
-            <a href="{{ url('spv') }}" class="nav-link">
+            <a href="{{ url('ptw-spv') }}" class="nav-link">
               <i class="nav-icon far fa-file"></i>
               <p>
-                Perizinan
+                Permission To Work
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('jsa-spv') }}" class="nav-link">
+              <i class="nav-icon far fa-file"></i>
+              <p>
+                Job Hazard Analysis
               </p>
             </a>
           </li>

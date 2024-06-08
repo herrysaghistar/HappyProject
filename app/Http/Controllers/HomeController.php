@@ -30,7 +30,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        $ptw = ptw::count();
+        $ptw_undone = ptw::where('level','<>','approved')->count();
+        // $jsa = jsa::count();
+        // $jsa_undone = jsa::where()->count();
+        $document_count = [
+            'ptw' => $ptw,
+            'ptw_undone' => $ptw_undone
+            // 'jsa' => $jsa,
+            // 'jsa_undone' => $jsa_undone
+        ];
+        return view('dashboard.index', compact('document_count'));
     }
 
     public function create(Request $request)

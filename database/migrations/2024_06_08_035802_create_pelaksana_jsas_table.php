@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('pelaksana_jsas', function (Blueprint $table) {
             $table->id();
+            $table->string('jenis');
+            $table->string('nama');
             $table->timestamps();
         });
     }

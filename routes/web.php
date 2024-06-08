@@ -25,23 +25,28 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware('can:admin')->group(function () {
-    Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/ptw-admin', [AdminController::class, 'index']);
+    Route::get('/jsa-admin', [AdminController::class, 'jsa']);
 });
 
 Route::middleware('can:hse')->group(function () {
-    Route::get('/hse', [HseController::class, 'index']);
+    Route::get('/ptw-hse', [HseController::class, 'index']);
+    Route::get('/jsa-hse', [HseController::class, 'jsa']);
 });
 
 Route::middleware('can:kabeng')->group(function () {
-    Route::get('/kabeng', [KabengController::class, 'index']);
+    Route::get('/ptw-kabeng', [KabengController::class, 'index']);
+    Route::get('/jsa-kabeng', [KabengController::class, 'jsa']);
 });
 
 Route::middleware('can:kapro')->group(function () {
-    Route::get('/kapro', [KaproController::class, 'index']);
+    Route::get('/ptw-kapro', [KaproController::class, 'index']);
+    Route::get('/jsa-kapro', [KaproController::class, 'jsa']);
 });
 
 Route::middleware('can:spv')->group(function () {
-    Route::get('/spv', [SpvController::class, 'index']);
+    Route::get('/ptw-spv', [SpvController::class, 'index']);
+    Route::get('/jsa-spv', [SpvController::class, 'jsa']);
 });
 
 Route::post('/create-ptw', [HomeController::class, 'create']);

@@ -37,4 +37,9 @@ class HseController extends Controller
 
         return view('permission.permission', compact('data', 'project', 'work_location', 'permission_type', 'permission_tambahan', 'tools'));
     }
+
+    public function jsa()
+    {
+
+    }
 }
