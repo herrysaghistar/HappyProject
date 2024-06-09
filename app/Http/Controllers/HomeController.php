@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ptw;
+use App\Models\jsa;
 use App\Models\ptw_tools;
 use App\Models\ptw_permission;
 use App\Models\tools_type;
@@ -32,13 +33,13 @@ class HomeController extends Controller
     {
         $ptw = ptw::count();
         $ptw_undone = ptw::where('level','<>','approved')->count();
-        // $jsa = jsa::count();
-        // $jsa_undone = jsa::where()->count();
+        $jsa = jsa::count();
+        $jsa_undone = jsa::where('reviewed_by', '<>', '')->count();
         $document_count = [
             'ptw' => $ptw,
-            'ptw_undone' => $ptw_undone
-            // 'jsa' => $jsa,
-            // 'jsa_undone' => $jsa_undone
+            'ptw_undone' => $ptw_undone,
+            'jsa' => $jsa,
+            'jsa_undone' => $jsa_undone
         ];
         return view('dashboard.index', compact('document_count'));
     }

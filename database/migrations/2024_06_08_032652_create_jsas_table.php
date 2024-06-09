@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('jsas', function (Blueprint $table) {
             $table->id();
+            $table->string('ptw_id');
             $table->string('supervisi_name');
             $table->string('project_code');
             $table->string('judul_pekerjaan');

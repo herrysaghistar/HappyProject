@@ -201,9 +201,11 @@ class DatabaseSeeder extends Seeder
             $judul = ['pengelasan pipa air', 'pengeboran ground dekat plant X'];
             $uraian = ['pipa bocor tersenggol alat berat', 'meratakan tanah'];
             $nama_jsa_user = ['bambang', 'michel', 'veronica', 'samsudin', 'akbar'];
+            $num = [1,2,3,4,5,6,7,8,9,10,11,12];
             for ($cc=0; $cc < 2; $cc++) { 
                 for ($c=0; $c < 6; $c++) { 
                     \App\Models\jsa::create([
+                        'ptw_id' => $num[($cc == 1) ? $c : $c+6],
                         'supervisi_name' => 'spv User',
                         'project_code' => $project['project_code'][$c],
                         'judul_pekerjaan' => $judul[$cc],

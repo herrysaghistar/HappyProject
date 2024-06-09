@@ -52,7 +52,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>44</h3>
+                <h3>{{ $document_count['jsa'] }}</h3>
 
                 <p>Jumlah JSA</p>
               </div>
@@ -67,7 +67,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3>{{ $document_count['jsa_undone'] }}</h3>
 
                 <p>JSA Belum Disetujui</p>
               </div>
