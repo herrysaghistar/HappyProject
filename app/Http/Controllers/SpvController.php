@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ptw;
+use App\Models\jsa;
+use App\Models\user_jsa;
 use App\Models\tools_type;
 use App\Models\permission_tambahan;
 use App\Models\project;
@@ -39,6 +41,8 @@ class SpvController extends Controller
 
     public function jsa()
     {
-        return view('jsa.jsa');
+        $jsa = jsa::select('*', DB::raw('LPAD(id, 4, "0") AS formatted_id'),)->get();
+
+        return view('jsa.jsa', compact('jsa'));
     }
 }

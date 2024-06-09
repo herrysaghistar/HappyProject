@@ -165,10 +165,14 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
 
-            $project = ['Barge Mounted Power Plant 2 (BMPP-2)', 'Barge Mounted Power Plant 3 (BMPP-3)', 'Single Point Mooring (SPM)', 'Metso Outotec (METSO)', 'Dharma Lautan Utama (DLU)', 'Kapal Bantu Rumah Sakit (BRS)', 'Kapal Fregat Merah Putih (FMP)', 'Kapal Landing Platform Dock (LPD)'];
-            foreach ($project as $projects) {
+            $project = [
+                'project_code' => ['BMPP-2', 'BMPP-3', 'SPM', 'METSO', 'DLU', 'BRS', 'FMP', 'LPD'],
+                'project_name' => ['Barge Mounted Power Plant 2', 'Barge Mounted Power Plant 3', 'Single Point Mooring', 'Metso Outotec', 'Dharma Lautan Utama', 'Kapal Bantu Rumah Sakit', 'Kapal Fregat Merah Putih', 'Kapal Landing Platform Dock']
+            ];
+            for ($aa=0; $aa < count($project['project_code']); $aa++) { 
                 \App\Models\project::create([
-                    'project_name' => $projects,
+                    'project_code' => $project['project_code'][$aa],
+                    'project_name' => $project['project_name'][$aa],
                 ]);
             }
 
@@ -193,6 +197,35 @@ class DatabaseSeeder extends Seeder
                 }
             }
 
+            $jsa_user = ['pelaksana', 'penyusun'];
+            $judul = ['pengelasan pipa air', 'pengeboran ground dekat plant X'];
+            $uraian = ['pipa bocor tersenggol alat berat', 'meratakan tanah'];
+            $nama_jsa_user = ['bambang', 'michel', 'veronica', 'samsudin', 'akbar'];
+            for ($cc=0; $cc < 2; $cc++) { 
+                for ($c=0; $c < 6; $c++) { 
+                    \App\Models\jsa::create([
+                        'supervisi_name' => 'spv User',
+                        'project_code' => $project['project_code'][$c],
+                        'judul_pekerjaan' => $judul[$cc],
+                        'tempat_bekerja' => $work_location[$cc],
+                        'uraian_tugas' => $uraian[$cc],
+                        'plant_loc' => '??',
+                        'review' => '',
+                        'reviewed_by' => '',
+                        'reviewed_date' => ''
+                    ]);
+                }
+
+                for ($cccc=0; $cccc < 2; $cccc++) { 
+                    for ($ccc=0; $ccc < 4; $ccc++) { 
+                        \App\Models\user_jsa::create([
+                            'jsa_id' => $cc+1,
+                            'jenis' => $jsa_user[$cccc],
+                            'nama' => $nama_jsa_user[$ccc]
+                        ]);
+                    }
+                }
+            }
             
         } catch (Exception $e) {
             

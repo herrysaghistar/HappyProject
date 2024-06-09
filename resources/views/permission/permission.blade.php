@@ -77,7 +77,7 @@
                           @endcan
                         </div>
                       </td>
-                      <td>{{ $datas->ptw_id }}/PTW/{{ $datas->project_id }}/{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}/{{ $datas->created_at->format('Y') }}</td>
+                      <td>{{ $datas->ptw_id }}/PTW/{{ $datas->project_code }}/{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}/{{ $datas->created_at->format('Y') }}</td>
                       <td>{{ $datas->created_by }}</td>
                       <td>{{ $datas->created_at }}</td>
                       <td>{{ $datas->berlaku_dari }} - {{ $datas->berlaku_sampai }}</td>
