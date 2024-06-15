@@ -131,6 +131,7 @@
 <script type="text/javascript">
 $('.btnid').click(function(){
    var Id = $(this).data('id');
+   var data = $(this).data();
    console.log('Button clicked. ID:', Id);
    $("#modal-lg-edit #id_ptw").val(Id);
    $("#modal-sm-success #id_ptw").val(Id);
@@ -139,15 +140,49 @@ $('.btnid').click(function(){
    $("#modal-sm-hold #id_ptw").val(Id);
    $("#modal-sm-done #id_ptw").val(Id);
    $("#modal-sm-delete #id_ptw").val(Id);
+   
+   console.log(data);
+   $("#modal-lg-edit #project_id").val(data.projectId);
+   $("#modal-lg-edit #location_id").val(data.locationId);
+   $("#modal-lg-edit #berlaku_dari").val(data.berlakuDari);
+   $("#modal-lg-edit #berlaku_sampai").val(data.berlakuSampai);
+   $("#modal-lg-edit #permission_select_edit").val(data.permissionId);
+   $("#modal-lg-edit #manpower_qty").val(data.manpowerQty);
+   $("#modal-lg-edit #remark").val(data.remark);
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $(document).on('click', '.btnid_master_edit', function() {
+    var dataDetail = $(this).data();
+
+    $("#modal-lg-project-edit #id").val(dataDetail.id);
+    $("#modal-lg-project-edit #id").val(dataDetail.id);
+    $("#modal-lg-user-edit #id").val(dataDetail.id);
+
+  });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $(document).on('click', '.btnid_master_delete', function() {
+    var dataDetail = $(this).data();
+
+    $("#modal-sm-project-delete #id").val(dataDetail.id);
+    $("#modal-sm-location-delete #id").val(dataDetail.id);
+    $("#modal-sm-user-delete #id").val(dataDetail.id);
+
+  });
 });
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
   $(document).on('click', '.btniddetail', function() {
     var dataDetail = $(this).data();
+    console.log(dataDetail);
 
     $("#modal-lg-detail #ptw_id").val(dataDetail.ptwId);
-    $("#modal-lg-detail #no_register").val(dataDetail.ptwId+'/'+'PTW'+'/'+dataDetail.projectId+'/'+dataDetail.month+'/'+dataDetail.year);
+    $("#modal-lg-detail #no_register").val(dataDetail.ptwId+'/'+'PTW'+'/'+dataDetail.projectCode+'/'+dataDetail.month+'/'+dataDetail.year);
     $("#modal-lg-detail #created_at").val(dataDetail.createdAt);
     $("#modal-lg-detail #created_by").val(dataDetail.createdBy);
     $("#modal-lg-detail #berlaku_dari").val(dataDetail.berlakuDari);
@@ -156,6 +191,7 @@ $(document).ready(function() {
     $("#modal-lg-detail #manpower_qty").val(dataDetail.manpowerQty);
     $("#modal-lg-detail #permission_type").val(dataDetail.permissionType);
     $("#modal-lg-detail #nama_proyek").val(dataDetail.projectName);
+    $("#modal-lg-detail #code_proyek").val(dataDetail.projectCode);
     $("#modal-lg-detail #remark").val(dataDetail.remark);
 
   fetch(`http://127.0.0.1:8000/detail-tambahan/${dataDetail.ptwId}`)

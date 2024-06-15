@@ -50,7 +50,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('jsa-spv') }}" class="nav-link">
+            <a href="{{ url('jsa-admin') }}" class="nav-link">
               <i class="nav-icon far fa-file"></i>
               <p>
                 Job Hazard Analysis
@@ -58,15 +58,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('spv') }}" class="nav-link">
-              <i class="nav-icon far fa-circle"></i>
-              <p>
-                Data Master Perizinan
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ url('spv') }}" class="nav-link">
+            <a href="{{ url('location-master') }}" class="nav-link">
               <i class="nav-icon far fa-circle"></i>
               <p>
                 Data Master Lokasi
@@ -74,7 +66,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('spv') }}" class="nav-link">
+            <a href="{{ url('project-master') }}" class="nav-link">
               <i class="nav-icon far fa-circle"></i>
               <p>
                 Data Master Project
@@ -82,10 +74,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('spv') }}" class="nav-link">
+            <a href="{{ url('user-management') }}" class="nav-link">
               <i class="nav-icon far fa-circle"></i>
               <p>
-                User Setting
+                User Management
               </p>
             </a>
           </li>
@@ -100,7 +92,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('jsa-spv') }}" class="nav-link">
+            <a href="{{ url('jsa-hse') }}" class="nav-link">
               <i class="nav-icon far fa-file"></i>
               <p>
                 Job Hazard Analysis
@@ -118,7 +110,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('jsa-spv') }}" class="nav-link">
+            <a href="{{ url('jsa-kabeng') }}" class="nav-link">
               <i class="nav-icon far fa-file"></i>
               <p>
                 Job Hazard Analysis
@@ -136,7 +128,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('jsa-spv') }}" class="nav-link">
+            <a href="{{ url('jsa-kapro') }}" class="nav-link">
               <i class="nav-icon far fa-file"></i>
               <p>
                 Job Hazard Analysis

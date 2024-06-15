@@ -27,6 +27,22 @@ Route::get('/', [HomeController::class, 'index']);
 Route::middleware('can:admin')->group(function () {
     Route::get('/ptw-admin', [AdminController::class, 'index']);
     Route::get('/jsa-admin', [AdminController::class, 'jsa']);
+    
+    Route::get('/location-master', [HomeController::class, 'locationMaster']);
+    Route::post('/location-master-add', [HomeController::class, 'locationMasterAdd']);
+    Route::post('/location-master-edit', [HomeController::class, 'locationMasterEdit']);
+    Route::post('/location-master-delete', [HomeController::class, 'locationMasterDelete']);
+    
+    Route::get('/project-master', [HomeController::class, 'projectMaster']);
+    Route::post('/project-master-add', [HomeController::class, 'projectMasterAdd']);
+    Route::post('/project-master-edit', [HomeController::class, 'projectMasterEdit']);
+    Route::post('/project-master-delete', [HomeController::class, 'projectMasterDelete']);
+    
+    Route::get('/user-management', [HomeController::class, 'userManagement']);
+    Route::post('/user-management-add', [HomeController::class, 'userManagementAdd']);
+    Route::post('/user-management-edit', [HomeController::class, 'userManagementEdit']);
+    Route::post('/user-management-delete', [HomeController::class, 'userManagementDelete']);
+
 });
 
 Route::middleware('can:hse')->group(function () {

@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ptw;
 use App\Models\jsa;
+use App\Models\work_location;
+use App\Models\project;
 use App\Models\ptw_tools;
 use App\Models\ptw_permission;
 use App\Models\tools_type;
 use App\Models\permission_tambahan;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use \PDF;
 
 class HomeController extends Controller
@@ -227,5 +232,107 @@ class HomeController extends Controller
         $pdf = PDF::loadView('pdf', compact('datas'));
         // return $pdf->download('your-document.pdf');
         return view('pdf', compact('datas'));
+    }
+
+    public function locationMaster()
+    {
+        $data = work_location::all();
+
+        return view('datamaster.locationMaster', compact('data'));
+    }
+
+    public function locationMasterAdd(Request $request)
+    {
+        $data = New work_location();
+        $data->location_name = $request->name;
+        $data->save();
+
+        return redirect()->back();
+    }
+
+    public function locationMasterEdit(Request $request)
+    {
+        $data = work_location::find($request->id);
+        
+        $data->save();
+
+        return redirect()->back();
+    }
+
+    public function locationMasterDelete(Request $request)
+    {
+        $data = work_location::find($request->id)->delete();
+        return redirect()->back();
+    }
+
+    // Project Master Methods
+    public function projectMaster()
+    {
+        $data = project::all();
+
+        return view('datamaster.projectMaster', compact('data'));
+    }
+
+    public function projectMasterAdd(Request $request)
+    {
+        $data = New project();
+        $data->project_code = $request->code;
+        $data->project_name = $request->name;
+        $data->save();
+        
+        return redirect()->back();
+    }
+
+    public function projectMasterEdit(Request $request)
+    {
+        $data = project::find($request->id);
+        $data->save();
+        
+        return redirect()->back();
+    }
+
+    public function projectMasterDelete(Request $request)
+    {
+        $data = project::find($request->id)->delete();
+        
+        return redirect()->back();
+    }
+
+    // User Management Methods
+    public function userManagement()
+    {
+        $data = User::all();
+        $roles = DB::SELECT('SELECT name FROM roles');
+        $roles = collect($roles)->pluck('name');
+
+        return view('user.userManagement', compact('data', 'roles'));
+    }
+
+    public function userManagementAdd(Request $request)
+    {
+        $data = New User();
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->password = Hash::make($request->password);
+        $data->save();
+
+        $data->assignRole($request->role);
+        
+        return redirect()->back();
+    }
+
+    public function userManagementEdit(Request $request)
+    {
+        $data = User::find($request->id);
+        $data->save();
+        
+        return redirect()->back();
+    }
+
+    public function userManagementDelete(Request $request)
+    {
+        $data = User::find($request->id)->delete();
+        
+        return redirect()->back();
     }
 }

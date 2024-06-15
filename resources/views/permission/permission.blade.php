@@ -60,6 +60,7 @@
                                 data-berlaku-sampai="{{ $datas->berlaku_sampai }}" 
                                 data-location-name="{{ $datas->location_name }}" 
                                 data-project-name="{{ $datas->project_name }}" 
+                                data-project-code="{{ $datas->project_code }}" 
                                 data-permission-type="{{ $datas->permission_name }}" 
                                 data-remark="{{ $datas->remark }}" 
                                 data-toggle="modal" 
@@ -69,7 +70,17 @@
                           </div>
                           @can('hse')
                           <div class="col-12">
-                            <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-lg-edit"><i class="fas fa-pen"></i></button>
+                            <button type="submit" class="btnid btn btn-outline-warning" id="btnid" 
+                            data-id="{{ $datas->ptw_id }}" 
+                            data-location-id="{{ $datas->location_id }}" 
+                            data-project-id="{{ $datas->project_id }}"
+                            data-berlaku-dari="{{ $datas->berlaku_dari }}" 
+                            data-berlaku-sampai="{{ $datas->berlaku_sampai }}"
+                            data-permission-id="{{ $datas->permission_id }}" 
+                            data-manpower-qty="{{ $datas->manpower_qty }}" 
+                            data-remark="{{ $datas->remark }}" 
+                            data-toggle="modal" 
+                            data-target="#modal-lg-edit"><i class="fas fa-pen"></i></button>
                           </div>
                           <div class="col-12">
                             <button type="submit" class="btnid btn btn-outline-danger" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-delete"><i class="fas fa-trash"></i></button>
@@ -148,7 +159,7 @@
                 @csrf
                 <div class="form-group">
                   <label for="">Nama Proyek</label>
-                  <select class="form-control" name="project_id" id="">
+                  <select class="form-control" name="project_id" id="project_id">
                     @foreach($project as $projects)
                     <option value="{{ $projects->id }}">{{ $projects->project_name }}</option>
                     @endforeach
@@ -157,7 +168,7 @@
 
                 <div class="form-group">
                   <label for="">Lokasi</label>
-                  <select class="form-control" name="location_id" id="">
+                  <select class="form-control" name="location_id" id="location_id">
                     @foreach($work_location as $work_locations)
                     <option value="{{ $work_locations->id }}">{{ $work_locations->location_name }}</option>
                     @endforeach
@@ -246,7 +257,7 @@
                 <input type="" name="id_ptw" id="id_ptw" hidden>
                 <div class="form-group">
                   <label for="">Nama Proyek</label>
-                  <select class="form-control" name="project_id" id="">
+                  <select class="form-control" name="project_id" id="project_id">
                     @foreach($project as $projects)
                     <option value="{{ $projects->id }}">{{ $projects->project_name }}</option>
                     @endforeach
@@ -255,7 +266,7 @@
 
                 <div class="form-group">
                   <label for="">Lokasi</label>
-                  <select class="form-control" name="location_id" id="">
+                  <select class="form-control" name="location_id" id="location_id">
                     @foreach($work_location as $work_locations)
                     <option value="{{ $work_locations->id }}">{{ $work_locations->location_name }}</option>
                     @endforeach
@@ -275,7 +286,7 @@
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Jenis Perizinan</label>
                   <select class="form-control" name="permission_id" id="permission_select_edit">
-                    <option value="">Pilih Izin</option>
+                    <option value="0">Pilih Izin</option>
                     @foreach($permission_type as $permission_types)
                     <option value="{{ $permission_types->id }}">{{ $permission_types->permission_name }}</option>
                     @endforeach

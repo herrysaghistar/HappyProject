@@ -22,6 +22,11 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                @cannot('kapro')
+                <div class="col-2">
+                  <button type="submit" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-lg">JSA Baru</button>
+                </div>
+                @endcan
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
@@ -59,11 +64,14 @@
                       @endif
                       <td>
                         @if($data->reviewed_by == '')
-                          @can('spv')
-                            <button class="btn btn-danger">Belum Di Review</button>
-                          @endcan
-                          @cannot('spv')
-                            <button class="btn btn-danger" disabled>Belum Di Review</button>
+                          @can('hse')
+                              <button class="btn btn-danger">Belum Di Review</button>
+                          @elsecan('kabeng')
+                              <button class="btn btn-danger">Belum Di Review</button>
+                          @elsecan('kapro')
+                              <button class="btn btn-danger">Belum Di Review</button>
+                          @else
+                              <button class="btn btn-danger" disabled>Belum Di Review</button>
                           @endcan
                         @else
                         <button class="btn btn-outline-success" disabled>Sudah Di Review</button>
@@ -86,7 +94,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Form Permohonan Baru</h4>
+              <h4 class="modal-title">Detail JSA</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

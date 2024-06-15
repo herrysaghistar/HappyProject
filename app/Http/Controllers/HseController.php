@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ptw;
+use App\Models\jsa;
+use App\Models\user_jsa;
 use App\Models\tools_type;
 use App\Models\permission_tambahan;
 use App\Models\project;
@@ -20,7 +22,9 @@ class HseController extends Controller
                         'ptws.*',
                         'projects.id as project_id',
                         'projects.*',
+                        'work_locations.id as location_id',
                         'work_locations.*',
+                        'permission_types.id as permission_id',
                         'permission_types.*'
                     )
                     ->join('projects', 'ptws.project_id', '=', 'projects.id')
@@ -40,6 +44,8 @@ class HseController extends Controller
 
     public function jsa()
     {
-        return view('jsa.jsa');
+        $jsa = jsa::select('*', DB::raw('LPAD(id, 4, "0") AS formatted_id'),)->get();
+
+        return view('jsa.jsa', compact('jsa'));
     }
 }

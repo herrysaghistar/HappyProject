@@ -22,7 +22,9 @@ class SpvController extends Controller
                         'ptws.*',
                         'projects.id as project_id',
                         'projects.*',
+                        'work_locations.id as location_id',
                         'work_locations.*',
+                        'permission_types.id as permission_id',
                         'permission_types.*'
                     )
                     ->join('projects', 'ptws.project_id', '=', 'projects.id')
