@@ -226,12 +226,22 @@ class HomeController extends Controller
     {
         $datas = ptw::join('projects', 'ptws.project_id', '=', 'projects.id')
                     ->join('work_locations', 'ptws.work_location_id', '=', 'work_locations.id')
+                    ->join('permission_types', 'ptws.work_location_id', '=', 'work_locations.id')
                     ->select('ptws.id as ptw_id' ,'ptws.*',  'projects.*', 'work_locations.*')
                     ->where('ptws.id', $id)
                     ->first();
-        $pdf = PDF::loadView('pdf', compact('datas'));
-        // return $pdf->download('your-document.pdf');
-        return view('pdf', compact('datas'));
+        $datas_instruksi = permission_tambahan::select('permission_name')->where('permission_type_id', $datas->permission_id)->get();
+        $apd = ptw_tools::join('tools_types', 'ptw_tools.tools_id', '=', 'tools_types.id')
+                    ->select('tools_name')->where('permission_type_id', $datas->permission_id)->get();
+        // dd($apd);
+        // dd($datas->permission_id);
+        // dd($datas_instruksi);
+        // $pdf = PDF::loadView('pdf', compact('datas', 'datas_instruksi', 'apd'));
+        $pdf = PDF::loadView('pdf', compact('datas', 'datas_instruksi', 'apd'))
+          ->setPaper([0, 0, 1000, 1380]);
+
+        return $pdf->download('your-document.pdf');
+        // return view('pdf', compact('datas', 'datas_instruksi', 'apd'));
     }
 
     public function locationMaster()
@@ -335,4 +345,56 @@ class HomeController extends Controller
         
         return redirect()->back();
     }
+
+    public function createJSA(Request $request)
+    {
+        $data = New jsa();
+        $data->ptw_id = $request->ptw_id;
+        $data->supervisi_name = $request->supervisi_name;
+        $data->project_code = $request->project_code;
+        $data->judul_pekerjaan = $request->judul_pekerjaan;
+        $data->tempat_bekerja = $request->tempat_bekerja;
+        $data->uraian_tugas = $request->uraian_tugas;
+        $data->plant_loc = $request->plant_loc;
+        $data->review = $request->review;
+        $data->reviewed_by = $request->reviewed_by;
+        $data->reviewed_date = $request->reviewed_date;
+        $data->save();
+
+        return redirect()->back();
+    }
+
+    public function UpdateJSA(Request $request)
+    {
+        $data = jsa::find($request->id);
+        $data->review = 'Y';
+        $data->supervisi_name = $request->supervisi_name;
+        $data->project_code = $request->project_code;
+        $data->judul_pekerjaan = $request->judul_pekerjaan;
+        $data->tempat_bekerja = $request->tempat_bekerja;
+        $data->uraian_tugas = $request->uraian_tugas;
+        $data->plant_loc = $request->plant_loc;
+        $data->save();
+
+        return redirect()->back();
+    }
+
+    public function UpdateStatusReviewJSA(Request $request)
+    {
+        $data = jsa::find($request->id);
+        $data->review = 'Y';
+        $data->reviewed_by = Auth::user()->name;
+        $data->reviewed_date = date('Y-m-d');
+        $data->save();
+
+        return redirect()->back();
+    }
+
+    public function deleteJSA(Request $request)
+    {
+        $data = jsa::find($request->id)->delete();
+
+        return redirect()->back();
+    }
+
 }

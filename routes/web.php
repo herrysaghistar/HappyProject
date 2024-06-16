@@ -69,6 +69,11 @@ Route::post('/create-ptw', [HomeController::class, 'create']);
 Route::post('/edit-ptw', [HomeController::class, 'UpdatePtw']);
 Route::post('/delete-ptw', [HomeController::class, 'deletePtw']);
 
+Route::post('/create-jsa', [HomeController::class, 'createJSA']);
+Route::post('/edit-jsa', [HomeController::class, 'UpdateJSA']);
+Route::post('/edit-status-review-jsa', [HomeController::class, 'UpdateStatusReviewJSA']);
+Route::post('/delete-jsa', [HomeController::class, 'deleteJSA']);
+
 Route::post('/acc', [HomeController::class, 'acc']);
 Route::post('/reject', [HomeController::class, 'reject']);
 
