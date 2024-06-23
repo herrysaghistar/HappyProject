@@ -71,16 +71,18 @@
                           @can('hse')
                           <div class="col-12">
                             <button type="submit" class="btnid btn btn-outline-warning" id="btnid" 
-                            data-id="{{ $datas->ptw_id }}" 
-                            data-location-id="{{ $datas->location_id }}" 
-                            data-project-id="{{ $datas->project_id }}"
-                            data-berlaku-dari="{{ $datas->berlaku_dari }}" 
-                            data-berlaku-sampai="{{ $datas->berlaku_sampai }}"
-                            data-permission-id="{{ $datas->permission_id }}" 
-                            data-manpower-qty="{{ $datas->manpower_qty }}" 
-                            data-remark="{{ $datas->remark }}" 
-                            data-toggle="modal" 
-                            data-target="#modal-lg-edit"><i class="fas fa-pen"></i></button>
+                              data-id="{{ $datas->ptw_id }}" 
+                              data-location-id="{{ $datas->location_id }}" 
+                              data-project-id="{{ $datas->project_id }}"
+                              data-berlaku-dari="{{ $datas->berlaku_dari }}" 
+                              data-berlaku-sampai="{{ $datas->berlaku_sampai }}"
+                              data-permission-id="{{ $datas->permission_id }}" 
+                              data-manpower-qty="{{ $datas->manpower_qty }}" 
+                              data-catatan-hse="{{ $datas->catatan_hse }}"
+                              data-remark="{{ $datas->remark }}" 
+                              data-toggle="modal" 
+                              data-target="#modal-lg-edit"><i class="fas fa-pen"></i>
+                            </button>
                           </div>
                           <div class="col-12">
                             <button type="submit" class="btnid btn btn-outline-danger" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-delete"><i class="fas fa-trash"></i></button>
@@ -327,6 +329,10 @@
                 <div class="form-group">
                   <label for="remark">Uraian Kegiatan</label>
                   <textarea name="remark" class="form-control" id="remark" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="remark">Catatan HSE</label>
+                  <textarea name="catatan_hse" class="form-control" id="catatan_hse" rows="3"></textarea>
                 </div>
                 </div>
                 <div class="modal-footer justify-content-between">

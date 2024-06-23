@@ -38,7 +38,7 @@
                     <tr>
                       <td>{{ $datas->location_name }}</td>
                       <td>
-                        <button class="btnid_master_edit btn btn-outline-primary" id="btnid_location" data-id="{{ $datas->id }}" data-toggle="modal" data-target="#modal-lg-location-edit">Edit</button>
+                        <button class="btnid_master_edit btn btn-outline-primary" id="btnid_location" data-datas="{{ $datas }}" data-toggle="modal" data-target="#modal-lg-location-edit">Edit</button>
                       </td>
                       <td>
                         <button class="btnid_master_delete btn btn-danger" id="btnid_location" data-id="{{ $datas->id }}" data-toggle="modal" data-target="#modal-sm-location-delete">Delete</button>
@@ -90,10 +90,16 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-footer justify-content-between">
+            <div class="modal-body">
               <form action="{{ url('/location-master-edit') }}" method="post">
                 @csrf
                 <input type="" name="id" id="id" hidden>
+                <div class="form-group">
+                  <label for="manpower_qty">Nama Lokasi</label>
+                  <input type="" name="location" class="form-control" id="location_name" required>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
                 <button type="submit" class="btn btn-success">Edit</button>
               </form>
             </div>

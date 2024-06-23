@@ -10,7 +10,18 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          @can('spv')
+          <img src="{{ asset('/blue_helm.png') }}" class="img-circle elevation-2" alt="User Image">
+          @endcan
+          @can('hse')
+          <img src="{{ asset('/red_helm.png') }}" class="img-circle elevation-2" alt="User Image">
+          @endcan
+          @can('kapro')
+          <img src="{{ asset('/white_helm.png') }}" class="img-circle elevation-2" alt="User Image">
+          @endcan
+          @can('kabeng')
+          <img src="{{ asset('/white_helm.png') }}" class="img-circle elevation-2" alt="User Image">
+          @endcan
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('manpower_qty');
             $table->string('remark');
             $table->string('status');
+            $table->string('catatan_hse');
             $table->string('approved_by');
             $table->string('rejected_by');
             $table->string('created_by');

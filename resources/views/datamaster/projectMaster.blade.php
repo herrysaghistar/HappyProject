@@ -40,7 +40,7 @@
                       <td>{{ $datas->project_code }}</td>
                       <td>{{ $datas->project_name }}</td>
                       <td>
-                        <button class="btnid_master_edit btn btn-outline-primary" id="btnid_project" data-id="{{ $datas->id }}" data-toggle="modal" data-target="#modal-lg-project-edit">Edit</button>
+                        <button class="btnid_master_edit btn btn-outline-primary" id="btnid_project" data-datas="{{ $datas }}" data-toggle="modal" data-target="#modal-lg-project-edit">Edit</button>
                       </td>
                       <td>
                         <button class="btnid_master_delete btn btn-danger" id="btnid_project" data-id="{{ $datas->id }}" data-toggle="modal" data-target="#modal-sm-project-delete">Delete</button>
@@ -96,10 +96,21 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-footer justify-content-between">
+            <div class="modal-body">
               <form action="{{ url('/project-master-edit') }}" method="post">
                 @csrf
                 <input type="" name="id" id="id" hidden>
+                <div class="form-group">
+                  <label for="manpower_qty">Kode Project</label>
+                  <input type="" name="project_code" class="form-control" id="project_code" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="manpower_qty">Nama Project</label>
+                  <input type="" name="project_name" class="form-control" id="project_name" required>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
                 <button type="submit" class="btn btn-success">Edit</button>
               </form>
             </div>

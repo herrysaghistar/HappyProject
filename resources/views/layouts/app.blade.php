@@ -149,16 +149,128 @@ $('.btnid').click(function(){
    $("#modal-lg-edit #permission_select_edit").val(data.permissionId);
    $("#modal-lg-edit #manpower_qty").val(data.manpowerQty);
    $("#modal-lg-edit #remark").val(data.remark);
+   $("#modal-lg-edit #catatan_hse").val(data.catatanHse);
+});
+</script>
+
+<!-- JSA -->
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.btnid_jsa').click(function(){
+    var data = $(this).data();
+    console.log(data);
+    $("#modal-lg-edit #id").val(data);
+    $("#modal-sm-delete-jsa #id").val(data.datas.id);
+
+    $("#modal-lg-detail-jsa #doc_no").val('JHA '+data.datas.formatted_id+'/'+data.datas.project_code);
+    $("#modal-lg-detail-jsa #supervisi").val(data.datas.supervisi_name);
+    $("#modal-lg-detail-jsa #project_name").val(data.datas.project_code);
+    $("#modal-lg-detail-jsa #judul_pekerjaan").val(data.datas.judul_pekerjaan);
+    $("#modal-lg-detail-jsa #location_name").val(data.datas.tempat_bekerja);
+    $("#modal-lg-detail-jsa #plant_location").val(data.datas.plant_loc);
+    $("#modal-lg-detail-jsa #uraian_tugas").val(data.datas.uraian_tugas);
+
+    $("#modal-lg-edit-jsa #id").val(data.datas.id);
+    $("#modal-lg-edit-jsa #supervisi").val(data.datas.supervisi_name);
+    $("#modal-lg-edit-jsa #project_name").val(data.datas.project_code);
+    $("#modal-lg-edit-jsa #judul_pekerjaan").val(data.datas.judul_pekerjaan);
+    $("#modal-lg-edit-jsa #location_name").val(data.datas.tempat_bekerja);
+    $("#modal-lg-edit-jsa #plant_location").val(data.datas.plant_loc);
+    $("#modal-lg-edit-jsa #uraian_tugas").val(data.datas.uraian_tugas);
+
+    // Fetch data for Penyusun JSA
+fetch(`http://127.0.0.1:8000/user-penyusun-jsa/${data.datas.id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const penyusunDiv = document.getElementById('detail-penyusun-jsa-container');
+        penyusunDiv.innerHTML = ''; // Clear previous content
+
+        data.forEach((datas, index) => {
+            const penyusun = document.createElement('p');
+            penyusun.textContent = `${index + 1}. ${datas.nama}`; 
+            penyusunDiv.appendChild(penyusun);
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+// Fetch data for Pelaksana JSA
+fetch(`http://127.0.0.1:8000/user-pelaksana-jsa/${data.datas.id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const pelaksanaDiv = document.getElementById('detail-pelaksana-jsa-container');
+        pelaksanaDiv.innerHTML = ''; // Clear previous content
+
+        data.forEach((datas, index) => {
+            const pelaksana = document.createElement('p');
+            pelaksana.textContent = `${index + 1}. ${datas.nama}`; 
+            pelaksanaDiv.appendChild(pelaksana);
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+// Fetch data for Penyusun JSA
+fetch(`http://127.0.0.1:8000/user-penyusun-jsa/${data.datas.id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const penyusunDiv = document.getElementById('edit-penyusun-jsa-container');
+        penyusunDiv.innerHTML = ''; // Clear previous content
+
+        data.forEach((datas) => {
+            addPenyusunForEdit(datas.nama); // Add row with fetched data
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+// Fetch data for Pelaksana JSA
+fetch(`http://127.0.0.1:8000/user-pelaksana-jsa/${data.datas.id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const pelaksanaDiv = document.getElementById('edit-pelaksana-jsa-container');
+        pelaksanaDiv.innerHTML = ''; // Clear previous content
+
+        data.forEach((datas) => {
+            addPelaksanaForEdit(datas.nama); // Add row with fetched data
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+  });
 });
 </script>
 <script type="text/javascript">
+$(document).on('click', '.btnid_jsa_review', function() {
+    var data = $(this).data();
+    console.log(data.datas);
+    $("#modal-sm-review #id").val(data);
+
+    document.getElementById("review_jsa_title").innerHTML = 'Apakah Anda Telah Review Detail JSA "JHA '+data.datas.formatted_id+'/'+data.datas.project_code+'" ?';
+    // $("#modal-sm-review #review_jsa_title").val(data.datas.id);
+  });
+</script>
+<!-- JSA -->
+
+<script type="text/javascript">
 $(document).ready(function() {
   $(document).on('click', '.btnid_master_edit', function() {
-    var dataDetail = $(this).data();
+    var dataEdit = $(this).data();
+    console.log(dataEdit);
 
-    $("#modal-lg-project-edit #id").val(dataDetail.id);
-    $("#modal-lg-project-edit #id").val(dataDetail.id);
-    $("#modal-lg-user-edit #id").val(dataDetail.id);
+    $("#modal-lg-project-edit #id").val(dataEdit.datas.id);
+    $("#modal-lg-project-edit #project_code").val(dataEdit.datas.project_code);
+    $("#modal-lg-project-edit #project_name").val(dataEdit.datas.project_name);
+
+    $("#modal-lg-location-edit #id").val(dataEdit.datas.id);
+    $("#modal-lg-location-edit #location_name").val(dataEdit.datas.location_name);
+
+    $("#modal-lg-user-edit #id").val(dataEdit.datas.id);
+    $("#modal-lg-user-edit #name").val(dataEdit.datas.name);
+    $("#modal-lg-user-edit #email").val(dataEdit.datas.email);
+    $("#modal-lg-user-edit #roleBefore").val(dataEdit.datas.roles[0].name);
+    $("#modal-lg-user-edit #role").val(dataEdit.datas.roles[0].name);
 
   });
 });
@@ -441,6 +553,68 @@ $(document).ready(function() {
             .catch(error => console.error('Error fetching data:', error));
     });
 });
+</script>
+<script type="text/javascript">
+  // Add Penyusun JSA row
+function addPenyusun() {
+  var newColumn = document.createElement('div');
+  newColumn.setAttribute("class", "form-group");
+  newColumn.innerHTML = `
+    <input type="text" name="penyusun_jsa[]" class="form-control" required>
+    <br>
+    <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus Penyusun</button>
+  `;
+  document.getElementById('penyusun-jsa-container').appendChild(newColumn);
+}
+
+// Add Pelaksana JSA row
+function addPelaksana() {
+  var newColumn = document.createElement('div');
+  newColumn.setAttribute("class", "form-group");
+  newColumn.innerHTML = `
+    <input type="text" name="pelaksana_jsa[]" class="form-control" required>
+    <br>
+    <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus Pelaksana</button>
+  `;
+  document.getElementById('pelaksana-jsa-container').appendChild(newColumn);
+}
+
+// Remove Row
+function removeRow(button) {
+  button.parentNode.remove();
+}
+
+</script>
+<script type="text/javascript">
+// Add Penyusun JSA row
+  function addPenyusunForEdit(name = '') {
+    var newColumn = document.createElement('div');
+    newColumn.setAttribute("class", "form-group");
+    newColumn.innerHTML = `
+      <input type="text" name="penyusun_jsa[]" class="form-control" value="${name}" required>
+      <br>
+      <button type="button" class="btn btn-danger btn-sm" onclick="removeRowForEdit(this)">Hapus Penyusun</button>
+    `;
+    document.getElementById('edit-penyusun-jsa-container').appendChild(newColumn);
+  }
+
+  // Add Pelaksana JSA row
+  function addPelaksanaForEdit(name = '') {
+    var newColumn = document.createElement('div');
+    newColumn.setAttribute("class", "form-group");
+    newColumn.innerHTML = `
+      <input type="text" name="pelaksana_jsa[]" class="form-control" value="${name}" required>
+      <br>
+      <button type="button" class="btn btn-danger btn-sm" onclick="removeRowForEdit(this)">Hapus Pelaksana</button>
+    `;
+    document.getElementById('edit-pelaksana-jsa-container').appendChild(newColumn);
+  }
+
+// Remove Row
+function removeRowForEdit(button) {
+  button.parentNode.remove();
+}
+
 </script>
 @yield('chart')
 </body>

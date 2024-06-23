@@ -45,7 +45,24 @@ class HseController extends Controller
     public function jsa()
     {
         $jsa = jsa::select('*', DB::raw('LPAD(id, 4, "0") AS formatted_id'),)->get();
+        $ptw = Ptw::select(
+                        'ptws.id as ptw_id',
+                        'ptws.*',
+                        'projects.id as project_id',
+                        'projects.*',
+                        'work_locations.id as location_id',
+                        'work_locations.*',
+                        'permission_types.id as permission_id',
+                        'permission_types.*'
+                    )
+                    ->join('projects', 'ptws.project_id', '=', 'projects.id')
+                    ->join('work_locations', 'ptws.work_location_id', '=', 'work_locations.id')
+                    ->join('permission_types', 'ptws.permission_id', '=', 'permission_types.id')
+                    ->get();
 
-        return view('jsa.jsa', compact('jsa'));
+        $project = project::all();
+        $location = work_location::all();
+
+        return view('jsa.jsa', compact('jsa', 'location', 'project', 'ptw'));
     }
 }

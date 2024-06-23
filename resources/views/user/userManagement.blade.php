@@ -46,7 +46,7 @@
                         @endforeach
                       </td>
                       <td>
-                        <button class="btnid_master_edit btn btn-outline-primary" id="btnid_user" data-id="{{ $datas->id }}" data-toggle="modal" data-target="#modal-lg-user-edit">Edit</button>
+                        <button class="btnid_master_edit btn btn-outline-primary" id="btnid_user" data-datas="{{ $datas }}"  data-toggle="modal" data-target="#modal-lg-user-edit">Edit</button>
                       </td>
                       <td>
                         <button class="btnid_master_delete btn btn-danger" id="btnid_user" data-id="{{ $datas->id }}" data-toggle="modal" data-target="#modal-sm-user-delete">Delete</button>
@@ -114,10 +114,31 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-footer justify-content-between">
+            <div class="modal-body">
               <form action="{{ url('/user-management-edit') }}" method="post">
                 @csrf
                 <input type="" name="id" id="id" hidden>
+                <input type="" name="roleBefore" class="form-control" id="roleBefore" hidden>
+                <div class="form-group">
+                  <label for="manpower_qty">Nama</label>
+                  <input type="" name="name" class="form-control" id="name" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="manpower_qty">Email</label>
+                  <input type="" name="email" class="form-control" id="email" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="">Role</label>
+                  <select class="form-control" name="role" id="role">
+                    @foreach($roles as $role)
+                        <option value="{{ $role }}">{{ $role }}</option>
+                    @endforeach
+                  </select>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
                 <button type="submit" class="btn btn-success">Edit</button>
               </form>
             </div>

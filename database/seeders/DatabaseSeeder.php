@@ -189,6 +189,7 @@ class DatabaseSeeder extends Seeder
                     'manpower_qty' => '5',
                     'remark' => 'kerja bolo',
                     'status' => '',
+                    'catatan_hse' => '',
                     'approved_by' => '',
                     'rejected_by' => '',
                     'created_by' => $roleName . ' User',

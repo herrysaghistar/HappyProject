@@ -11,6 +11,7 @@ use App\Models\project;
 use App\Models\ptw_tools;
 use App\Models\ptw_permission;
 use App\Models\tools_type;
+use App\Models\user_jsa;
 use App\Models\permission_tambahan;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -92,6 +93,7 @@ class HomeController extends Controller
         $ptw->berlaku_dari = $request->berlaku_dari;
         $ptw->berlaku_sampai = $request->berlaku_sampai;
         $ptw->manpower_qty = $request->manpower_qty;
+        $ptw->catatan_hse = $request->catatan_hse ?? '';
         $ptw->remark = $request->remark ?? '';
         $ptw->save();
 
@@ -254,7 +256,7 @@ class HomeController extends Controller
     public function locationMasterAdd(Request $request)
     {
         $data = New work_location();
-        $data->location_name = $request->name;
+        $data->location_name = $request->project;
         $data->save();
 
         return redirect()->back();
@@ -263,7 +265,7 @@ class HomeController extends Controller
     public function locationMasterEdit(Request $request)
     {
         $data = work_location::find($request->id);
-        
+        $data->location_name = $request->location;
         $data->save();
 
         return redirect()->back();
@@ -296,6 +298,8 @@ class HomeController extends Controller
     public function projectMasterEdit(Request $request)
     {
         $data = project::find($request->id);
+        $data->project_code = $request->project_code;
+        $data->project_name = $request->project_name;
         $data->save();
         
         return redirect()->back();
@@ -334,7 +338,11 @@ class HomeController extends Controller
     public function userManagementEdit(Request $request)
     {
         $data = User::find($request->id);
+        $data->name =$request->name;
+        $data->email = $request->email;
         $data->save();
+        $data->removeRole($request->roleBefore);
+        $data->assignRole($request->role);
         
         return redirect()->back();
     }
@@ -348,18 +356,37 @@ class HomeController extends Controller
 
     public function createJSA(Request $request)
     {
+        if (!$request->pelaksana_jsa || !$request->penyusun_jsa) {
+            return redirect()->back()->withErrors(['message' => 'Penyusun / Pelaksana tidak boleh kosong']);
+        }
         $data = New jsa();
         $data->ptw_id = $request->ptw_id;
-        $data->supervisi_name = $request->supervisi_name;
+        $data->supervisi_name = $request->supervisi;
         $data->project_code = $request->project_code;
         $data->judul_pekerjaan = $request->judul_pekerjaan;
         $data->tempat_bekerja = $request->tempat_bekerja;
-        $data->uraian_tugas = $request->uraian_tugas;
-        $data->plant_loc = $request->plant_loc;
-        $data->review = $request->review;
-        $data->reviewed_by = $request->reviewed_by;
-        $data->reviewed_date = $request->reviewed_date;
+        $data->uraian_tugas = $request->uraian_tugas ?? '';
+        $data->plant_loc = $request->plant_loc ?? '';
+        $data->review = '';
+        $data->reviewed_by = '';
+        $data->reviewed_date = '';
         $data->save();
+
+        foreach ($request->pelaksana_jsa as $value) {
+            $user_pelaksana = New user_jsa();
+            $user_pelaksana->jsa_id = $data->id;
+            $user_pelaksana->jenis = 'pelaksana';
+            $user_pelaksana->nama = $value;
+            $user_pelaksana->save();
+        }
+
+        foreach ($request->penyusun_jsa as $value) {
+            $user_penyusun = New user_jsa();
+            $user_penyusun->jsa_id = $data->id;
+            $user_penyusun->jenis = 'penyusun';
+            $user_penyusun->nama = $value;
+            $user_penyusun->save();
+        }
 
         return redirect()->back();
     }
@@ -367,14 +394,31 @@ class HomeController extends Controller
     public function UpdateJSA(Request $request)
     {
         $data = jsa::find($request->id);
-        $data->review = 'Y';
-        $data->supervisi_name = $request->supervisi_name;
+        $data->supervisi_name = $request->supervisi;
         $data->project_code = $request->project_code;
         $data->judul_pekerjaan = $request->judul_pekerjaan;
         $data->tempat_bekerja = $request->tempat_bekerja;
         $data->uraian_tugas = $request->uraian_tugas;
-        $data->plant_loc = $request->plant_loc;
+        $data->plant_loc = $request->plant_location;
         $data->save();
+
+        $user_jsa = user_jsa::where('jsa_id', $request->id)->delete();
+
+        foreach ($request->pelaksana_jsa as $value) {
+            $user_pelaksana = New user_jsa();
+            $user_pelaksana->jsa_id = $data->id;
+            $user_pelaksana->jenis = 'pelaksana';
+            $user_pelaksana->nama = $value;
+            $user_pelaksana->save();
+        }
+
+        foreach ($request->penyusun_jsa as $value) {
+            $user_penyusun = New user_jsa();
+            $user_penyusun->jsa_id = $data->id;
+            $user_penyusun->jenis = 'penyusun';
+            $user_penyusun->nama = $value;
+            $user_penyusun->save();
+        }
 
         return redirect()->back();
     }
@@ -397,4 +441,17 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    public function userPenyusunJsa($id)
+    {
+        $data = user_jsa::where('jsa_id', $id)->where('jenis', 'penyusun')->get();
+
+        return json_encode($data);
+    }
+
+    public function userPelaksanaJsa($id)
+    {
+        $data = user_jsa::where('jsa_id', $id)->where('jenis', 'pelaksana')->get();
+
+        return json_encode($data);
+    }
 }

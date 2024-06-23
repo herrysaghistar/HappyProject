@@ -47,33 +47,27 @@ class AdminController extends Controller
         return view('permission.permission', compact('data', 'project', 'work_location', 'permission_type', 'permission_tambahan', 'tools'));
     }
 
-    public function create(Request $request)
-    {
-    	$ptw = New ptw;
-    	$ptw->level = 'spv';
-    	$ptw->status = '';
-    	$ptw->berlaku_dari = $request->berlaku_dari;
-    	$ptw->berlaku_sampai = $request->berlaku_sampai;
-    	$ptw->manpower_qty = $request->manpower_qty;
-    	$ptw->remark = $request->remark;
-    	$ptw->approved_by = '';
-    	$ptw->save();
-
-    	foreach ($request->input('tools', []) as $tools_name) {
-	        // Create a user
-	        ptw_tools::create([
-	            'ptw_id' => $ptw->id,
-	            'tools_id' => $tools_name,
-	        ]);
-	    }
-
-        return redirect()->back();
-    }
-
     public function jsa()
     {
         $jsa = jsa::select('*', DB::raw('LPAD(id, 4, "0") AS formatted_id'),)->get();
+        $ptw = Ptw::select(
+                        'ptws.id as ptw_id',
+                        'ptws.*',
+                        'projects.id as project_id',
+                        'projects.*',
+                        'work_locations.id as location_id',
+                        'work_locations.*',
+                        'permission_types.id as permission_id',
+                        'permission_types.*'
+                    )
+                    ->join('projects', 'ptws.project_id', '=', 'projects.id')
+                    ->join('work_locations', 'ptws.work_location_id', '=', 'work_locations.id')
+                    ->join('permission_types', 'ptws.permission_id', '=', 'permission_types.id')
+                    ->get();
 
-        return view('jsa.jsa', compact('jsa'));
+        $project = project::all();
+        $location = work_location::all();
+
+        return view('jsa.jsa', compact('jsa', 'location', 'project', 'ptw'));
     }
 }

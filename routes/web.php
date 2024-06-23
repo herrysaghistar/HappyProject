@@ -74,6 +74,9 @@ Route::post('/edit-jsa', [HomeController::class, 'UpdateJSA']);
 Route::post('/edit-status-review-jsa', [HomeController::class, 'UpdateStatusReviewJSA']);
 Route::post('/delete-jsa', [HomeController::class, 'deleteJSA']);
 
+Route::get('/user-penyusun-jsa/{id}', [HomeController::class, 'userPenyusunJsa']);
+Route::get('/user-pelaksana-jsa/{id}', [HomeController::class, 'userPelaksanaJsa']);
+
 Route::post('/acc', [HomeController::class, 'acc']);
 Route::post('/reject', [HomeController::class, 'reject']);
 
