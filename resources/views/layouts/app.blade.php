@@ -155,7 +155,7 @@ $('.btnid').click(function(){
 
 <!-- JSA -->
 <script type="text/javascript">
-$(document).ready(function(){
+
   $('.btnid_jsa').click(function(){
     var data = $(this).data();
     console.log(data);
@@ -239,7 +239,7 @@ fetch(`http://127.0.0.1:8000/user-pelaksana-jsa/${data.datas.id}`)
     .catch(error => console.error('Error fetching data:', error));
 
   });
-});
+
 </script>
 <script type="text/javascript">
 $(document).on('click', '.btnid_jsa_review', function() {

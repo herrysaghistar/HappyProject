@@ -62,6 +62,7 @@ class HomeController extends Controller
         $ptw->manpower_qty = $request->manpower_qty;
         $ptw->remark = $request->remark ?? '';
         $ptw->created_by = auth()->user()->name;
+        $ptw->catatan_hse = '';
         $ptw->approved_by = '';
         $ptw->rejected_by = '';
         $ptw->status = '';

@@ -1118,7 +1118,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <form action="{{ url('/review-jsa') }}" method="post">
+              <form action="{{ url('/edit-status-review-jsa') }}" method="post">
                 @csrf
                 <input type="" name="id" id="id" hidden>
                 <button type="submit" class="btn btn-success">ACC JSA</button>
