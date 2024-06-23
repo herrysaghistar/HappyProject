@@ -704,7 +704,7 @@
                 <td class="xl72" style="border-bottom-style:solid;border-color:windowtext;border-left-style:none;border-right-style:solid;border-top-style:solid;border-width:0.5pt;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:621pt;" colspan="7" width="826">
                     <span style="color:black;font-family:Calibri, sans-serif;font-size:11pt;">
                         <font class="font5" style="font-style:normal;text-decoration-line:none;">
-                            <strong>CATATAN DARI DEPARTEMEN HSE:</strong>
+                            <strong>CATATAN DARI DEPARTEMEN HSE: {{ $datas->catatan_hse }}</strong>
                     </font>&nbsp;
                     </span>
                     <br>
@@ -719,7 +719,7 @@
                     <br>
                     <span style="color:black;font-family:Calibri, sans-serif;font-size:11pt;">
                         <font class="font6" style="font-weight:400;text-decoration-line:none;">
-                            <i>{{ $datas->catatan_hse }}<span>&nbsp; </span>
+                            <i>….......................................................................................................................................................<span>&nbsp; </span>
                         </i>
                     </font>
                         <font class="font0" style="font-style:normal;font-weight:400;text-decoration-line:none;">(…..............................................................)</font>&nbsp;
@@ -761,15 +761,20 @@
                         <font class="font5" style="font-style:normal;text-decoration-line:none;">
                             <strong>(</strong>
                     </font>
-                        <font class="font0" style="font-style:normal;font-weight:400;text-decoration-line:none;">…...................................................</font>
+                        <font class="font0" style="font-style:normal;font-weight:400;text-decoration-line:none;">…................................................................</font>
                         <font class="font5" style="font-style:normal;text-decoration-line:none;">
                             <strong>)</strong>
                         <span>
-                            <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong>
+                            <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong>
+                    </span>
+                    <span style="color:black;font-family:Calibri, sans-serif;font-size:11pt;">
+                        <font class="font5" style="font-style:normal;text-decoration-line:none;">
+                            <span>
+                            <strong>&nbsp; &nbsp;&nbsp;</strong>
                     </span>
                         <strong>(</strong>
                     </font>
-                        <font class="font0" style="font-style:normal;font-weight:400;text-decoration-line:none;">..............................................................</font>
+                        <font class="font0" style="font-style:normal;font-weight:400;text-decoration-line:none;">..............................................................................</font>
                         <font class="font5" style="font-style:normal;text-decoration-line:none;">
                             <strong>)</strong>
                     </font>&nbsp;
@@ -783,11 +788,11 @@
                         <strong>KEPALA BENGKEL /&nbsp;</strong>
                     </font>
                         <font class="font6" style="font-weight:400;text-decoration-line:none;">
-                            <i>SUPERVISOR<span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
+                            <i>SUPERVISOR<span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
                         </i>
                     </font>
                         <font class="font5" style="font-style:normal;text-decoration-line:none;">
-                            <strong>KEPALA PROYEK /&nbsp;</strong>
+                            <strong>KEPALA PROYEK / </strong>
                     </font>
                         <font class="font6" style="font-weight:400;text-decoration-line:none;">
                             <i>PROJECT MANAGER</i>
@@ -822,17 +827,22 @@
                             <strong>(</strong>
                     </font>
                         <font class="font0" style="font-style:normal;font-weight:400;text-decoration-line:none;">
-                            <strong>….....................................................</strong>
+                            <strong>…................................................................</strong>
                     </font>
                         <font class="font5" style="font-style:normal;text-decoration-line:none;">
                             <strong>)</strong>
                         <span>
-                            <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong>
+                            <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </strong>
+                    </span>
+                    <span style="color:black;font-family:Calibri, sans-serif;font-size:11pt;">
+                        <font class="font5" style="font-style:normal;text-decoration-line:none;">
+                            <span>
+                            <strong>&nbsp; &nbsp;&nbsp;</strong>
                     </span>
                         <strong>(</strong>
                     </font>
                         <font class="font0" style="font-style:normal;font-weight:400;text-decoration-line:none;">
-                            <strong>..............................................................</strong>
+                            <strong>.........................................................</strong>
                     </font>
                         <font class="font5" style="font-style:normal;text-decoration-line:none;">
                             <strong>)</strong>
@@ -844,13 +854,13 @@
                             <span>
                             <strong>&nbsp; &nbsp; &nbsp;</strong>
                     </span>
-                        <strong>KEPALA BENGKEL /&nbsp;</strong>
+                        <strong>KEPALA BENGKEL </strong>
                     </font>
                         <font class="font6" style="font-weight:400;text-decoration-line:none;">
                             <i>
-                            <strong>SUPERVISOR</strong>
+                            SUPERVISOR
                         <span>
-                            <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong>
+                            <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong>
                     </span>
                     </i>
                     </font>
