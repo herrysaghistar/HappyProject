@@ -182,7 +182,7 @@ $('.btnid').click(function(){
 fetch(`http://127.0.0.1:8000/user-penyusun-jsa/${data.datas.id}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        // console.log(data);
         const penyusunDiv = document.getElementById('detail-penyusun-jsa-container');
         penyusunDiv.innerHTML = ''; // Clear previous content
 
@@ -198,7 +198,7 @@ fetch(`http://127.0.0.1:8000/user-penyusun-jsa/${data.datas.id}`)
 fetch(`http://127.0.0.1:8000/user-pelaksana-jsa/${data.datas.id}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        // console.log(data);
         const pelaksanaDiv = document.getElementById('detail-pelaksana-jsa-container');
         pelaksanaDiv.innerHTML = ''; // Clear previous content
 
@@ -214,7 +214,7 @@ fetch(`http://127.0.0.1:8000/user-pelaksana-jsa/${data.datas.id}`)
 fetch(`http://127.0.0.1:8000/user-penyusun-jsa/${data.datas.id}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        // console.log(data);
         const penyusunDiv = document.getElementById('edit-penyusun-jsa-container');
         penyusunDiv.innerHTML = ''; // Clear previous content
 
@@ -228,7 +228,7 @@ fetch(`http://127.0.0.1:8000/user-penyusun-jsa/${data.datas.id}`)
 fetch(`http://127.0.0.1:8000/user-pelaksana-jsa/${data.datas.id}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        // console.log(data);
         const pelaksanaDiv = document.getElementById('edit-pelaksana-jsa-container');
         pelaksanaDiv.innerHTML = ''; // Clear previous content
 
@@ -240,15 +240,135 @@ fetch(`http://127.0.0.1:8000/user-pelaksana-jsa/${data.datas.id}`)
 
   });
 
+// Fetch data PertimbanganLKJSADiv
+// console.log('data');
+// fetch(`http://127.0.0.1:8000/PertimbanganLKJSA/${data.datas.id}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log(data);
+//         const pertimbanganLKJSADiv = document.getElementById('PertimbanganLKJSAEdit');
+//         pertimbanganLKJSADiv.innerHTML = ''; // Clear previous content
+
+//         data.forEach((datas) => {
+//             addPelaksanaForEdit(datas.nama); // Add row with fetched data
+//         });
+//     })
+//     .catch(error => console.error('Error fetching data:', error));
+
+// Fetch data PertimbanganPBJSADiv
+// console.log('data');
+// fetch(`http://127.0.0.1:8000/PertimbanganPBJSA/${data.datas.id}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log(data);
+//         const pertimbanganPBJSADiv = document.getElementById('PertimbanganPBJSAEdit');
+//         pertimbanganPBJSADiv.innerHTML = ''; // Clear previous content
+
+//         data.forEach((datas) => {
+//             addPelaksanaForEdit(datas.nama); // Add row with fetched data
+//         });
+//     })
+//     .catch(error => console.error('Error fetching data:', error));
+
+// Fetch data PertimbanganPPEJSADiv
+// console.log('data');
+// fetch(`http://127.0.0.1:8000/PertimbanganPPEJSA/${data.datas.id}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log(data);
+//         const pertimbanganPPEJSADiv = document.getElementById('PertimbanganPPEJSAEdit');
+//         pertimbanganPPEJSADiv.innerHTML = ''; // Clear previous content
+
+//         data.forEach((datas) => {
+//             addPelaksanaForEdit(datas.nama); // Add row with fetched data
+//         });
+//     })
+//     .catch(error => console.error('Error fetching data:', error));
+
+// Fetch data PertimbanganPersonJSADiv
+// console.log('data');
+// fetch(`http://127.0.0.1:8000/PertimbanganPersonJSA/${data.datas.id}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log(data);
+//         const pertimbanganPersonJSADiv = document.getElementById('PertimbanganPersonJSAEdit');
+//         pertimbanganPersonJSADiv.innerHTML = ''; // Clear previous content
+
+//         data.forEach((datas) => {
+//             addPelaksanaForEdit(datas.nama); // Add row with fetched data
+//         });
+//     })
+//     .catch(error => console.error('Error fetching data:', error));
+
 </script>
 <script type="text/javascript">
 $(document).on('click', '.btnid_jsa_review', function() {
     var data = $(this).data();
     console.log(data.datas);
-    $("#modal-sm-review #id").val(data);
+    $("#modal-sm-review #id").val(data.datas.id);
 
     document.getElementById("review_jsa_title").innerHTML = 'Apakah Anda Telah Review Detail JSA "JHA '+data.datas.formatted_id+'/'+data.datas.project_code+'" ?';
-    // $("#modal-sm-review #review_jsa_title").val(data.datas.id);
+    
+    fetch(`http://127.0.0.1:8000/PertimbanganLKJSA/${data.datas.id}`)
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          const pelaksanaDiv = document.getElementById('PertimbanganLKJSA');
+          pelaksanaDiv.innerHTML = ''; // Clear previous content
+
+          data.forEach((datas, index) => {
+              const pelaksana = document.createElement('p');
+              pelaksana.textContent = `${index + 1}. ${datas.nama}`; 
+              pelaksanaDiv.appendChild(pelaksana);
+          });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+
+    fetch(`http://127.0.0.1:8000/PertimbanganPBJSA/${data.datas.id}`)
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          const pelaksanaDiv = document.getElementById('PertimbanganPBJSA');
+          pelaksanaDiv.innerHTML = ''; // Clear previous content
+
+          data.forEach((datas, index) => {
+              const pelaksana = document.createElement('p');
+              pelaksana.textContent = `${index + 1}. ${datas.nama}`; 
+              pelaksanaDiv.appendChild(pelaksana);
+          });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+
+    fetch(`http://127.0.0.1:8000/PertimbanganPPEJSA/${data.datas.id}`)
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          const pelaksanaDiv = document.getElementById('PertimbanganPPEJSA');
+          pelaksanaDiv.innerHTML = ''; // Clear previous content
+
+          data.forEach((datas, index) => {
+              const pelaksana = document.createElement('p');
+              pelaksana.textContent = `${index + 1}. ${datas.nama}`; 
+              pelaksanaDiv.appendChild(pelaksana);
+          });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+
+    fetch(`http://127.0.0.1:8000/PertimbanganPersonJSA/${data.datas.id}`)
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          const pelaksanaDiv = document.getElementById('PertimbanganPersonJSA');
+          pelaksanaDiv.innerHTML = ''; // Clear previous content
+
+          data.forEach((datas, index) => {
+              const pelaksana = document.createElement('p');
+              pelaksana.textContent = `${index + 1}. ${datas.nama}`; 
+              pelaksanaDiv.appendChild(pelaksana);
+          });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+
   });
 </script>
 <!-- JSA -->
@@ -580,6 +700,54 @@ function addPelaksana() {
   document.getElementById('pelaksana-jsa-container').appendChild(newColumn);
 }
 
+// Add addLK
+function addLK() {
+  var newColumn = document.createElement('div');
+  newColumn.setAttribute("class", "form-group");
+  newColumn.innerHTML = `
+    <input type="text" name="addLK[]" class="form-control" required>
+    <br>
+    <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus Langkah Kerja</button>
+  `;
+  document.getElementById('addLK').appendChild(newColumn);
+}
+
+// Add addPB
+function addPB() {
+  var newColumn = document.createElement('div');
+  newColumn.setAttribute("class", "form-group");
+  newColumn.innerHTML = `
+    <input type="text" name="addPB[]" class="form-control" required>
+    <br>
+    <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus Potensi Bahaya</button>
+  `;
+  document.getElementById('addPB').appendChild(newColumn);
+}
+
+// Add addPPE
+function addPPE() {
+  var newColumn = document.createElement('div');
+  newColumn.setAttribute("class", "form-group");
+  newColumn.innerHTML = `
+    <input type="text" name="addPPE[]" class="form-control" required>
+    <br>
+    <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus PPE</button>
+  `;
+  document.getElementById('addPPE').appendChild(newColumn);
+}
+
+// Add addPerson
+function addPerson() {
+  var newColumn = document.createElement('div');
+  newColumn.setAttribute("class", "form-group");
+  newColumn.innerHTML = `
+    <input type="text" name="addPerson[]" class="form-control" required>
+    <br>
+    <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus Person Responsible</button>
+  `;
+  document.getElementById('addPerson').appendChild(newColumn);
+}
+
 // Remove Row
 function removeRow(button) {
   button.parentNode.remove();
@@ -609,6 +777,51 @@ function removeRow(button) {
       <button type="button" class="btn btn-danger btn-sm" onclick="removeRowForEdit(this)">Hapus Pelaksana</button>
     `;
     document.getElementById('edit-pelaksana-jsa-container').appendChild(newColumn);
+  }
+
+// Add LK
+  function addLKForEdit(name = '') {
+    var newColumn = document.createElement('div');
+    newColumn.setAttribute("class", "form-group");
+    newColumn.innerHTML = `
+      <input type="text" name="addLK[]" class="form-control" value="${name}" required>
+      <br>
+      <button type="button" class="btn btn-danger btn-sm" onclick="removeRowForEdit(this)">Hapus Penyusun</button>
+    `;
+    document.getElementById('edit-penyusun-jsa-container').appendChild(newColumn);
+  }
+// Add PB
+  function addPBForEdit(name = '') {
+    var newColumn = document.createElement('div');
+    newColumn.setAttribute("class", "form-group");
+    newColumn.innerHTML = `
+      <input type="text" name="addPB[]" class="form-control" value="${name}" required>
+      <br>
+      <button type="button" class="btn btn-danger btn-sm" onclick="removeRowForEdit(this)">Hapus Penyusun</button>
+    `;
+    document.getElementById('edit-penyusun-jsa-container').appendChild(newColumn);
+  }
+// Add PPE
+  function addPPEForEdit(name = '') {
+    var newColumn = document.createElement('div');
+    newColumn.setAttribute("class", "form-group");
+    newColumn.innerHTML = `
+      <input type="text" name="addPPE[]" class="form-control" value="${name}" required>
+      <br>
+      <button type="button" class="btn btn-danger btn-sm" onclick="removeRowForEdit(this)">Hapus Penyusun</button>
+    `;
+    document.getElementById('edit-penyusun-jsa-container').appendChild(newColumn);
+  }
+// Add Person
+  function addPersonForEdit(name = '') {
+    var newColumn = document.createElement('div');
+    newColumn.setAttribute("class", "form-group");
+    newColumn.innerHTML = `
+      <input type="text" name="addPerson[]" class="form-control" value="${name}" required>
+      <br>
+      <button type="button" class="btn btn-danger btn-sm" onclick="removeRowForEdit(this)">Hapus Penyusun</button>
+    `;
+    document.getElementById('edit-penyusun-jsa-container').appendChild(newColumn);
   }
 
 // Remove Row

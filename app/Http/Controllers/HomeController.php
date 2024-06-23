@@ -14,6 +14,10 @@ use App\Models\tools_type;
 use App\Models\user_jsa;
 use App\Models\permission_tambahan;
 use App\Models\User;
+use App\Models\LK;
+use App\Models\PB;
+use App\Models\PPE;
+use App\Models\Person;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use \PDF;
@@ -389,6 +393,34 @@ class HomeController extends Controller
             $user_penyusun->save();
         }
 
+        foreach ($request->addLK as $value) {
+            $addLKs = New LK();
+            $addLKs->jsa_id = $data->id;
+            $addLKs->nama = $value;
+            $addLKs->save();
+        }
+
+        foreach ($request->addPB as $value) {
+            $addPBs = New PB();
+            $addPBs->jsa_id = $data->id;
+            $addPBs->nama = $value;
+            $addPBs->save();
+        }
+
+        foreach ($request->addPPE as $value) {
+            $addPPEs = New PPE();
+            $addPPEs->jsa_id = $data->id;
+            $addPPEs->nama = $value;
+            $addPPEs->save();
+        }
+
+        foreach ($request->addPerson as $value) {
+            $addPersons = New Person();
+            $addPersons->jsa_id = $data->id;
+            $addPersons->nama = $value;
+            $addPersons->save();
+        }
+
         return redirect()->back();
     }
 
@@ -421,6 +453,39 @@ class HomeController extends Controller
             $user_penyusun->save();
         }
 
+        // $a = LK::where('jsa_id', $request->id)->delete();
+        // $b = PB::where('jsa_id', $request->id)->delete();
+        // $c = PPE::where('jsa_id', $request->id)->delete();
+        // $d = Person::where('jsa_id', $request->id)->delete();
+
+        // foreach ($request->addLK as $value) {
+        //     $addLKs = New LK();
+        //     $addLKs->jsa_id = $data->id;
+        //     $addLKs->nama = $value;
+        //     $addLKs->save();
+        // }
+
+        // foreach ($request->addPB as $value) {
+        //     $addPBs = New PB();
+        //     $addPBs->jsa_id = $data->id;
+        //     $addPBs->nama = $value;
+        //     $addPBs->save();
+        // }
+
+        // foreach ($request->addPPE as $value) {
+        //     $addPPEs = New PPE();
+        //     $addPPEs->jsa_id = $data->id;
+        //     $addPPEs->nama = $value;
+        //     $addPPEs->save();
+        // }
+
+        // foreach ($request->addPerson as $value) {
+        //     $addPersons = New Person();
+        //     $addPersons->jsa_id = $data->id;
+        //     $addPersons->nama = $value;
+        //     $addPersons->save();
+        // }
+
         return redirect()->back();
     }
 
@@ -452,6 +517,34 @@ class HomeController extends Controller
     public function userPelaksanaJsa($id)
     {
         $data = user_jsa::where('jsa_id', $id)->where('jenis', 'pelaksana')->get();
+
+        return json_encode($data);
+    }
+
+    public function PertimbanganLKJSA($id)
+    {
+        $data = LK::where('jsa_id', $id)->get();
+
+        return json_encode($data);
+    }
+
+    public function PertimbanganPBJSA($id)
+    {
+        $data = PB::where('jsa_id', $id)->get();
+
+        return json_encode($data);
+    }
+
+    public function PertimbanganPPEJSA($id)
+    {
+        $data = PPE::where('jsa_id', $id)->get();
+        
+        return json_encode($data);
+    }
+
+    public function PertimbanganPersonJSA($id)
+    {
+        $data = Person::where('jsa_id', $id)->get();
 
         return json_encode($data);
     }

@@ -91,3 +91,8 @@ Route::get('/input-apd/{id}', [HomeController::class, 'InputApd']);
 
 Route::get('/detail-tambahan/{id}', [HomeController::class, 'DetailTambahan']);
 Route::get('/apd/{id}', [HomeController::class, 'Apd']);
+
+Route::get('/PertimbanganLKJSA/{id}', [HomeController::class, 'PertimbanganLKJSA']);
+Route::get('/PertimbanganPBJSA/{id}', [HomeController::class, 'PertimbanganPBJSA']);
+Route::get('/PertimbanganPPEJSA/{id}', [HomeController::class, 'PertimbanganPPEJSA']);
+Route::get('/PertimbanganPersonJSA/{id}', [HomeController::class, 'PertimbanganPersonJSA']);

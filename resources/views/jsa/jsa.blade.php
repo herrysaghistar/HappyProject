@@ -209,6 +209,30 @@
                   <textarea name="uraian_tugas" class="form-control" id="uraian_tugas" rows="3"></textarea>
                 </div>
 
+                <div class="form-group">
+                  <label for="manpower_qty">Langkah kerja</label>
+                  <div id="addLK"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addLK()">Tambahkan Langkah Kerja</button>
+                </div>
+
+                <div class="form-group">
+                  <label for="manpower_qty">Potensi Bahaya</label>
+                  <div id="addPB"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPB()">Tambahkan Potensi Bahaya</button>
+                </div>
+                
+                <div class="form-group">
+                  <label for="manpower_qty">Tindakan Pengendalian dan APD</label>
+                  <div id="addPPE"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPPE()">Tambahkan PPE</button>
+                </div>
+                
+                <div class="form-group">
+                  <label for="manpower_qty">Person Responsible For Control Measure</label>
+                  <div id="addPerson"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPerson()">Tambahkan Person Responsible</button>
+                </div>
+
                 </div>
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -346,6 +370,30 @@
                   <textarea name="uraian_tugas" class="form-control" id="uraian_tugas" rows="3"></textarea>
                 </div>
 
+                <!-- <div class="form-group">
+                  <label for="manpower_qty">Pelaksana JSA</label>
+                  <div id="PertimbanganLKJSAEdit"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPelaksanaForEdit()">Tambahkan Pelaksana</button>
+                </div>
+
+                <div class="form-group">
+                  <label for="manpower_qty">Pelaksana JSA</label>
+                  <div id="PertimbanganPBJSAEdit"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPelaksanaForEdit()">Tambahkan Pelaksana</button>
+                </div>
+
+                <div class="form-group">
+                  <label for="manpower_qty">Pelaksana JSA</label>
+                  <div id="PertimbanganPPEJSAEdit"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPelaksanaForEdit()">Tambahkan Pelaksana</button>
+                </div>
+
+                <div class="form-group">
+                  <label for="manpower_qty">Pelaksana JSA</label>
+                  <div id="PertimbanganPersonJSAEdit"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPelaksanaForEdit()">Tambahkan Pelaksana</button>
+                </div> -->
+
                 </div>
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -387,32 +435,14 @@
               <p>
                 Detail JSA telah mempertimbangkan hal hal berikut :
               </p>
-              <p>
-                1. Langkah kerja :
-                <ol>
-                  @foreach($langkah_kerja as $LK)
-                  <li></li>
-                  @endforeach
-                </ol>
-                2. Langkah kerja :
-                <ol>
-                  @foreach($langkah_kerja as $LK)
-                  <li></li>
-                  @endforeach
-                </ol>
-                3. Langkah kerja :
-                <ol>
-                  @foreach($langkah_kerja as $LK)
-                  <li></li>
-                  @endforeach
-                </ol>
-                4. Langkah kerja :
-                <ol>
-                  @foreach($langkah_kerja as $LK)
-                  <li></li>
-                  @endforeach
-                </ol>
-              </p>
+              <label>Langkah Kerja</label>              
+              <div id="PertimbanganLKJSA"></div>
+              <label>Potensi Bahaya</label>              
+              <div id="PertimbanganPBJSA"></div>
+              <label>PPE</label>              
+              <div id="PertimbanganPPEJSA"></div>
+              <label>Penanggung Jawab</label>
+              <div id="PertimbanganPersonJSA"></div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
