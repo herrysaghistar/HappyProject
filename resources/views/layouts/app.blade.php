@@ -305,6 +305,7 @@ $(document).ready(function() {
     $("#modal-lg-detail #nama_proyek").val(dataDetail.projectName);
     $("#modal-lg-detail #code_proyek").val(dataDetail.projectCode);
     $("#modal-lg-detail #remark").val(dataDetail.remark);
+    $("#modal-lg-detail #catatan_hse").val(dataDetail.catatanHse);
 
   fetch(`http://127.0.0.1:8000/detail-tambahan/${dataDetail.ptwId}`)
     .then(response => response.json())

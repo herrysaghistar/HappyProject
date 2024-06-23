@@ -257,7 +257,7 @@ class HomeController extends Controller
     public function locationMasterAdd(Request $request)
     {
         $data = New work_location();
-        $data->location_name = $request->project;
+        $data->location_name = $request->name;
         $data->save();
 
         return redirect()->back();

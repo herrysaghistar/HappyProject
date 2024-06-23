@@ -62,6 +62,7 @@
                                 data-project-name="{{ $datas->project_name }}" 
                                 data-project-code="{{ $datas->project_code }}" 
                                 data-permission-type="{{ $datas->permission_name }}" 
+                                data-catatan-hse="{{ $datas->catatan_hse }}" 
                                 data-remark="{{ $datas->remark }}" 
                                 data-toggle="modal" 
                                 data-target="#modal-lg-detail">
@@ -405,6 +406,11 @@
               <div class="form-group">
                 <label for="nama_proyek">Uraian Kegiatan</label>
                 <input type="text" id="remark" class="form-control" disabled>
+              </div>
+
+              <div class="form-group">
+                <label for="nama_proyek">Catatan HSE</label>
+                <input type="text" id="catatan_hse" class="form-control" disabled>
               </div>
 
               <div class="form-group">

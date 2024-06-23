@@ -719,7 +719,7 @@
                     <br>
                     <span style="color:black;font-family:Calibri, sans-serif;font-size:11pt;">
                         <font class="font6" style="font-weight:400;text-decoration-line:none;">
-                            <i>…........................................................................................................................................<span>&nbsp; </span>
+                            <i>{{ $datas->catatan_hse }}<span>&nbsp; </span>
                         </i>
                     </font>
                         <font class="font0" style="font-style:normal;font-weight:400;text-decoration-line:none;">(…..............................................................)</font>&nbsp;
@@ -783,7 +783,7 @@
                         <strong>KEPALA BENGKEL /&nbsp;</strong>
                     </font>
                         <font class="font6" style="font-weight:400;text-decoration-line:none;">
-                            <i>SUPERVISOR<span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>
+                            <i>SUPERVISOR<span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
                         </i>
                     </font>
                         <font class="font5" style="font-style:normal;text-decoration-line:none;">
