@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Dokumen JSA</h1>
+            <h1>Dokumen JHA</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -18,7 +18,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Data Dokumen JSA</h3>
+                <h3 class="card-title">Data Dokumen JHA</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -29,7 +29,7 @@
                 @endif
                 @cannot('kapro')
                 <div class="col-2">
-                  <button type="submit" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-lg">JSA Baru</button>
+                  <button type="submit" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-lg">JHA Baru</button>
                 </div>
                 @endcan
                 <table id="example1" class="table table-bordered table-striped">
@@ -122,7 +122,11 @@
                               <button class="btn btn-danger" disabled>Belum Di Review</button>
                           @endcan
                         @else
-                        <button class="btn btn-outline-success" disabled>Sudah Di Review</button>
+                        <button class="btnid_jsa_review btn btn-outline-success" 
+                                id="btnid_jsa_review" 
+                                data-datas="{{ $data }}" 
+                                data-toggle="modal" 
+                                data-target="#modal-sm-review">Sudah Di Review</button>
                         @endif
                       </td>
                     </tr>
@@ -142,7 +146,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Add JSA</h4>
+              <h4 class="modal-title">Add JHA</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -165,13 +169,13 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="manpower_qty">Penyusun JSA</label>
+                  <label for="manpower_qty">Penyusun JHA</label>
                   <div id="penyusun-jsa-container"></div>
                   <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPenyusun()">Tambahkan Penyusun</button>
                 </div>
 
                 <div class="form-group">
-                  <label for="manpower_qty">Pelaksana JSA</label>
+                  <label for="manpower_qty">Pelaksana JHA</label>
                   <div id="pelaksana-jsa-container"></div>
                   <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPelaksana()">Tambahkan Pelaksana</button>
                 </div>
@@ -236,7 +240,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button class="btn btn-success" type="submit">Buat Permohonan</button>
+                  <button class="btn btn-success" type="submit">Buat JHA</button>
                 </div>
               </form>
           </div>
@@ -246,7 +250,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Detail JSA</h4>
+              <h4 class="modal-title">Detail JHA</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -265,12 +269,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="manpower_qty">Penyusun JSA</label>
+                    <label for="manpower_qty">Penyusun JHA</label>
                     <div id="detail-penyusun-jsa-container"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="manpower_qty">Pelaksana JSA</label>
+                    <label for="manpower_qty">Pelaksana JHA</label>
                     <div id="detail-pelaksana-jsa-container"></div>
                 </div>
 
@@ -311,7 +315,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Edit JSA</h4>
+              <h4 class="modal-title">Edit JHA</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -326,13 +330,13 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="manpower_qty">Penyusun JSA</label>
+                  <label for="manpower_qty">Penyusun JHA</label>
                   <div id="edit-penyusun-jsa-container"></div>
                   <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPenyusunForEdit()">Tambahkan Penyusun</button>
                 </div>
 
                 <div class="form-group">
-                  <label for="manpower_qty">Pelaksana JSA</label>
+                  <label for="manpower_qty">Pelaksana JHA</label>
                   <div id="edit-pelaksana-jsa-container"></div>
                   <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPelaksanaForEdit()">Tambahkan Pelaksana</button>
                 </div>
@@ -449,7 +453,7 @@
               <form action="{{ url('/edit-status-review-jsa') }}" method="post">
                 @csrf
                 <input type="" name="id" id="id" hidden>
-                <button type="submit" class="btn btn-success">ACC JSA</button>
+                <button type="submit" class="btn btn-success" id="acc-jha-button" style="display: none;">ACC JHA</button>
               </form>
             </div>
           </div>

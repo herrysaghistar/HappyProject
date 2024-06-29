@@ -44,7 +44,7 @@ class HomeController extends Controller
         $ptw = ptw::count();
         $ptw_undone = ptw::where('level','<>','approved')->count();
         $jsa = jsa::count();
-        $jsa_undone = jsa::where('reviewed_by', '<>', '')->count();
+        $jsa_undone = jsa::where('reviewed_by', '=', '')->count();
         $document_count = [
             'ptw' => $ptw,
             'ptw_undone' => $ptw_undone,
@@ -371,7 +371,7 @@ class HomeController extends Controller
         $data->judul_pekerjaan = $request->judul_pekerjaan;
         $data->tempat_bekerja = $request->tempat_bekerja;
         $data->uraian_tugas = $request->uraian_tugas ?? '';
-        $data->plant_loc = $request->plant_loc ?? '';
+        $data->plant_loc = $request->plant_location ?? '';
         $data->review = '';
         $data->reviewed_by = '';
         $data->reviewed_date = '';
@@ -547,5 +547,18 @@ class HomeController extends Controller
         $data = Person::where('jsa_id', $id)->get();
 
         return json_encode($data);
+    }
+
+    public function statusJHA($id)
+    {
+        $data = jsa::find($id);
+
+        if ($data->review == 'Y') {
+            $status = 'Y';
+        } else {
+            $status = 'N';
+        }
+
+        return json_encode($status);
     }
 }

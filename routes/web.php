@@ -96,3 +96,4 @@ Route::get('/PertimbanganLKJSA/{id}', [HomeController::class, 'PertimbanganLKJSA
 Route::get('/PertimbanganPBJSA/{id}', [HomeController::class, 'PertimbanganPBJSA']);
 Route::get('/PertimbanganPPEJSA/{id}', [HomeController::class, 'PertimbanganPPEJSA']);
 Route::get('/PertimbanganPersonJSA/{id}', [HomeController::class, 'PertimbanganPersonJSA']);
+Route::get('/statusJHA/{id}', [HomeController::class, 'statusJHA']);

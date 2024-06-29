@@ -29,7 +29,17 @@
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @can('spv')
+              <a href="{{ url('ptw-spv') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('hse')
+              <a href="{{ url('ptw-hse') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('kabeng')
+              <a href="{{ url('ptw-kabeng') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('kapro')
+              <a href="{{ url('ptw-kapro') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('admin')
+              <a href="{{ url('ptw-admin') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @endcan
             </div>
           </div>
           <!-- ./col -->
@@ -44,7 +54,17 @@
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @can('spv')
+              <a href="{{ url('ptw-spv') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('hse')
+              <a href="{{ url('ptw-hse') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('kabeng')
+              <a href="{{ url('ptw-kabeng') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('kapro')
+              <a href="{{ url('ptw-kapro') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('admin')
+              <a href="{{ url('ptw-admin') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @endcan
             </div>
           </div>
           <!-- ./col -->
@@ -54,12 +74,22 @@
               <div class="inner">
                 <h3>{{ $document_count['jsa'] }}</h3>
 
-                <p>Jumlah JSA</p>
+                <p>Jumlah JHA</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @can('spv')
+              <a href="{{ url('jsa-spv') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('hse')
+              <a href="{{ url('jsa-hse') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('kabeng')
+              <a href="{{ url('jsa-kabeng') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('kapro')
+              <a href="{{ url('jsa-kapro') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('admin')
+              <a href="{{ url('jsa-admin') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @endcan
             </div>
           </div>
           <!-- ./col -->
@@ -69,12 +99,22 @@
               <div class="inner">
                 <h3>{{ $document_count['jsa_undone'] }}</h3>
 
-                <p>JSA Belum Disetujui</p>
+                <p>JHA Belum Disetujui</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @can('spv')
+              <a href="{{ url('jsa-spv') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('hse')
+              <a href="{{ url('jsa-hse') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('kabeng')
+              <a href="{{ url('jsa-kabeng') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('kapro')
+              <a href="{{ url('jsa-kapro') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @elsecan('admin')
+              <a href="{{ url('jsa-admin') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              @endcan
             </div>
           </div>
           <!-- ./col -->
@@ -119,7 +159,7 @@
         var dataValues = Object.values(documentCount);
         var data = {
             labels: [
-              'PTW', 'PTW Belum Approve', 'JSA', 'JSA Belum Approve'
+              'PTW', 'PTW Belum Approve', 'JHA', 'JHA Belum Approve'
               ],
             datasets: [{
                 data: dataValues,

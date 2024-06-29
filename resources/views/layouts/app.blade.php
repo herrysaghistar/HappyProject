@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Permit To Work</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -75,6 +75,12 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
+</script>
+
+<script>
+  $(document).ready(function () {
+    $('[data-widget="pushmenu"]').PushMenu();
+  });
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -307,8 +313,10 @@ $(document).on('click', '.btnid_jsa_review', function() {
     console.log(data.datas);
     $("#modal-sm-review #id").val(data.datas.id);
 
+    document.getElementById('acc-jha-button').style.display = 'none';
+
     document.getElementById("review_jsa_title").innerHTML = 'Apakah Anda Telah Review Detail JSA "JHA '+data.datas.formatted_id+'/'+data.datas.project_code+'" ?';
-    
+
     fetch(`http://127.0.0.1:8000/PertimbanganLKJSA/${data.datas.id}`)
       .then(response => response.json())
       .then(data => {
@@ -368,8 +376,18 @@ $(document).on('click', '.btnid_jsa_review', function() {
           });
       })
       .catch(error => console.error('Error fetching data:', error));
+    
+    fetch(`http://127.0.0.1:8000/statusJHA/${data.datas.id}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if (data == 'N') {
+              document.getElementById('acc-jha-button').style.display = 'block';
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    });
 
-  });
 </script>
 <!-- JSA -->
 
