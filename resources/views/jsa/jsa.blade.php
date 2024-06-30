@@ -256,58 +256,55 @@
               </button>
             </div>
             <div class="modal-body">
-              <form method="POST" action="{{ url('/create-ptw') }}">
-                @csrf
-                <div class="form-group">
-                  <label for="manpower_qty">Doc. No.</label>
-                  <input type="" name="doc_no" class="form-control" id="doc_no" disabled>
-                </div>
+              <div class="form-group">
+                <label for="manpower_qty">Doc. No.</label>
+                <input type="" name="doc_no" class="form-control" id="doc_no" disabled>
+              </div>
 
-                <div class="form-group">
-                  <label for="manpower_qty">Supervisi</label>
-                  <input type="" name="supervisi" class="form-control" id="supervisi" disabled>
-                </div>
+              <div class="form-group">
+                <label for="manpower_qty">Supervisi</label>
+                <input type="" name="supervisi" class="form-control" id="supervisi" disabled>
+              </div>
 
-                <div class="form-group">
-                    <label for="manpower_qty">Penyusun JHA</label>
-                    <div id="detail-penyusun-jsa-container"></div>
-                </div>
+              <div class="form-group">
+                  <label for="manpower_qty">Penyusun JHA</label>
+                  <div id="detail-penyusun-jsa-container"></div>
+              </div>
 
-                <div class="form-group">
-                    <label for="manpower_qty">Pelaksana JHA</label>
-                    <div id="detail-pelaksana-jsa-container"></div>
-                </div>
+              <div class="form-group">
+                  <label for="manpower_qty">Pelaksana JHA</label>
+                  <div id="detail-pelaksana-jsa-container"></div>
+              </div>
 
-                <div class="form-group">
-                  <label for="">Kode Proyek</label>
-                  <input type="" name="project_name" class="form-control" id="project_name" disabled>
-                </div>
+              <div class="form-group">
+                <label for="">Kode Proyek</label>
+                <input type="" name="project_name" class="form-control" id="project_name" disabled>
+              </div>
 
-                <div class="form-group">
-                  <label for="manpower_qty">Judul Pekerjaan</label>
-                  <input type="" name="judul_pekerjaan" class="form-control" id="judul_pekerjaan" disabled>
-                </div>
+              <div class="form-group">
+                <label for="manpower_qty">Judul Pekerjaan</label>
+                <input type="" name="judul_pekerjaan" class="form-control" id="judul_pekerjaan" disabled>
+              </div>
 
-                <div class="form-group">
-                  <label for="manpower_qty">Lokasi Pekerjaan</label>
-                  <input type="" name="location_name" class="form-control" id="location_name" disabled>
-                </div>
+              <div class="form-group">
+                <label for="manpower_qty">Lokasi Pekerjaan</label>
+                <input type="" name="location_name" class="form-control" id="location_name" disabled>
+              </div>
 
-                <div class="form-group">
-                  <label for="remark">Plant Location</label>
-                  <input type="" name="plant_location" class="form-control" id="plant_location" disabled>
-                </div>
+              <div class="form-group">
+                <label for="remark">Plant Location</label>
+                <input type="" name="plant_location" class="form-control" id="plant_location" disabled>
+              </div>
 
-                <div class="form-group">
-                  <label for="remark">Uraian Tugas</label>
-                  <input type="" name="uraian_tugas" class="form-control" id="uraian_tugas" disabled>
-                </div>
+              <div class="form-group">
+                <label for="remark">Uraian Tugas</label>
+                <input type="" name="uraian_tugas" class="form-control" id="uraian_tugas" disabled>
+              </div>
 
-                </div>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-              </form>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
           </div>
         </div>
       </div>
@@ -439,6 +436,51 @@
               <p>
                 Detail JSA telah mempertimbangkan hal hal berikut :
               </p>
+              <div class="form-group">
+                <label for="manpower_qty">Doc. No.</label>
+                <input type="" name="doc_no" class="form-control" id="doc_no" disabled>
+              </div>
+
+              <div class="form-group">
+                <label for="manpower_qty">Supervisi</label>
+                <input type="" name="supervisi" class="form-control" id="supervisi" disabled>
+              </div>
+
+              <div class="form-group">
+                  <label for="manpower_qty">Penyusun JHA</label>
+                  <div id="detail-penyusun-jsa-container-review"></div>
+              </div>
+
+              <div class="form-group">
+                  <label for="manpower_qty">Pelaksana JHA</label>
+                  <div id="detail-pelaksana-jsa-container-review"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="">Kode Proyek</label>
+                <input type="" name="project_name" class="form-control" id="project_name" disabled>
+              </div>
+
+              <div class="form-group">
+                <label for="manpower_qty">Judul Pekerjaan</label>
+                <input type="" name="judul_pekerjaan" class="form-control" id="judul_pekerjaan" disabled>
+              </div>
+
+              <div class="form-group">
+                <label for="manpower_qty">Lokasi Pekerjaan</label>
+                <input type="" name="location_name" class="form-control" id="location_name" disabled>
+              </div>
+
+              <div class="form-group">
+                <label for="remark">Plant Location</label>
+                <input type="" name="plant_location" class="form-control" id="plant_location" disabled>
+              </div>
+
+              <div class="form-group">
+                <label for="remark">Uraian Tugas</label>
+                <input type="" name="uraian_tugas" class="form-control" id="uraian_tugas" disabled>
+              </div>
+
               <label>Langkah Kerja</label>              
               <div id="PertimbanganLKJSA"></div>
               <label>Potensi Bahaya</label>              

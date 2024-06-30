@@ -244,76 +244,54 @@ fetch(`http://127.0.0.1:8000/user-pelaksana-jsa/${data.datas.id}`)
 
   });
 
-// Fetch data PertimbanganLKJSADiv
-// console.log('data');
-// fetch(`http://127.0.0.1:8000/PertimbanganLKJSA/${data.datas.id}`)
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log(data);
-//         const pertimbanganLKJSADiv = document.getElementById('PertimbanganLKJSAEdit');
-//         pertimbanganLKJSADiv.innerHTML = ''; // Clear previous content
-
-//         data.forEach((datas) => {
-//             addPelaksanaForEdit(datas.nama); // Add row with fetched data
-//         });
-//     })
-//     .catch(error => console.error('Error fetching data:', error));
-
-// Fetch data PertimbanganPBJSADiv
-// console.log('data');
-// fetch(`http://127.0.0.1:8000/PertimbanganPBJSA/${data.datas.id}`)
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log(data);
-//         const pertimbanganPBJSADiv = document.getElementById('PertimbanganPBJSAEdit');
-//         pertimbanganPBJSADiv.innerHTML = ''; // Clear previous content
-
-//         data.forEach((datas) => {
-//             addPelaksanaForEdit(datas.nama); // Add row with fetched data
-//         });
-//     })
-//     .catch(error => console.error('Error fetching data:', error));
-
-// Fetch data PertimbanganPPEJSADiv
-// console.log('data');
-// fetch(`http://127.0.0.1:8000/PertimbanganPPEJSA/${data.datas.id}`)
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log(data);
-//         const pertimbanganPPEJSADiv = document.getElementById('PertimbanganPPEJSAEdit');
-//         pertimbanganPPEJSADiv.innerHTML = ''; // Clear previous content
-
-//         data.forEach((datas) => {
-//             addPelaksanaForEdit(datas.nama); // Add row with fetched data
-//         });
-//     })
-//     .catch(error => console.error('Error fetching data:', error));
-
-// Fetch data PertimbanganPersonJSADiv
-// console.log('data');
-// fetch(`http://127.0.0.1:8000/PertimbanganPersonJSA/${data.datas.id}`)
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log(data);
-//         const pertimbanganPersonJSADiv = document.getElementById('PertimbanganPersonJSAEdit');
-//         pertimbanganPersonJSADiv.innerHTML = ''; // Clear previous content
-
-//         data.forEach((datas) => {
-//             addPelaksanaForEdit(datas.nama); // Add row with fetched data
-//         });
-//     })
-//     .catch(error => console.error('Error fetching data:', error));
-
 </script>
 <script type="text/javascript">
 $(document).on('click', '.btnid_jsa_review', function() {
     var data = $(this).data();
     console.log(data.datas);
     $("#modal-sm-review #id").val(data.datas.id);
+    $("#modal-sm-review #doc_no").val('JHA '+data.datas.formatted_id+'/'+data.datas.project_code);
+    $("#modal-sm-review #supervisi").val(data.datas.supervisi_name);
+    $("#modal-sm-review #project_name").val(data.datas.project_code);
+    $("#modal-sm-review #judul_pekerjaan").val(data.datas.judul_pekerjaan);
+    $("#modal-sm-review #location_name").val(data.datas.tempat_bekerja);
+    $("#modal-sm-review #plant_location").val(data.datas.plant_loc);
+    $("#modal-sm-review #uraian_tugas").val(data.datas.uraian_tugas);
 
     document.getElementById('acc-jha-button').style.display = 'none';
 
     document.getElementById("review_jsa_title").innerHTML = 'Apakah Anda Telah Review Detail JSA "JHA '+data.datas.formatted_id+'/'+data.datas.project_code+'" ?';
+
+    fetch(`http://127.0.0.1:8000/user-penyusun-jsa/${data.datas.id}`)
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);
+            const penyusunDiv = document.getElementById('detail-penyusun-jsa-container-review');
+            penyusunDiv.innerHTML = ''; // Clear previous content
+
+            data.forEach((datas, index) => {
+                const penyusun = document.createElement('p');
+                penyusun.textContent = `${index + 1}. ${datas.nama}`; 
+                penyusunDiv.appendChild(penyusun);
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+    // Fetch data for Pelaksana JSA
+    fetch(`http://127.0.0.1:8000/user-pelaksana-jsa/${data.datas.id}`)
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);
+            const pelaksanaDiv = document.getElementById('detail-pelaksana-jsa-container-review');
+            pelaksanaDiv.innerHTML = ''; // Clear previous content
+
+            data.forEach((datas, index) => {
+                const pelaksana = document.createElement('p');
+                pelaksana.textContent = `${index + 1}. ${datas.nama}`; 
+                pelaksanaDiv.appendChild(pelaksana);
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
 
     fetch(`http://127.0.0.1:8000/PertimbanganLKJSA/${data.datas.id}`)
       .then(response => response.json())
