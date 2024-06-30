@@ -54,7 +54,7 @@
                                 data-project-id="{{ $datas->project_id }}" 
                                 data-month="{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}"
                                 data-year="{{ $datas->created_at->format('Y') }}" 
-                                data-created-at="{{ $datas->created_at }}" 
+                                data-created-at="{{ $datas->created_at_ptw }}" 
                                 data-created-by="{{ $datas->created_by }}" 
                                 data-berlaku-dari="{{ $datas->berlaku_dari }}" 
                                 data-berlaku-sampai="{{ $datas->berlaku_sampai }}" 
@@ -95,7 +95,7 @@
                       </td>
                       <td>{{ $datas->ptw_id }}/PTW/{{ $datas->project_code }}/{{ \App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month) }}/{{ $datas->created_at->format('Y') }}</td>
                       <td>{{ $datas->created_by }}</td>
-                      <td>{{ $datas->created_at }}</td>
+                      <td>{{ $datas->created_at_ptw }}</td>
                       <td>{{ $datas->berlaku_dari }} - {{ $datas->berlaku_sampai }}</td>
                       <td>{{ $datas->location_name }}</td>
                       <td>

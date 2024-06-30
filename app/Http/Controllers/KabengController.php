@@ -19,6 +19,7 @@ class KabengController extends Controller
     {
     	$data = Ptw::select(
                         'ptws.id as ptw_id',
+                        'ptws.created_at as created_at_ptw',
                         'ptws.*',
                         'projects.id as project_id',
                         'projects.*',
