@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ptw_permissions', function (Blueprint $table) {
             $table->string('ptw_id');
             $table->string('permission_id');
+            $table->string('status');
             $table->timestamps();
         });
     }

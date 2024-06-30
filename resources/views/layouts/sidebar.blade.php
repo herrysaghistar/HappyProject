@@ -103,6 +103,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ url('inspeksiApdInstruksi') }}" class="nav-link">
+              <i class="nav-icon far fa-file"></i>
+              <p>
+                Inspeksi APD & Instruksi PTW
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ url('jsa-hse') }}" class="nav-link">
               <i class="nav-icon far fa-file"></i>
               <p>

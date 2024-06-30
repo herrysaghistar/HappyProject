@@ -76,6 +76,7 @@ class HomeController extends Controller
             ptw_tools::create([
                 'ptw_id' => $ptw->id,
                 'tools_id' => $tools,
+                'status' => '',
             ]);
         }
 
@@ -83,6 +84,7 @@ class HomeController extends Controller
             ptw_permission::create([
                 'ptw_id' => $ptw->id,
                 'permission_id' => $permission,
+                'status' => '',
             ]);
         }
 
@@ -109,6 +111,7 @@ class HomeController extends Controller
             ptw_tools::create([
                 'ptw_id' => $ptw->id,
                 'tools_id' => $tools,
+                'status' => '',
             ]);
         }
 
@@ -116,6 +119,7 @@ class HomeController extends Controller
             ptw_permission::create([
                 'ptw_id' => $ptw->id,
                 'permission_id' => $permission,
+                'status' => '',
             ]);
         }
 
@@ -576,5 +580,27 @@ class HomeController extends Controller
         }
 
         return json_encode($status);
+    }
+
+    public function ptwById($id)
+    {
+        $data = Ptw::select(
+                        'ptws.id as ptw_id',
+                        'ptws.*',
+                        'projects.id as project_id',
+                        'projects.*',
+                        'work_locations.id as location_id',
+                        'work_locations.*',
+                        'permission_types.id as permission_id',
+                        'permission_types.*'
+                    )
+                    ->join('projects', 'ptws.project_id', '=', 'projects.id')
+                    ->join('work_locations', 'ptws.work_location_id', '=', 'work_locations.id')
+                    ->join('permission_types', 'ptws.permission_id', '=', 'permission_types.id')
+                    ->where('ptws.id', $id)
+                    ->first();
+        $doc_no = $data->ptw_id.'/'.'PTW'.$data->project_code.'/'.\App\Helpers\DateHelper::monthToRoman(optional($data->created_at)->month).'/'.$data->created_at->format('Y');
+
+        return json_encode($doc_no);
     }
 }

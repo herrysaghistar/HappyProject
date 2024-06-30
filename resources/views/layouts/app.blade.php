@@ -166,6 +166,14 @@ $('.btnid').click(function(){
     $("#modal-lg-edit #id").val(data);
     $("#modal-sm-delete-jsa #id").val(data.datas.id);
 
+    fetch(`http://127.0.0.1:8000/ptw-by-id/${data.datas.id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        $("#modal-lg-detail-jsa #doc_no_ptw").val(data);
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
     $("#modal-lg-detail-jsa #doc_no").val('JHA '+data.datas.formatted_id+'/'+data.datas.project_code);
     $("#modal-lg-detail-jsa #supervisi").val(data.datas.supervisi_name);
     $("#modal-lg-detail-jsa #project_name").val(data.datas.project_code);
@@ -242,6 +250,66 @@ fetch(`http://127.0.0.1:8000/user-pelaksana-jsa/${data.datas.id}`)
     })
     .catch(error => console.error('Error fetching data:', error));
 
+fetch(`http://127.0.0.1:8000/PertimbanganLKJSA/${data.datas.id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const pertimbanganLKJSA = document.getElementById('addLKForEdit');
+        pertimbanganLKJSA.innerHTML = ''; // Clear previous addLKForEditent
+
+        data.forEach((datas) => {
+          console.log('something i hope is 4 of these');
+          console.log(datas.nama);
+          addLKForEdit(datas.nama); // Add row with fetched data
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+fetch(`http://127.0.0.1:8000/PertimbanganPBJSA/${data.datas.id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const pertimbanganPBJSA = document.getElementById('addPBForEdit');
+        pertimbanganPBJSA.innerHTML = ''; // Clear previous addPBForEditent
+
+        data.forEach((datas) => {
+          console.log('something i hope is 4 of these');
+          console.log(datas.nama);
+          addPBForEdit(datas.nama); // Add row with fetched data
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+fetch(`http://127.0.0.1:8000/PertimbanganPPEJSA/${data.datas.id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const pertimbanganPPEJSA = document.getElementById('addPPEForEdit');
+        pertimbanganPPEJSA.innerHTML = ''; // Clear previous content
+
+        data.forEach((datas) => {
+          console.log('something i hope is 4 of these');
+          console.log(datas.nama);
+          addPPEForEdit(datas.nama); // Add row with fetched data
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+fetch(`http://127.0.0.1:8000/PertimbanganPersonJSA/${data.datas.id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const pertimbanganPersonJSA = document.getElementById('addPersonForEdit');
+        pertimbanganPersonJSA.innerHTML = ''; // Clear previous content
+
+        data.forEach((datas) => {
+          console.log('something i hope is 4 of these');
+          console.log(datas.nama);
+          addPersonForEdit(datas.nama); // Add row with fetched data
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
   });
 
 </script>
@@ -249,6 +317,15 @@ fetch(`http://127.0.0.1:8000/user-pelaksana-jsa/${data.datas.id}`)
 $(document).on('click', '.btnid_jsa_review', function() {
     var data = $(this).data();
     console.log(data.datas);
+
+    fetch(`http://127.0.0.1:8000/ptw-by-id/${data.datas.id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        $("#modal-sm-review #doc_no_ptw_review").val(data);
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
     $("#modal-sm-review #id").val(data.datas.id);
     $("#modal-sm-review #doc_no").val('JHA '+data.datas.formatted_id+'/'+data.datas.project_code);
     $("#modal-sm-review #supervisi").val(data.datas.supervisi_name);
@@ -774,11 +851,11 @@ function removeRow(button) {
   }
 
 // Add addLK
-function addLKForEdit() {
+function addLKForEdit(name = '') {
   var newColumn = document.createElement('div');
   newColumn.setAttribute("class", "form-group");
   newColumn.innerHTML = `
-    <input type="text" name="addLK[]" class="form-control" required>
+    <input type="text" name="addLK[]" class="form-control"  value="${name}" required>
     <br>
     <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus Langkah Kerja</button>
   `;
@@ -786,11 +863,11 @@ function addLKForEdit() {
 }
 
 // Add addPB
-function addPBForEdit() {
+function addPBForEdit(name = '') {
   var newColumn = document.createElement('div');
   newColumn.setAttribute("class", "form-group");
   newColumn.innerHTML = `
-    <input type="text" name="addPB[]" class="form-control" required>
+    <input type="text" name="addPB[]" class="form-control"  value="${name}" required>
     <br>
     <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus Potensi Bahaya</button>
   `;
@@ -798,11 +875,11 @@ function addPBForEdit() {
 }
 
 // Add addPPE
-function addPPEForEdit() {
+function addPPEForEdit(name = '') {
   var newColumn = document.createElement('div');
   newColumn.setAttribute("class", "form-group");
   newColumn.innerHTML = `
-    <input type="text" name="addPPE[]" class="form-control" required>
+    <input type="text" name="addPPE[]" class="form-control"  value="${name}" required>
     <br>
     <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus PPE</button>
   `;
@@ -810,11 +887,11 @@ function addPPEForEdit() {
 }
 
 // Add addPerson
-function addPersonForEdit() {
+function addPersonForEdit(name = '') {
   var newColumn = document.createElement('div');
   newColumn.setAttribute("class", "form-group");
   newColumn.innerHTML = `
-    <input type="text" name="addPerson[]" class="form-control" required>
+    <input type="text" name="addPerson[]" class="form-control"  value="${name}" required>
     <br>
     <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus Person Responsible</button>
   `;

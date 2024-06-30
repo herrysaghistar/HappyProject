@@ -259,6 +259,11 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
+                <label for="manpower_qty">Doc. No. PTW</label>
+                <input type="" name="doc_no_ptw" class="form-control" id="doc_no_ptw" disabled>
+              </div>
+
+              <div class="form-group">
                 <label for="manpower_qty">Doc. No.</label>
                 <input type="" name="doc_no" class="form-control" id="doc_no" disabled>
               </div>
@@ -438,6 +443,11 @@
               <p>
                 Detail JSA telah mempertimbangkan hal hal berikut :
               </p>
+              <div class="form-group">
+                <label for="manpower_qty">Doc. No. PTW</label>
+                <input type="" name="doc_no_ptw_review" class="form-control" id="doc_no_ptw_review" disabled>
+              </div>
+
               <div class="form-group">
                 <label for="manpower_qty">Doc. No.</label>
                 <input type="" name="doc_no" class="form-control" id="doc_no" disabled>
