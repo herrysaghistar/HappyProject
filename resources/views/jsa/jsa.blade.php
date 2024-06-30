@@ -487,7 +487,7 @@
               <div id="PertimbanganLKJSA"></div>
               <label>Potensi Bahaya</label>              
               <div id="PertimbanganPBJSA"></div>
-              <label>PPE</label>              
+              <label>PPE/Tindakan Pengendalian</label>              
               <div id="PertimbanganPPEJSA"></div>
               <label>Penanggung Jawab</label>
               <div id="PertimbanganPersonJSA"></div>
