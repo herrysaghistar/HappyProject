@@ -576,7 +576,15 @@ $(document).ready(function() {
             instruksi_tambahan_data.textContent = `${index + 1}. ${datas.permission_name}`; 
             
             const statusLabel = document.createElement('span');
-            statusLabel.className = 'badge badge-secondary';
+            if (datas.status == '' || !datas.status) {
+              statusLabel.style.display = 'none';
+            }
+            if (datas.status == 'Terlaksana') {
+              statusLabel.className = 'badge badge-success';
+            }
+            if (datas.status == 'Tidak Terlaksana') {
+              statusLabel.className = 'badge badge-danger';
+            }
             statusLabel.textContent = datas.status;
 
             instruksi_tambahan_data.appendChild(statusLabel);
@@ -611,6 +619,7 @@ $(document).ready(function() {
                 })
                 .then(response => {
                     console.log(response);
+                    alert('Data Berhasil Diubah! Silahkan Close Dan Buka Kembali!');
                 });
 
             });
@@ -654,7 +663,18 @@ fetch(`http://127.0.0.1:8000/apd/${dataDetail.ptwId}`)
             apd_data.textContent = `${index + 1}. ${datas.tools_name}`; 
 
             const statusLabel = document.createElement('span');
-            statusLabel.className = 'badge badge-secondary';
+            if (datas.status == '' || !datas.status) {
+              statusLabel.style.display = 'none';
+            }
+            if (datas.status == 'Baik') {
+              statusLabel.className = 'badge badge-success';
+            }
+            if (datas.status == 'Tidak Ada') {
+              statusLabel.className = 'badge badge-secondary';
+            }
+            if (datas.status == 'Rusak') {
+              statusLabel.className = 'badge badge-danger';
+            }
             statusLabel.textContent = datas.status;
 
             apd_data.appendChild(statusLabel);
@@ -688,6 +708,7 @@ fetch(`http://127.0.0.1:8000/apd/${dataDetail.ptwId}`)
                 })
                 .then(response => {
                     console.log(response);
+                    alert('Data Berhasil Diubah! Silahkan Close Dan Buka Kembali!');
                 });
 
             });
