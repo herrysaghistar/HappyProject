@@ -76,7 +76,6 @@ class HomeController extends Controller
             ptw_tools::create([
                 'ptw_id' => $ptw->id,
                 'tools_id' => $tools,
-                'status' => '',
             ]);
         }
 
@@ -84,7 +83,6 @@ class HomeController extends Controller
             ptw_permission::create([
                 'ptw_id' => $ptw->id,
                 'permission_id' => $permission,
-                'status' => '',
             ]);
         }
 
@@ -111,7 +109,6 @@ class HomeController extends Controller
             ptw_tools::create([
                 'ptw_id' => $ptw->id,
                 'tools_id' => $tools,
-                'status' => '',
             ]);
         }
 
@@ -119,7 +116,6 @@ class HomeController extends Controller
             ptw_permission::create([
                 'ptw_id' => $ptw->id,
                 'permission_id' => $permission,
-                'status' => '',
             ]);
         }
 

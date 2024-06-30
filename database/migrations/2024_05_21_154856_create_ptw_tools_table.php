@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ptw_tools', function (Blueprint $table) {
             $table->string('ptw_id');
             $table->string('tools_id');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
