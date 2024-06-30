@@ -563,6 +563,9 @@ $(document).ready(function() {
     .then(data => {
         const instruksiDiv = document.getElementById('instruksi_tambahan_div');
         instruksiDiv.innerHTML = '';
+        const instruksi_tambahan_data = '';
+        const statusLabel = '';
+        const instruksi_tambahan_data_opsi = '';
         if (data.length > 0) {
             const labelPermissions = document.createElement('label');
             labelPermissions.textContent = "Instruksi Tambahan";
@@ -638,6 +641,9 @@ fetch(`http://127.0.0.1:8000/apd/${dataDetail.ptwId}`)
     .then(data => {
         const apdDiv = document.getElementById('tools_div');
         apdDiv.innerHTML = '';
+        const apd_data = '';
+        const statusLabel = '';
+        const apd_data_opsi = '';
         if (data.length > 0) {
             const labelTools = document.createElement('label');
             labelTools.textContent = "Tools";
