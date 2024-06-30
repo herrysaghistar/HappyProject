@@ -45,12 +45,14 @@
                           {{ $role->name }}@if(!$loop->last), @endif
                         @endforeach
                       </td>
+                      @cannot('admin')
                       <td>
                         <button class="btnid_master_edit btn btn-outline-primary" id="btnid_user" data-datas="{{ $datas }}"  data-toggle="modal" data-target="#modal-lg-user-edit">Edit</button>
                       </td>
                       <td>
                         <button class="btnid_master_delete btn btn-danger" id="btnid_user" data-id="{{ $datas->id }}" data-toggle="modal" data-target="#modal-sm-user-delete">Delete</button>
                       </td>
+                      @endcannot
                     </tr>
                     @endforeach
                   </tbody>
