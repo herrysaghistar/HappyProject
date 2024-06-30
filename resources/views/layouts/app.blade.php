@@ -773,53 +773,56 @@ function removeRow(button) {
     document.getElementById('edit-pelaksana-jsa-container').appendChild(newColumn);
   }
 
-// Add LK
-  function addLKForEdit(name = '') {
-    var newColumn = document.createElement('div');
-    newColumn.setAttribute("class", "form-group");
-    newColumn.innerHTML = `
-      <input type="text" name="addLK[]" class="form-control" value="${name}" required>
-      <br>
-      <button type="button" class="btn btn-danger btn-sm" onclick="removeRowForEdit(this)">Hapus Penyusun</button>
-    `;
-    document.getElementById('edit-penyusun-jsa-container').appendChild(newColumn);
-  }
-// Add PB
-  function addPBForEdit(name = '') {
-    var newColumn = document.createElement('div');
-    newColumn.setAttribute("class", "form-group");
-    newColumn.innerHTML = `
-      <input type="text" name="addPB[]" class="form-control" value="${name}" required>
-      <br>
-      <button type="button" class="btn btn-danger btn-sm" onclick="removeRowForEdit(this)">Hapus Penyusun</button>
-    `;
-    document.getElementById('edit-penyusun-jsa-container').appendChild(newColumn);
-  }
-// Add PPE
-  function addPPEForEdit(name = '') {
-    var newColumn = document.createElement('div');
-    newColumn.setAttribute("class", "form-group");
-    newColumn.innerHTML = `
-      <input type="text" name="addPPE[]" class="form-control" value="${name}" required>
-      <br>
-      <button type="button" class="btn btn-danger btn-sm" onclick="removeRowForEdit(this)">Hapus Penyusun</button>
-    `;
-    document.getElementById('edit-penyusun-jsa-container').appendChild(newColumn);
-  }
-// Add Person
-  function addPersonForEdit(name = '') {
-    var newColumn = document.createElement('div');
-    newColumn.setAttribute("class", "form-group");
-    newColumn.innerHTML = `
-      <input type="text" name="addPerson[]" class="form-control" value="${name}" required>
-      <br>
-      <button type="button" class="btn btn-danger btn-sm" onclick="removeRowForEdit(this)">Hapus Penyusun</button>
-    `;
-    document.getElementById('edit-penyusun-jsa-container').appendChild(newColumn);
-  }
+// Add addLK
+function addLKForEdit() {
+  var newColumn = document.createElement('div');
+  newColumn.setAttribute("class", "form-group");
+  newColumn.innerHTML = `
+    <input type="text" name="addLK[]" class="form-control" required>
+    <br>
+    <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus Langkah Kerja</button>
+  `;
+  document.getElementById('addLKForEdit').appendChild(newColumn);
+}
+
+// Add addPB
+function addPBForEdit() {
+  var newColumn = document.createElement('div');
+  newColumn.setAttribute("class", "form-group");
+  newColumn.innerHTML = `
+    <input type="text" name="addPB[]" class="form-control" required>
+    <br>
+    <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus Potensi Bahaya</button>
+  `;
+  document.getElementById('addPBForEdit').appendChild(newColumn);
+}
+
+// Add addPPE
+function addPPEForEdit() {
+  var newColumn = document.createElement('div');
+  newColumn.setAttribute("class", "form-group");
+  newColumn.innerHTML = `
+    <input type="text" name="addPPE[]" class="form-control" required>
+    <br>
+    <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus PPE</button>
+  `;
+  document.getElementById('addPPEForEdit').appendChild(newColumn);
+}
+
+// Add addPerson
+function addPersonForEdit() {
+  var newColumn = document.createElement('div');
+  newColumn.setAttribute("class", "form-group");
+  newColumn.innerHTML = `
+    <input type="text" name="addPerson[]" class="form-control" required>
+    <br>
+    <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus Person Responsible</button>
+  `;
+  document.getElementById('addPersonForEdit').appendChild(newColumn);
+}
 
 // Remove Row
-function removeRowForEdit(button) {
+function removeRow(button) {
   button.parentNode.remove();
 }
 

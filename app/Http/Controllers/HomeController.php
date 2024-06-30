@@ -393,32 +393,40 @@ class HomeController extends Controller
             $user_penyusun->save();
         }
 
-        foreach ($request->addLK as $value) {
-            $addLKs = New LK();
-            $addLKs->jsa_id = $data->id;
-            $addLKs->nama = $value;
-            $addLKs->save();
+        if ($request->addLK) {
+            foreach ($request->addLK as $value) {
+                $addLKs = New LK();
+                $addLKs->jsa_id = $data->id;
+                $addLKs->nama = $value;
+                $addLKs->save();
+            }
         }
 
-        foreach ($request->addPB as $value) {
-            $addPBs = New PB();
-            $addPBs->jsa_id = $data->id;
-            $addPBs->nama = $value;
-            $addPBs->save();
+        if ($request->addPB) {
+            foreach ($request->addPB as $value) {
+                $addPBs = New PB();
+                $addPBs->jsa_id = $data->id;
+                $addPBs->nama = $value;
+                $addPBs->save();
+            }
         }
 
-        foreach ($request->addPPE as $value) {
-            $addPPEs = New PPE();
-            $addPPEs->jsa_id = $data->id;
-            $addPPEs->nama = $value;
-            $addPPEs->save();
+        if ($request->addPPE) {
+            foreach ($request->addPPE as $value) {
+                $addPPEs = New PPE();
+                $addPPEs->jsa_id = $data->id;
+                $addPPEs->nama = $value;
+                $addPPEs->save();
+            }
         }
 
-        foreach ($request->addPerson as $value) {
-            $addPersons = New Person();
-            $addPersons->jsa_id = $data->id;
-            $addPersons->nama = $value;
-            $addPersons->save();
+        if ($request->addPerson) {
+            foreach ($request->addPerson as $value) {
+                $addPersons = New Person();
+                $addPersons->jsa_id = $data->id;
+                $addPersons->nama = $value;
+                $addPersons->save();
+            }
         }
 
         return redirect()->back();
@@ -453,38 +461,46 @@ class HomeController extends Controller
             $user_penyusun->save();
         }
 
-        // $a = LK::where('jsa_id', $request->id)->delete();
-        // $b = PB::where('jsa_id', $request->id)->delete();
-        // $c = PPE::where('jsa_id', $request->id)->delete();
-        // $d = Person::where('jsa_id', $request->id)->delete();
 
-        // foreach ($request->addLK as $value) {
-        //     $addLKs = New LK();
-        //     $addLKs->jsa_id = $data->id;
-        //     $addLKs->nama = $value;
-        //     $addLKs->save();
-        // }
+        if ($request->addLK) {
+            $a = LK::where('jsa_id', $request->id)->delete();
+            foreach ($request->addLK as $value) {
+                $addLKs = New LK();
+                $addLKs->jsa_id = $data->id;
+                $addLKs->nama = $value;
+                $addLKs->save();
+            }
+        }
 
-        // foreach ($request->addPB as $value) {
-        //     $addPBs = New PB();
-        //     $addPBs->jsa_id = $data->id;
-        //     $addPBs->nama = $value;
-        //     $addPBs->save();
-        // }
+        if ($request->addPB) {
+            $b = PB::where('jsa_id', $request->id)->delete();
+            foreach ($request->addPB as $value) {
+                $addPBs = New PB();
+                $addPBs->jsa_id = $data->id;
+                $addPBs->nama = $value;
+                $addPBs->save();
+            }
+        }
 
-        // foreach ($request->addPPE as $value) {
-        //     $addPPEs = New PPE();
-        //     $addPPEs->jsa_id = $data->id;
-        //     $addPPEs->nama = $value;
-        //     $addPPEs->save();
-        // }
+        if ($request->addPPE) {
+            $c = PPE::where('jsa_id', $request->id)->delete();
+            foreach ($request->addPPE as $value) {
+                $addPPEs = New PPE();
+                $addPPEs->jsa_id = $data->id;
+                $addPPEs->nama = $value;
+                $addPPEs->save();
+            }
+        }
 
-        // foreach ($request->addPerson as $value) {
-        //     $addPersons = New Person();
-        //     $addPersons->jsa_id = $data->id;
-        //     $addPersons->nama = $value;
-        //     $addPersons->save();
-        // }
+        if ($request->addPerson) {
+            $d = Person::where('jsa_id', $request->id)->delete();
+            foreach ($request->addPerson as $value) {
+                $addPersons = New Person();
+                $addPersons->jsa_id = $data->id;
+                $addPersons->nama = $value;
+                $addPersons->save();
+            }
+        }
 
         return redirect()->back();
     }

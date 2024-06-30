@@ -60,6 +60,7 @@
                             </button>
                           </div>
                           @can('hse')
+                          @if($data->review != 'Y')
                           <div class="col-12">
                             <button type="submit" class="btnid_jsa btn btn-outline-warning" id="btnid_jsa" 
                                     data-datas="{{ $data }}" 
@@ -68,6 +69,7 @@
                               <i class="fas fa-pen"></i>
                             </button>
                           </div>
+                          @endcan
                           <div class="col-12">
                             <button type="submit" class="btnid_jsa btn btn-outline-danger" id="btnid_jsa" 
                                     data-datas="{{ $data }}" 
@@ -371,29 +373,29 @@
                   <textarea name="uraian_tugas" class="form-control" id="uraian_tugas" rows="3"></textarea>
                 </div>
 
-                <!-- <div class="form-group">
-                  <label for="manpower_qty">Pelaksana JSA</label>
-                  <div id="PertimbanganLKJSAEdit"></div>
-                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPelaksanaForEdit()">Tambahkan Pelaksana</button>
+                <div class="form-group">
+                  <label for="manpower_qty">Langkah kerja</label>
+                  <div id="addLKForEdit"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addLKForEdit()">Tambahkan Langkah Kerja</button>
                 </div>
 
                 <div class="form-group">
-                  <label for="manpower_qty">Pelaksana JSA</label>
-                  <div id="PertimbanganPBJSAEdit"></div>
-                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPelaksanaForEdit()">Tambahkan Pelaksana</button>
+                  <label for="manpower_qty">Potensi Bahaya</label>
+                  <div id="addPBForEdit"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPBForEdit()">Tambahkan Potensi Bahaya</button>
                 </div>
-
+                
                 <div class="form-group">
-                  <label for="manpower_qty">Pelaksana JSA</label>
-                  <div id="PertimbanganPPEJSAEdit"></div>
-                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPelaksanaForEdit()">Tambahkan Pelaksana</button>
+                  <label for="manpower_qty">Tindakan Pengendalian dan APD</label>
+                  <div id="addPPEForEdit"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPPEForEdit()">Tambahkan PPE</button>
                 </div>
-
+                
                 <div class="form-group">
-                  <label for="manpower_qty">Pelaksana JSA</label>
-                  <div id="PertimbanganPersonJSAEdit"></div>
-                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPelaksanaForEdit()">Tambahkan Pelaksana</button>
-                </div> -->
+                  <label for="manpower_qty">Person Responsible For Control Measure</label>
+                  <div id="addPersonForEdit"></div>
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="addPersonForEdit()">Tambahkan Person Responsible</button>
+                </div>
 
                 </div>
                 <div class="modal-footer justify-content-between">

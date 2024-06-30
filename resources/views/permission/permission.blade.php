@@ -70,6 +70,7 @@
                             </button>
                           </div>
                           @can('hse')
+                          @if($datas->level != 'approved')
                           <div class="col-12">
                             <button type="submit" class="btnid btn btn-outline-warning" id="btnid" 
                               data-id="{{ $datas->ptw_id }}" 
@@ -85,6 +86,7 @@
                               data-target="#modal-lg-edit"><i class="fas fa-pen"></i>
                             </button>
                           </div>
+                          @endif
                           <div class="col-12">
                             <button type="submit" class="btnid btn btn-outline-danger" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-delete"><i class="fas fa-trash"></i></button>
                           </div>
@@ -99,7 +101,9 @@
                       <td>
                         @if($datas->status == 'onprogress')
                         <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-hold">Hold</button>
+                        @cannot('spv')
                         <button type="submit" class="btnid btn btn-danger" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-done">Close</button>
+                        @endcannot
                         @elseif($datas->status == 'onhold')
                         <button type="submit" class="btnid btn btn-outline-warning" id="btnid" data-id="{{ $datas->ptw_id }}" data-toggle="modal" data-target="#modal-sm-open">Open</button>
                         @elseif($datas->status == 'done')
