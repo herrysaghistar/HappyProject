@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -555,6 +556,7 @@ $(document).ready(function() {
     $("#modal-lg-detail #remark").val(dataDetail.remark);
 
   const br = '<br>';
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   
   fetch(`http://127.0.0.1:8000/detail-tambahan/${dataDetail.ptwId}`)
     .then(response => response.json())
@@ -583,6 +585,30 @@ $(document).ready(function() {
             // Add onchange event listener
             instruksi_tambahan_data_opsi.addEventListener('change', (event) => {
                 console.log('Value changed to:', event.target.value);
+                console.log('Value changed to:', event.target.id);
+
+                var value = event.target.value;
+                var id = event.target.id;
+                var data = {
+                  value: value,
+                  id: id
+                };
+
+                const url = `http://127.0.0.1:8000/updateInstruksi`;
+    
+                // Make the GET request using fetch
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                          'X-CSRF-Token': csrfToken  // Include CSRF token in headers
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    console.log(response);
+                });
+
             });
 
             const optionx = document.createElement('option');
@@ -628,10 +654,35 @@ fetch(`http://127.0.0.1:8000/apd/${dataDetail.ptwId}`)
             
             const apd_data_opsi = document.createElement('select');
             apd_data_opsi.setAttribute('name', 'apd[]');
+            apd_data_opsi.setAttribute('id', datas.idd);
             apd_data_opsi.className = 'form-control';
 
             apd_data_opsi.addEventListener('change', (event) => {
                 console.log('Value changed to:', event.target.value);
+                console.log('Value changed to:', event.target.id);
+
+                var value = event.target.value;
+                var id = event.target.id;
+                var data = {
+                  value: value,
+                  id: id
+                };
+
+                const url = `http://127.0.0.1:8000/updateApd`;
+    
+                // Make the GET request using fetch
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'X-CSRF-Token': csrfToken  // Include CSRF token in headers
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    console.log(response);
+                });
+
             });
 
             const optionx = document.createElement('option');

@@ -215,7 +215,7 @@ class HomeController extends Controller
 
     public function DetailTambahan($id)
     {
-        $detail_tambahan = ptw_permission::select('permission_name', 'status')->join('permission_tambahans', 'permission_tambahans.id', '=', 'ptw_permissions.permission_id')
+        $detail_tambahan = ptw_permission::select('ptw_permissions.id as idd', 'permission_name', 'status')->join('permission_tambahans', 'permission_tambahans.id', '=', 'ptw_permissions.permission_id')
         ->where('ptw_id', $id)->get();
 
         return json_encode($detail_tambahan);
@@ -223,7 +223,7 @@ class HomeController extends Controller
 
     public function Apd($id)
     {
-        $apd = ptw_tools::select('tools_name', 'status')->join('tools_types', 'tools_types.id', '=', 'ptw_tools.tools_id')
+        $apd = ptw_tools::select('ptw_tools.id as idd', 'tools_name', 'status')->join('tools_types', 'tools_types.id', '=', 'ptw_tools.tools_id')
         ->where('ptw_id', $id)->get();
 
         return json_encode($apd);

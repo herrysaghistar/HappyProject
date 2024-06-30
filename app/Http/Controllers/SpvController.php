@@ -30,6 +30,7 @@ class SpvController extends Controller
                     ->join('projects', 'ptws.project_id', '=', 'projects.id')
                     ->join('work_locations', 'ptws.work_location_id', '=', 'work_locations.id')
                     ->join('permission_types', 'ptws.permission_id', '=', 'permission_types.id')
+                    ->where('created_by', auth()->user()->name)
                     ->get();
 
         $tools = tools_type::all();

@@ -100,3 +100,5 @@ Route::get('/statusJHA/{id}', [HomeController::class, 'statusJHA']);
 Route::get('/ptw-by-id/{id}', [HomeController::class, 'ptwById']);
 
 Route::get('/inspeksiApdInstruksi', [HseController::class, 'inspeksiApdInstruksi']);
+Route::post('/updateInstruksi', [HseController::class, 'inspeksiUpdateInstruksi']);
+Route::post('/updateApd', [HseController::class, 'inspeksiUpdateApd']);

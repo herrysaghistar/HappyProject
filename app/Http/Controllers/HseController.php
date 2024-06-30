@@ -11,6 +11,8 @@ use App\Models\permission_tambahan;
 use App\Models\project;
 use App\Models\work_location;
 use App\Models\permission_type;
+use App\Models\ptw_tools;
+use App\Models\ptw_permission;
 use DB;
 
 class HseController extends Controller
@@ -69,9 +71,33 @@ class HseController extends Controller
         return view('permission.instruksi', compact('data', 'project', 'work_location', 'permission_type', 'permission_tambahan', 'tools'));
     }
 
-    public function updateInstruksi()
+    public function updateInstruksi($value, $id)
     {
+        $detail_tambahan =[
+            'status' => 'OK'
+        ];
         
+        return json_encode($detail_tambahan);
+    }
+
+    public function inspeksiUpdateInstruksi(Request $request)
+    {
+        \Log::debug($request);
+        $data = ptw_tools::find($request->id);
+        $data->status = $request->value;
+        $data->save();
+
+        // return json_encode($data);
+    }
+
+    public function inspeksiUpdateApd(Request $request)
+    {
+        \Log::debug($request);
+        $data = ptw_permission::find($request->id);
+        $data->status = $request->value;
+        $data->save();
+
+        // return json_encode($data);
     }
 
     public function jsa()
