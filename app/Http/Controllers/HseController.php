@@ -83,7 +83,7 @@ class HseController extends Controller
     public function inspeksiUpdateInstruksi(Request $request)
     {
         \Log::debug($request);
-        $data = ptw_tools::find($request->id);
+        $data = ptw_permission::find($request->id);
         $data->status = $request->value;
         $data->save();
 
@@ -93,7 +93,7 @@ class HseController extends Controller
     public function inspeksiUpdateApd(Request $request)
     {
         \Log::debug($request);
-        $data = ptw_permission::find($request->id);
+        $data = ptw_tools::find($request->id);
         $data->status = $request->value;
         $data->save();
 

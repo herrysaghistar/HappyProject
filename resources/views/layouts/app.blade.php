@@ -580,6 +580,7 @@ $(document).ready(function() {
 
             const instruksi_tambahan_data_opsi = document.createElement('select');
             instruksi_tambahan_data_opsi.setAttribute('name', 'instruksi[]');
+            instruksi_tambahan_data_opsi.setAttribute('id', datas.idd);
             instruksi_tambahan_data_opsi.className = 'form-control';
 
             // Add onchange event listener
