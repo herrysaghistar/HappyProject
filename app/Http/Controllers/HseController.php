@@ -57,7 +57,7 @@ class HseController extends Controller
                     ->join('projects', 'ptws.project_id', '=', 'projects.id')
                     ->join('work_locations', 'ptws.work_location_id', '=', 'work_locations.id')
                     ->join('permission_types', 'ptws.permission_id', '=', 'permission_types.id')
-                    ->whereIn('level', ['hse', 'approved', 'rejected'])
+                    ->whereIn('level', ['approved'])
                     ->get();
 
         $tools = tools_type::all();
@@ -67,6 +67,11 @@ class HseController extends Controller
         $permission_type = permission_type::all();
 
         return view('permission.instruksi', compact('data', 'project', 'work_location', 'permission_type', 'permission_tambahan', 'tools'));
+    }
+
+    public function updateInstruksi()
+    {
+        
     }
 
     public function jsa()

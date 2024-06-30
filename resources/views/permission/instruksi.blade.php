@@ -44,7 +44,7 @@
                       <td>
                         <div class="row">
                           <div class="col-12">
-                            <button class="btniddetail btn btn-secondary" id="btniddetail" 
+                            <button class="btniddetailinstruksi btn btn-secondary" id="btniddetailinstruksi" 
                                 data-ptw-id="{{ $datas->ptw_id }}" 
                                 data-project="{{ $datas->project_name }}" 
                                 data-project-id="{{ $datas->project_id }}" 

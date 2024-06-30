@@ -539,6 +539,132 @@ $(document).ready(function() {
 });
 </script>
 <script type="text/javascript">
+$(document).ready(function() {
+  $(document).on('click', '.btniddetailinstruksi', function() {
+    var dataDetail = $(this).data();
+    console.log(dataDetail);
+
+    $("#modal-lg-detail #ptw_id").val(dataDetail.ptwId);
+    $("#modal-lg-detail #no_register").val(dataDetail.ptwId+'/'+'PTW'+'/'+dataDetail.projectCode+'/'+dataDetail.month+'/'+dataDetail.year);
+    $("#modal-lg-detail #created_at").val(dataDetail.createdAt);
+    $("#modal-lg-detail #berlaku_dari").val(dataDetail.berlakuDari);
+    $("#modal-lg-detail #berlaku_sampai").val(dataDetail.berlakuSampai);
+    $("#modal-lg-detail #work_location").val(dataDetail.locationName);
+    $("#modal-lg-detail #permission_type").val(dataDetail.permissionType);
+    $("#modal-lg-detail #nama_proyek").val(dataDetail.projectName);
+    $("#modal-lg-detail #remark").val(dataDetail.remark);
+
+  const br = '<br>';
+  
+  fetch(`http://127.0.0.1:8000/detail-tambahan/${dataDetail.ptwId}`)
+    .then(response => response.json())
+    .then(data => {
+        const instruksiDiv = document.getElementById('instruksi_tambahan_div');
+        instruksiDiv.innerHTML = '';
+        if (data.length > 0) {
+            const labelPermissions = document.createElement('label');
+            labelPermissions.textContent = "Instruksi Tambahan";
+            instruksiDiv.appendChild(labelPermissions);
+        }
+        data.forEach((datas, index) => {
+            const instruksi_tambahan_data = document.createElement('p');
+            instruksi_tambahan_data.textContent = `${index + 1}. ${datas.permission_name}`; 
+            
+            const statusLabel = document.createElement('span');
+            statusLabel.className = 'badge badge-secondary';
+            statusLabel.textContent = datas.status;
+
+            instruksi_tambahan_data.appendChild(statusLabel);
+
+            const instruksi_tambahan_data_opsi = document.createElement('select');
+            instruksi_tambahan_data_opsi.setAttribute('name', 'instruksi[]');
+            instruksi_tambahan_data_opsi.className = 'form-control';
+
+            // Add onchange event listener
+            instruksi_tambahan_data_opsi.addEventListener('change', (event) => {
+                console.log('Value changed to:', event.target.value);
+            });
+
+            const optionx = document.createElement('option');
+            optionx.value = '';
+            optionx.textContent = '-- Pilih --';
+            const option1 = document.createElement('option');
+            option1.value = 'Terlaksana';
+            option1.textContent = 'Terlaksana';
+            const option2 = document.createElement('option');
+            option2.value = 'Tidak Terlaksana';
+            option2.textContent = 'Tidak Terlaksana';
+
+            instruksi_tambahan_data_opsi.appendChild(optionx);
+            instruksi_tambahan_data_opsi.appendChild(option1);
+            instruksi_tambahan_data_opsi.appendChild(option2);
+
+            instruksiDiv.appendChild(instruksi_tambahan_data);
+            instruksiDiv.appendChild(instruksi_tambahan_data_opsi);
+            instruksiDiv.appendChild(document.createElement('br'));
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+fetch(`http://127.0.0.1:8000/apd/${dataDetail.ptwId}`)
+    .then(response => response.json())
+    .then(data => {
+        const apdDiv = document.getElementById('tools_div');
+        apdDiv.innerHTML = '';
+        if (data.length > 0) {
+            const labelTools = document.createElement('label');
+            labelTools.textContent = "Tools";
+            apdDiv.appendChild(labelTools);
+        }
+        data.forEach((datas, index) => {
+            const apd_data = document.createElement('p');
+            apd_data.textContent = `${index + 1}. ${datas.tools_name}`; 
+
+            const statusLabel = document.createElement('span');
+            statusLabel.className = 'badge badge-secondary';
+            statusLabel.textContent = datas.status;
+
+            apd_data.appendChild(statusLabel);
+            
+            const apd_data_opsi = document.createElement('select');
+            apd_data_opsi.setAttribute('name', 'apd[]');
+            apd_data_opsi.className = 'form-control';
+
+            apd_data_opsi.addEventListener('change', (event) => {
+                console.log('Value changed to:', event.target.value);
+            });
+
+            const optionx = document.createElement('option');
+            optionx.value = '';
+            optionx.textContent = '-- Pilih --';
+            const option1 = document.createElement('option');
+            option1.value = 'Baik';
+            option1.textContent = 'Baik';
+            const option2 = document.createElement('option');
+            option2.value = 'Rusak';
+            option2.textContent = 'Rusak';
+            const option3 = document.createElement('option');
+            option3.value = 'Tidak Ada';
+            option3.textContent = 'Tidak Ada';
+
+            apd_data_opsi.appendChild(optionx);
+            apd_data_opsi.appendChild(option1);
+            apd_data_opsi.appendChild(option2);
+            apd_data_opsi.appendChild(option3);
+
+            apdDiv.appendChild(apd_data);
+            apdDiv.appendChild(apd_data_opsi);
+            apdDiv.appendChild(document.createElement('br'));
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+    
+
+  });
+});
+</script>
+<script type="text/javascript">
   $(document).ready(function() {
     $('#permission_select_edit').on('change', function() {
         const selectedValue = this.value;
