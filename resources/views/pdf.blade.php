@@ -687,11 +687,29 @@
                     <span style="color:black;font-family:Calibri, sans-serif;font-size:11pt;">
                         <font class="font5" style="font-style:normal;text-decoration-line:none;">
                             <strong>PENANGGUNG JAWAB LAPANGAN /&nbsp;</strong>
-                    </font>
+                        </font>
                         <font class="font6" style="font-weight:400;text-decoration-line:none;">
-                            <i>WORKPLACE SUPERVISOR (...................................................................</i>
-                    </font>
-                        <font class="font0" style="font-style:normal;font-weight:400;text-decoration-line:none;">)</font>
+                            <i>WORKPLACE SUPERVISOR : </i>
+                        </font>
+                        @foreach($data_acc_ptw_user as $data)
+                        </font>
+                        <font class="font0" style="font-style:normal;font-weight:400;text-decoration-line:none;">
+                            @php
+                                $name = $data->acc_name;
+                                $maxLength = 64; // adjust this to your requirement
+                                $nameLength = strlen($name);
+                                $padding = ($maxLength - $nameLength) / 2;
+                                $spaces = str_repeat('&nbsp;', $padding);
+                            @endphp
+
+                            @if($data->where('acc_role', 'spv')->exists() && $data->acc_role == 'spv')
+                                {!! $spaces !!}{{ $name }}{!! $spaces !!}
+                            @endif
+                        </font>
+                        @endforeach
+                        @if(!$data_acc_ptw_user->contains('acc_role', 'spv'))
+                            (..............................................................)
+                        @endif
                     </span>
                 </td>
             </tr>
@@ -732,15 +750,14 @@
                                 $spaces = str_repeat('&nbsp;', $padding);
                             @endphp
 
-                            @if($data->where('acc_role', 'hse')->exists())
-                                @if($data->acc_role == 'hse')
-                                    {!! $spaces !!}{{ $name }}{!! $spaces !!}
-                                @endif
-                            @else
-                                (…..............................................................)
+                            @if($data->where('acc_role', 'hse')->exists() && $data->acc_role == 'hse')
+                                {!! $spaces !!}{{ $name }}{!! $spaces !!}
                             @endif
                         </font>
                     @endforeach
+                    @if(!$data_acc_ptw_user->contains('acc_role', 'hse'))
+                            (…..............................................................)
+                        @endif
                     &nbsp;
                     </span>
                     <br>
@@ -790,15 +807,14 @@
                                 $spaces = str_repeat('&nbsp;', $padding);
                             @endphp
 
-                            @if($data->where('acc_role', 'kabeng')->exists())
-                                @if($data->acc_role == 'kabeng')
-                                    {!! $spaces !!}{{ $name }}{!! $spaces !!}
-                                @endif
-                            @else
-                                (…..............................................................)
+                            @if($data->where('acc_role', 'kabeng')->exists() && $data->acc_role == 'kabeng')
+                                {!! $spaces !!}{{ $name }}{!! $spaces !!}
                             @endif
                         </font>
                         @endforeach
+                        @if(!$data_acc_ptw_user->contains('acc_role', 'kabeng'))
+                            (……......................................................................)
+                        @endif
                             <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong>
                     </span>
                     <span style="color:black;font-family:Calibri, sans-serif;font-size:11pt;">
@@ -818,15 +834,14 @@
                                 $spaces = str_repeat('&nbsp;', $padding);
                             @endphp
 
-                            @if($data->where('acc_role', 'kapro')->exists())
-                                @if($data->acc_role == 'kapro')
-                                    {!! $spaces !!}{{ $name }}{!! $spaces !!}
-                                @endif
-                            @else
-                                (…..............................................................)
+                            @if($data->where('acc_role', 'kapro')->exists() && $data->acc_role == 'kapro')
+                                {!! $spaces !!}{{ $name }}{!! $spaces !!}
                             @endif
                         </font>
                         @endforeach
+                        @if(!$data_acc_ptw_user->contains('acc_role', 'kapro'))
+                            (…..............................................................)
+                        @endif
                         &nbsp;
                     </span>
                     <br>
@@ -886,15 +901,14 @@
                                 $spaces = str_repeat('&nbsp;', $padding);
                             @endphp
 
-                            @if($data->where('acc_role', 'kabeng')->exists())
-                                @if($data->acc_role == 'kabeng')
-                                    {!! $spaces !!}{{ $name }}{!! $spaces !!}
-                                @endif
-                            @else
-                                (…..............................................................)
+                            @if($data->where('acc_role', 'kabeng')->exists() && $data->acc_role == 'kabeng')
+                                {!! $spaces !!}{{ $name }}{!! $spaces !!}
                             @endif
                         </font>
                         @endforeach
+                        @if(!$data_acc_ptw_user->contains('acc_role', 'kabeng'))
+                            (…......................................................................)
+                        @endif
                             <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </strong>
                     </span>
                     <span style="color:black;font-family:Calibri, sans-serif;font-size:11pt;">
@@ -914,15 +928,14 @@
                                 $spaces = str_repeat('&nbsp;', $padding);
                             @endphp
 
-                            @if($data->where('acc_role', 'hse')->exists())
-                                @if($data->acc_role == 'hse')
-                                    {!! $spaces !!}{{ $name }}{!! $spaces !!}
-                                @endif
-                            @else
-                                (…..............................................................)
+                            @if($data->where('acc_role', 'hse')->exists() && $data->acc_role == 'hse')
+                                {!! $spaces !!}{{ $name }}{!! $spaces !!}
                             @endif
                         </font>
                         @endforeach
+                        @if(!$data_acc_ptw_user->contains('acc_role', 'hse'))
+                            (…..............................................................)
+                        @endif
                         &nbsp;
                     </span>
                     <br>
@@ -937,7 +950,7 @@
                             <i>
                             SUPERVISOR
                         <span>
-                            <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong>
+                            <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong>
                     </span>
                     </i>
                     </font>

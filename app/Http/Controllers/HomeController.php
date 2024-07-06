@@ -74,7 +74,9 @@ class HomeController extends Controller
         $ptw->save();
 
         $ptw_user = New ptw_user;
-        $ptw_user->acc_name = $ptw->id;
+        $ptw_user->ptw_id = $ptw->id;
+        $ptw_user->acc_role = 'spv';
+        $ptw_user->acc_name = auth()->user()->name;
         $ptw_user->save();
 
         foreach ($request->input('tools', []) as $tools) {
@@ -255,15 +257,13 @@ class HomeController extends Controller
         $datas_instruksi = permission_tambahan::select('permission_name')->where('permission_type_id', $datas->permission_id)->get();
         $apd = ptw_tools::join('tools_types', 'ptw_tools.tools_id', '=', 'tools_types.id')
                     ->select('tools_name')->where('permission_type_id', $datas->permission_id)->get();
-        // dd($apd);
-        // dd($datas->permission_id);
-        // dd($datas_instruksi);
-        // $pdf = PDF::loadView('pdf', compact('datas', 'datas_instruksi', 'apd'));
+
         $pdf = PDF::loadView('pdf', compact('datas', 'datas_instruksi', 'apd', 'data_acc_ptw_user'))
           ->setPaper([0, 0, 1000, 1380]);
+        $pdf->setOptions(['margin_top' => 10, 'margin_bottom' => 10, 'margin_left' => 10, 'margin_right' => 10]);
         $date_download = date('Ymd');
-        return $pdf->download('PTW_APPROVED'.'_'.$date_download.'_'.'.pdf');
-        // return view('pdf', compact('datas', 'datas_instruksi', 'apd'));
+        return $pdf->download($datas->ptw_id.'/'.'PTW'.$datas->project_code.'/'.\App\Helpers\DateHelper::monthToRoman(optional($datas->created_at)->month).'/'.$datas->created_at->format('Y').'_'.$date_download.'_'.'.pdf');
+        // return view('pdf', compact('datas', 'datas_instruksi', 'apd', 'data_acc_ptw_user'));
     }
 
     public function locationMaster()

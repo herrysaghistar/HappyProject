@@ -192,7 +192,7 @@ class DatabaseSeeder extends Seeder
                     'catatan_hse' => '',
                     'approved_by' => '',
                     'rejected_by' => '',
-                    'created_by' => $roleName . ' User',
+                    'created_by' => 'spv User',
                 ]);
 
                 }
