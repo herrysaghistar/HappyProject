@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ptw;
+use App\Models\ptw_user;
 use App\Models\jsa;
 use App\Models\work_location;
 use App\Models\project;
@@ -72,6 +73,10 @@ class HomeController extends Controller
         $ptw->status = '';
         $ptw->save();
 
+        $ptw_user = New ptw_user;
+        $ptw_user->acc_name = $ptw->id;
+        $ptw_user->save();
+
         foreach ($request->input('tools', []) as $tools) {
             ptw_tools::create([
                 'ptw_id' => $ptw->id,
@@ -134,18 +139,27 @@ class HomeController extends Controller
     public function acc(Request $request)
     {
         $ptw = ptw::find($request->id_ptw);
+        $ptw_user = new ptw_user;
+        $ptw_user->ptw_id = $request->id_ptw;
         if (Auth::user()->can('hse') || Auth::user()->can('admin')) {
             $ptw->level = 'kabeng';
+            $ptw_user->acc_role = 'hse';
+            $ptw_user->acc_name = Auth::user()->name;
         }
         elseif (Auth::user()->can('kabeng')) {
             $ptw->level = 'kapro';
+            $ptw_user->acc_role = 'kabeng';
+            $ptw_user->acc_name = Auth::user()->name;
         }
         elseif (Auth::user()->can('kapro')) {
             $ptw->level = 'approved';
             $ptw->status = 'onprogress';
+            $ptw_user->acc_role = 'kapro';
+            $ptw_user->acc_name = Auth::user()->name;
         }
         $ptw->approved_by = auth()->user()->name;
         $ptw->save();
+        $ptw_user->save();
 
         return redirect()->back();
     }
@@ -237,6 +251,7 @@ class HomeController extends Controller
                     ->select('ptws.id as ptw_id' ,'ptws.*',  'projects.*', 'work_locations.*')
                     ->where('ptws.id', $id)
                     ->first();
+        $data_acc_ptw_user = ptw_user::where('ptw_id', $id)->get();
         $datas_instruksi = permission_tambahan::select('permission_name')->where('permission_type_id', $datas->permission_id)->get();
         $apd = ptw_tools::join('tools_types', 'ptw_tools.tools_id', '=', 'tools_types.id')
                     ->select('tools_name')->where('permission_type_id', $datas->permission_id)->get();
@@ -244,10 +259,10 @@ class HomeController extends Controller
         // dd($datas->permission_id);
         // dd($datas_instruksi);
         // $pdf = PDF::loadView('pdf', compact('datas', 'datas_instruksi', 'apd'));
-        $pdf = PDF::loadView('pdf', compact('datas', 'datas_instruksi', 'apd'))
+        $pdf = PDF::loadView('pdf', compact('datas', 'datas_instruksi', 'apd', 'data_acc_ptw_user'))
           ->setPaper([0, 0, 1000, 1380]);
-
-        return $pdf->download('your-document.pdf');
+        $date_download = date('Ymd');
+        return $pdf->download('PTW_APPROVED'.'_'.$date_download.'_'.'.pdf');
         // return view('pdf', compact('datas', 'datas_instruksi', 'apd'));
     }
 
